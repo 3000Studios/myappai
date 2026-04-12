@@ -107,10 +107,9 @@ return (
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <span className="storefront-eyebrow">3000 Studios</span>
         <h1 className="storefront-headline">
           Apps built by<br />
-          <span className="storefront-headline--accent">Jeremy Swain</span>
+          <span className="storefront-headline--accent">3000 Studios</span>
         </h1>
         <p className="storefront-subhead">
           A collection of AI-powered tools, platforms, and products — built in public, shipped fast.
@@ -229,7 +228,7 @@ return (
         transition={{ duration: 0.5 }}
       >
         <h2>Want to work together?</h2>
-        <p>I build AI-powered products and tools. If you have an idea, let's talk.</p>
+        <p>We build AI-powered products and tools. If you have an idea, let's talk.</p>
         <Link to="/contact" className="cta-btn">Get in touch →</Link>
       </motion.div>
     </section>
