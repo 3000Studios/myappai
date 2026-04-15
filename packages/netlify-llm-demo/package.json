@@ -1,0 +1,12 @@
+{
+  \"name\": \"netlify-llm-demo\",
+  \"version\": \"0.1.0\",
+  \"private\": true,
+  \"scripts\": {
+    \"dev\": \"netlify dev\",
+    \"build\": \"netlify build\",
+    \"start\": \"netlify dev\"
+  },
+  \"dependencies\": {},
+  \"devDependencies\": {}
+}

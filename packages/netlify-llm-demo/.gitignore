@@ -1,0 +1,18 @@
+# Node / npm
+node_modules/
+npm-debug.log*
+yarn.lock
+package-lock.json
+
+# Netlify build output
+.dist/
+.publish/
+netlify/
+netlify.toml
+
+# Environment files (never commit!)
+.env
+.env.*    # catch any other env files
+
+# VS Code settings (optional)
+.vscode/
