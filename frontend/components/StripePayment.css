@@ -1,0 +1,393 @@
+/* Stripe Payment Component Styles */
+
+.stripe-payment {
+  background: rgba(26, 26, 46, 0.8);
+  border: 1px solid #2a2a4e;
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 100%;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.payment-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #2a2a4e;
+}
+
+.payment-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #00ff88, #0088ff);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0a0a0f;
+  flex-shrink: 0;
+}
+
+.payment-title h3 {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.25rem 0;
+}
+
+.payment-title p {
+  color: #b8bcc8;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.payment-amount {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #00ff88;
+  flex-shrink: 0;
+}
+
+.payment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  flex: 1;
+  min-width: 0;
+}
+
+.form-group.full-width {
+  flex: 1 1 100%;
+}
+
+.form-group label {
+  display: block;
+  color: #ffffff;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(42, 42, 78, 0.8);
+  border: 1px solid #2a2a4e;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #00ff88;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+}
+
+.form-group input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.form-group input::placeholder {
+  color: #666;
+}
+
+.payment-error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 51, 102, 0.1);
+  border: 1px solid rgba(255, 51, 102, 0.3);
+  border-radius: 8px;
+  color: #ff6688;
+  font-size: 0.9rem;
+}
+
+.payment-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.cancel-button,
+.submit-button {
+  flex: 1;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.cancel-button {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 1px solid #2a2a4e;
+}
+
+.cancel-button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.submit-button {
+  background: linear-gradient(135deg, #00ff88, #0088ff);
+  color: #0a0a0f;
+  box-shadow: 0 4px 20px rgba(0, 255, 136, 0.4);
+}
+
+.submit-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(0, 255, 136, 0.6);
+}
+
+.submit-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.processing-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(10, 10, 15, 0.3);
+  border-top: 2px solid #0a0a0f;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.payment-footer {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #2a2a4e;
+}
+
+.security-badges {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.security-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  border-radius: 20px;
+  color: #00ff88;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.payment-methods {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: #b8bcc8;
+  font-size: 0.8rem;
+}
+
+.card-icons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.card-icon {
+  padding: 0.25rem 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.card-icon.visa {
+  background: linear-gradient(135deg, #1a1f71, #1434cb);
+}
+
+.card-icon.mastercard {
+  background: linear-gradient(135deg, #eb001b, #f79e1b);
+}
+
+.card-icon.amex {
+  background: linear-gradient(135deg, #006fcf, #006fcf);
+}
+
+.card-icon.discover {
+  background: linear-gradient(135deg, #ff6000, #ff6000);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .stripe-payment {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  .payment-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .payment-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .payment-title h3 {
+    font-size: 1.3rem;
+  }
+
+  .payment-amount {
+    font-size: 1.5rem;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .payment-actions {
+    flex-direction: column;
+  }
+
+  .security-badges {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .payment-methods {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .stripe-payment {
+    padding: 1rem;
+  }
+
+  .payment-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .payment-title h3 {
+    font-size: 1.2rem;
+  }
+
+  .payment-amount {
+    font-size: 1.3rem;
+  }
+
+  .form-group input {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .cancel-button,
+  .submit-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Animation Enhancements */
+.stripe-payment {
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-group input:focus {
+  animation: pulse 0.3s ease-out;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 255, 136, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 255, 136, 0);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .stripe-payment {
+    animation: none;
+  }
+
+  .form-group input:focus {
+    animation: none;
+  }
+
+  .processing-spinner {
+    animation: none;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .stripe-payment {
+    border: 2px solid #ffffff;
+  }
+
+  .form-group input {
+    border: 2px solid #ffffff;
+  }
+
+  .submit-button {
+    border: 2px solid #0a0a0f;
+  }
+}

@@ -1,0 +1,290 @@
+.hero-video-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+}
+
+.hero-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 1;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.video-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #00ff88;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Fallback Animated Background */
+.hero-video-fallback {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+}
+
+.animated-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.gradient-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
+
+.layer-1 {
+  background: linear-gradient(
+    45deg,
+    #00ff88 0%,
+    #0088ff 25%,
+    #ff00ff 50%,
+    #ffaa00 75%,
+    #00ff88 100%
+  );
+  animation: gradientShift 15s ease-in-out infinite;
+}
+
+.layer-2 {
+  background: linear-gradient(
+    135deg,
+    #ff00ff 0%,
+    #00ff88 33%,
+    #0088ff 66%,
+    #ff00ff 100%
+  );
+  animation: gradientShift 20s ease-in-out infinite reverse;
+  opacity: 0.6;
+}
+
+.layer-3 {
+  background:
+    radial-gradient(
+      circle at 30% 50%,
+      rgba(0, 255, 136, 0.4) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 70% 80%,
+      rgba(0, 136, 255, 0.4) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 40% 20%,
+      rgba(255, 0, 255, 0.4) 0%,
+      transparent 50%
+    );
+  animation: gradientPulse 10s ease-in-out infinite;
+  opacity: 0.8;
+}
+
+@keyframes gradientShift {
+  0%,
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+  25% {
+    transform: translateX(-10%) translateY(5%);
+  }
+  50% {
+    transform: translateX(5%) translateY(-10%);
+  }
+  75% {
+    transform: translateX(-5%) translateY(10%);
+  }
+}
+
+@keyframes gradientPulse {
+  0%,
+  100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.floating-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  animation: float linear infinite;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-video-container,
+  .hero-video-fallback {
+    height: 100vh;
+    min-height: 600px;
+  }
+
+  .hero-content {
+    padding: 1rem;
+  }
+
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border-width: 3px;
+  }
+
+  .particle {
+    width: 2px;
+    height: 2px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content {
+    padding: 0.5rem;
+  }
+
+  .gradient-layer {
+    opacity: 0.6;
+  }
+
+  .layer-2 {
+    opacity: 0.4;
+  }
+
+  .layer-3 {
+    opacity: 0.6;
+  }
+}
+
+/* Performance Optimizations */
+.hero-video {
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.hero-overlay {
+  will-change: opacity;
+  backface-visibility: hidden;
+}
+
+.gradient-layer {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+.particle {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .gradient-layer {
+    animation: none;
+  }
+
+  .particle {
+    animation: none;
+  }
+
+  .loading-spinner {
+    animation: none;
+  }
+}

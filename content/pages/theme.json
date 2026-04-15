@@ -1,0 +1,21 @@
+{
+  "name": "Brass Operator",
+  "palette": {
+    "bg": "#071018",
+    "chrome": "#f7f2e8",
+    "surface": "rgba(14, 24, 37, 0.8)",
+    "surface-strong": "rgba(10, 16, 25, 0.94)",
+    "panel": "rgba(16, 31, 47, 0.88)",
+    "ink": "#fbf5ed",
+    "muted": "rgba(229, 225, 214, 0.76)",
+    "line": "rgba(255, 188, 108, 0.18)",
+    "prism-1": "#ff9b5e",
+    "prism-2": "#89efe3",
+    "prism-3": "#79a8ff"
+  },
+  "motion": {
+    "hero": "stagger-rise",
+    "sections": "soft-slide"
+  },
+  "updatedAt": "2026-03-21T00:00:00.000Z"
+}

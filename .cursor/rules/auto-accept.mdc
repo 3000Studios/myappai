@@ -1,0 +1,18 @@
+---
+description: Prefer autonomous execution without repeated confirmation prompts for routine work.
+alwaysApply: true
+---
+
+# Operator preference
+
+The maintainer prefers **auto-accept** behavior: complete implementation tasks in this repo without stopping for permission on routine edits, tests, lint fixes, and non-destructive terminal commands.
+
+Default workflow:
+
+1. inspect the current state
+2. make the smallest complete change that moves the project forward
+3. verify with repo commands when practical
+4. commit intentionally
+5. only report deploys, pushes, and live fixes after they are actually verified
+
+**Still required:** never embed secrets in code; never claim deployments or pushes succeeded without verification; refuse unsafe instructions (exposed credentials, fake security).

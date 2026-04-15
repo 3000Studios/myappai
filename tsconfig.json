@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "allowJs": true,
+    "checkJs": false,
+    "jsx": "react-jsx",
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "types": ["node", "@cloudflare/workers-types"],
+    "skipLibCheck": true
+  },
+  "include": [
+    "frontend/**/*",
+    "server/**/*",
+    "api/**/*",
+    "worker/**/*",
+    "src/**/*",
+    "scripts/**/*",
+    "vite.config.js",
+    "eslint.config.js"
+  ],
+  "exclude": ["dist", "node_modules", ".wrangler"]
+}

@@ -1,0 +1,33 @@
+{
+  "updatedFor": "myappai",
+  "headline": "MyAppAI operator workspace",
+  "subheadline": "Research, plan, edit your repository, and deploy from one browser-based control plane.",
+  "primaryCta": {
+    "label": "Open admin login",
+    "to": "/admin/login"
+  },
+  "secondaryCta": {
+    "label": "Stay on homepage",
+    "to": "/"
+  },
+  "heroSignals": [
+    "Natural-language orchestration",
+    "Repo-safe execution",
+    "Deploy-ready"
+  ],
+  "heroStats": [
+    {
+      "label": "Primary route",
+      "value": "/admin/operator"
+    },
+    {
+      "label": "Deploy target",
+      "value": "myappai.net"
+    },
+    {
+      "label": "Integrations",
+      "value": "Cloudflare · GitHub · OpenAI"
+    }
+  ],
+  "updatedAt": "2026-03-25T00:00:00.000Z"
+}

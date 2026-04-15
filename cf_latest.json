@@ -1,0 +1,347 @@
+{
+  "result": [
+    {
+      "id": "ed6026d0-8f1a-4876-8b57-002988fba6c4",
+      "short_id": "ed6026d0",
+      "project_id": "d876aa0e-e276-47cd-b293-458fd7141cf9",
+      "project_name": "myappai",
+      "environment": "production",
+      "url": "https://ed6026d0.myappai.pages.dev",
+      "created_on": "2026-04-01T12:16:30.928195Z",
+      "modified_on": "2026-04-01T12:17:02.737639Z",
+      "latest_stage": {
+        "name": "deploy",
+        "started_on": "2026-04-01T12:17:02.737639Z",
+        "ended_on": null,
+        "status": "active"
+      },
+      "deployment_trigger": {
+        "type": "github:push",
+        "metadata": {
+          "branch": "main",
+          "commit_hash": "0cf81e4fb0388dee9ed85749e47bf32237ee9e6b",
+          "commit_message": "commit and push clean",
+          "commit_dirty": false
+        }
+      },
+      "stages": [
+        {
+          "name": "queued",
+          "started_on": "2026-04-01T12:16:31.05852Z",
+          "ended_on": "2026-04-01T12:16:31.609679Z",
+          "status": "success"
+        },
+        {
+          "name": "initialize",
+          "started_on": "2026-04-01T12:16:31.609679Z",
+          "ended_on": "2026-04-01T12:16:34.710224Z",
+          "status": "success"
+        },
+        {
+          "name": "clone_repo",
+          "started_on": "2026-04-01T12:16:34.710224Z",
+          "ended_on": "2026-04-01T12:16:36.592721Z",
+          "status": "success"
+        },
+        {
+          "name": "build",
+          "started_on": "2026-04-01T12:16:36.592721Z",
+          "ended_on": "2026-04-01T12:17:02.737639Z",
+          "status": "success"
+        },
+        {
+          "name": "deploy",
+          "started_on": "2026-04-01T12:17:02.737639Z",
+          "ended_on": null,
+          "status": "active"
+        }
+      ],
+      "build_config": {
+        "build_command": "npm run build",
+        "destination_dir": "dist",
+        "build_caching": true,
+        "root_dir": "",
+        "web_analytics_tag": null,
+        "web_analytics_token": null
+      },
+      "source": {
+        "type": "github",
+        "config": {
+          "owner": "3000Studios",
+          "repo_name": "myappai",
+          "production_branch": "main",
+          "pr_comments_enabled": false
+        }
+      },
+      "env_vars": {
+        "ADMIN_API_KEY": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "ADMIN_EMAIL": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "ADMIN_PASSCODE": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "ADMIN_SESSION_SECRET": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "ADSENSE_CUSTOMER_ID": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "ADSENSE_PUBLISHER": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "ANTHROPIC_API": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "ANTHROPIC_API_KEY": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "API_MODE": {
+          "type": "plain_text",
+          "value": "repo-local"
+        },
+        "APP_NAME": {
+          "type": "plain_text",
+          "value": "myappai"
+        },
+        "CLAUDE_MODEL": {
+          "type": "plain_text",
+          "value": "claude-3-5-sonnet-latest"
+        },
+        "CLOUDFLARE_ACCOUNT_ID": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "CLOUDFLARE_API_TOKEN": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "CLOUDFLARE_PAGES_BRANCH": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "CLOUDFLARE_PAGES_PROJECT_NAME": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "CLOUDFLARE_ZONE_ID": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "CONTROL_PASSWORD": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "GEMINI_API_KEY": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "GH_BASE_BRANCH": {
+          "type": "plain_text",
+          "value": "main"
+        },
+        "GH_REPO": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "GH_TOKEN": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "JULES_API_KEY": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "JWT_SECRET": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "LICENSE_SECRET": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "LOGS_ACCESS_CODE": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "NODE_ENV": {
+          "type": "plain_text",
+          "value": "production"
+        },
+        "OLLAMA_API": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "OLLAMA_API_URL": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "OLLAMA_MODEL": {
+          "type": "plain_text",
+          "value": "llama3.2:3b"
+        },
+        "OLLAMA_PROXY_SECRET": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "OPENAI_API": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "OPENAI_API_KEY": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "OPENAI_MODEL": {
+          "type": "plain_text",
+          "value": "gpt-4o"
+        },
+        "PAYPAL_CLIENT_ID": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "PAYPAL_CLIENT_SECRET": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "PAYPAL_ENV": {
+          "type": "plain_text",
+          "value": "live"
+        },
+        "PUBLIC_ASSISTANT_PROVIDER": {
+          "type": "plain_text",
+          "value": "ollama"
+        },
+        "R2_ACCESS_KEY_ID": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "R2_BUCKET_NAME": {
+          "type": "plain_text",
+          "value": "myappai"
+        },
+        "R2_SECRET_ACCESS_KEY": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "RAILWAY_ENVIRONMENT_ID": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "RAILWAY_ENVIRONMENT_NAME": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "RAILWAY_PRIVATE_DOMAIN": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "RAILWAY_PROJECT_ID": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "RAILWAY_PROJECT_NAME": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "RAILWAY_PUBLIC_DOMAIN": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "RAILWAY_PUBLIC_URL": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "RAILWAY_SERVICE_ID": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "RAILWAY_SERVICE_NAME": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "RAILWAY_TOKEN": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "SESSION_SECRET": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "SITE_ORIGIN": {
+          "type": "plain_text",
+          "value": "https://myappai.net"
+        },
+        "SITE_URL": {
+          "type": "plain_text",
+          "value": "https://myappai.net"
+        },
+        "STRIPE_SECRET_KEY": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "STRIPE_WEBHOOK_SECRET": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "TELEGRAM_BOT_TOKEN": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "TELEGRAM_WEBHOOK_SECRET": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "TELEGRAM_WEBHOOK_URL": {
+          "type": "secret_text",
+          "value": ""
+        },
+        "VITE_ENABLE_ADS": {
+          "type": "plain_text",
+          "value": "false"
+        },
+        "WWW_SITE_ORIGIN": {
+          "type": "plain_text",
+          "value": "https://www.myappai.net"
+        },
+        "WWW_SITE_URL": {
+          "type": "plain_text",
+          "value": "https://www.myappai.net"
+        }
+      },
+      "r2_buckets": {
+        "ASSETS_BUCKET": {
+          "name": "myappai"
+        }
+      },
+      "compatibility_date": "2026-03-22",
+      "compatibility_flags": ["nodejs_compat"],
+      "build_image_major_version": 3,
+      "usage_model": null,
+      "aliases": null,
+      "is_skipped": false,
+      "production_branch": "main",
+      "uses_functions": null
+    }
+  ],
+  "success": true,
+  "errors": [],
+  "messages": [],
+  "result_info": {
+    "page": 1,
+    "per_page": 1,
+    "count": 1,
+    "total_count": 126,
+    "total_pages": 126
+  }
+}

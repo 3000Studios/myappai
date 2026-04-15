@@ -1,0 +1,20 @@
+"$schema" = "./node_modules/wrangler/config-schema.json"
+name = "myappai"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-03-22"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+NODE_ENV = "production"
+APP_NAME = "myappai"
+SITE_URL = "https://myappai.net"
+WWW_SITE_URL = "https://www.myappai.net"
+SITE_ORIGIN = "https://myappai.net"
+WWW_SITE_ORIGIN = "https://www.myappai.net"
+API_MODE = "repo-local"
+VITE_ENABLE_ADS = "false"
+
+[[r2_buckets]]
+binding = "ASSETS_BUCKET"
+bucket_name = "myappai"
+preview_bucket_name = "myappai-preview"

@@ -1,0 +1,253 @@
+{
+  "entries": [
+    {
+      "id": "log-1774513481776-6dxks5",
+      "level": "warn",
+      "scope": "operator",
+      "title": "Blocked operator prompt",
+      "message": "Open bash and repair the local admin server.",
+      "route": "",
+      "details": {
+        "blockedReason": "Machine-level shell or unrestricted computer control is not allowed from the web operator."
+      },
+      "actor": "",
+      "createdAt": "2026-03-26T08:24:41.776Z"
+    },
+    {
+      "id": "log-1774513479950-a3ct8m",
+      "level": "info",
+      "scope": "auth",
+      "title": "Admin login succeeded",
+      "message": "mr.jwswain@gmail.com",
+      "route": "",
+      "details": null,
+      "actor": "mr.jwswain@gmail.com",
+      "createdAt": "2026-03-26T08:24:39.950Z"
+    },
+    {
+      "id": "log-1774513306905-ocwvf5",
+      "level": "info",
+      "scope": "auth",
+      "title": "Admin login succeeded",
+      "message": "mr.jwswain@gmail.com",
+      "route": "",
+      "details": null,
+      "actor": "mr.jwswain@gmail.com",
+      "createdAt": "2026-03-26T08:21:46.906Z"
+    },
+    {
+      "id": "log-1774513230697-gqvqje",
+      "level": "info",
+      "scope": "auth",
+      "title": "Admin login succeeded",
+      "message": "mr.jwswain@gmail.com",
+      "route": "",
+      "details": null,
+      "actor": "mr.jwswain@gmail.com",
+      "createdAt": "2026-03-26T08:20:30.697Z"
+    },
+    {
+      "id": "log-1774513199156-9il2ye",
+      "level": "info",
+      "scope": "auth",
+      "title": "Admin login succeeded",
+      "message": "mr.jwswain@gmail.com",
+      "route": "",
+      "details": null,
+      "actor": "mr.jwswain@gmail.com",
+      "createdAt": "2026-03-26T08:19:59.156Z"
+    },
+    {
+      "id": "log-1774513176522-y8p0zq",
+      "level": "info",
+      "scope": "auth",
+      "title": "Admin login succeeded",
+      "message": "mr.jwswain@gmail.com",
+      "route": "",
+      "details": null,
+      "actor": "mr.jwswain@gmail.com",
+      "createdAt": "2026-03-26T08:19:36.522Z"
+    },
+    {
+      "id": "log-1774513135605-d7c99p",
+      "level": "info",
+      "scope": "auth",
+      "title": "Admin login succeeded",
+      "message": "mr.jwswain@gmail.com",
+      "route": "",
+      "details": null,
+      "actor": "mr.jwswain@gmail.com",
+      "createdAt": "2026-03-26T08:18:55.605Z"
+    },
+    {
+      "id": "log-1774513045298-xu08r5",
+      "level": "info",
+      "scope": "auth",
+      "title": "Admin login succeeded",
+      "message": "mr.jwswain@gmail.com",
+      "route": "",
+      "details": null,
+      "actor": "mr.jwswain@gmail.com",
+      "createdAt": "2026-03-26T08:17:25.298Z"
+    },
+    {
+      "id": "log-1774512971098-1ql1bo",
+      "level": "info",
+      "scope": "auth",
+      "title": "Admin login succeeded",
+      "message": "mr.jwswain@gmail.com",
+      "route": "",
+      "details": null,
+      "actor": "mr.jwswain@gmail.com",
+      "createdAt": "2026-03-26T08:16:11.098Z"
+    },
+    {
+      "id": "log-1774512941387-zjgu2a",
+      "level": "info",
+      "scope": "auth",
+      "title": "Admin login succeeded",
+      "message": "mr.jwswain@gmail.com",
+      "route": "",
+      "details": null,
+      "actor": "mr.jwswain@gmail.com",
+      "createdAt": "2026-03-26T08:15:41.387Z"
+    },
+    {
+      "id": "log-1774512894558-ap2e7p",
+      "level": "info",
+      "scope": "auth",
+      "title": "Admin login succeeded",
+      "message": "mr.jwswain@gmail.com",
+      "route": "",
+      "details": null,
+      "actor": "mr.jwswain@gmail.com",
+      "createdAt": "2026-03-26T08:14:54.558Z"
+    },
+    {
+      "id": "log-1774512860100-olmzui",
+      "level": "info",
+      "scope": "auth",
+      "title": "Admin login succeeded",
+      "message": "mr.jwswain@gmail.com",
+      "route": "",
+      "details": null,
+      "actor": "mr.jwswain@gmail.com",
+      "createdAt": "2026-03-26T08:14:20.100Z"
+    },
+    {
+      "id": "log-1774512391238-4lrxf3",
+      "level": "info",
+      "scope": "operator",
+      "title": "Operator prompt executed",
+      "message": "Refresh the homepage copy for SaaS founders.",
+      "route": "",
+      "details": {
+        "mode": "repo_file_edit",
+        "file": "frontend/pages/HomePage.jsx",
+        "deployment": {
+          "id": "deploy-1774512390716",
+          "status": "deploy_failed",
+          "message": "Update homepage copy to better resonate with SaaS founders",
+          "branch": "main",
+          "commitSha": null,
+          "startedAt": "2026-03-26T08:05:50.257Z",
+          "finishedAt": "2026-03-26T08:06:30.716Z",
+          "strategy": "manual-wrangler",
+          "buildOutput": "\n ⛅️ wrangler 4.75.0 (update available 4.77.0)\n─────────────────────────────────────────────\nUploading... (19/25)\nUploading... (21/25)\nUploading... (23/25)\nUploading... (25/25)\n✨ Success! Uploaded 6 files (19 already uploaded) (1.97 sec)\n\n✨ Uploading _headers\n✨ Uploading _redirects\n✨ Compiled Worker successfully\n✨ Uploading Worker bundle\n🌎 Deploying...\n",
+          "deployOutput": "\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mWarning: Your working directory is a git repo and has uncommitted changes\u001b[0m\n\n  To silence this warning, pass in --commit-dirty=true\n\n\n"
+        }
+      },
+      "actor": "",
+      "createdAt": "2026-03-26T08:06:31.238Z"
+    },
+    {
+      "id": "log-1774512336347-eu9d09",
+      "level": "info",
+      "scope": "operator",
+      "title": "Operator prompt executed",
+      "message": "Refresh the homepage copy for SaaS founders and prepare deployment.",
+      "route": "",
+      "details": {
+        "mode": "repo_file_edit",
+        "file": "frontend/pages/HomePage.jsx",
+        "deployment": {
+          "id": "deploy-1774512335689",
+          "status": "deployed",
+          "message": "Update homepage copy for SaaS founders",
+          "branch": "main",
+          "commitSha": null,
+          "startedAt": "2026-03-26T08:04:41.459Z",
+          "finishedAt": "2026-03-26T08:05:35.689Z",
+          "strategy": "manual-wrangler",
+          "buildOutput": "\n> myappai@1.1.0 prebuild\n> node scripts/generate-seo-assets.js\n\n[dotenv@17.3.1] injecting env (87) from .secrets/myappai.local.env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit\n[dotenv@17.3.1] injecting env (22) from .secrets/shared.local.env -- tip: ⚙️  suppress all logs with { quiet: true }\n\n> myappai@1.1.0 build\n> vite build\n\nvite v8.0.0 building client environment for production...\n\u001b[2K\rtransforming...✓ 455 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   1.81 kB │ gzip:   0.63 kB\ndist/assets/index-z0fWsepz.css   61.08 kB │ gzip:  13.16 kB\ndist/assets/index-1B4vSkmI.js   655.64 kB │ gzip: 194.89 kB\n\n✓ built in 8.28s\n",
+          "deployOutput": "\n ⛅️ wrangler 4.75.0 (update available 4.77.0)\n─────────────────────────────────────────────\nUploading... (20/25)\nUploading... (21/25)\nUploading... (23/25)\nUploading... (25/25)\n✨ Success! Uploaded 5 files (20 already uploaded) (2.20 sec)\n\n✨ Uploading _headers\n✨ Uploading _redirects\n✨ Compiled Worker successfully\n✨ Uploading Worker bundle\n🌎 Deploying...\n✨ Deployment complete! Take a peek over at https://80e16716.myappai.pages.dev\n"
+        }
+      },
+      "actor": "",
+      "createdAt": "2026-03-26T08:05:36.347Z"
+    },
+    {
+      "id": "log-1774512280371-i0xu0o",
+      "level": "warn",
+      "scope": "operator",
+      "title": "Blocked operator prompt",
+      "message": "Open bash and repair the local admin server.",
+      "route": "",
+      "details": {
+        "blockedReason": "Machine-level shell or unrestricted computer control is not allowed from the web operator."
+      },
+      "actor": "",
+      "createdAt": "2026-03-26T08:04:40.371Z"
+    },
+    {
+      "id": "log-1774511920358-0ecqlr",
+      "level": "error",
+      "scope": "server",
+      "title": "Error",
+      "message": "A server error was captured and stored in secure logs.",
+      "route": "/api/command",
+      "details": {
+        "route": "/api/command",
+        "errorName": "Error"
+      },
+      "actor": "",
+      "createdAt": "2026-03-26T07:58:40.358Z"
+    },
+    {
+      "id": "log-1774511920058-lpj90y",
+      "level": "error",
+      "scope": "server",
+      "title": "Error",
+      "message": "Target text was not found in the requested file.",
+      "route": "/api/command",
+      "details": {
+        "stack": "Error: Target text was not found in the requested file.\n    at applyTextOperation (file:///mnt/c/Workspaces/myappai/api/patchEngine.js:44:11)\n    at applyPatch (file:///mnt/c/Workspaces/myappai/api/patchEngine.js:89:23)\n    at async runOperatorPrompt (file:///mnt/c/Workspaces/myappai/server/services/operatorService.js:188:17)\n    at async file:///mnt/c/Workspaces/myappai/api/command.js:37:20"
+      },
+      "actor": "",
+      "createdAt": "2026-03-26T07:58:40.058Z"
+    },
+    {
+      "id": "log-1774511908129-p5fruv",
+      "level": "info",
+      "scope": "auth",
+      "title": "Admin login succeeded",
+      "message": "mr.jwswain@gmail.com",
+      "route": "",
+      "details": null,
+      "actor": "mr.jwswain@gmail.com",
+      "createdAt": "2026-03-26T07:58:28.129Z"
+    },
+    {
+      "id": "log-1774511899462-e09tmg",
+      "level": "info",
+      "scope": "auth",
+      "title": "Admin login succeeded",
+      "message": "mr.jwswain@gmail.com",
+      "route": "",
+      "details": null,
+      "actor": "mr.jwswain@gmail.com",
+      "createdAt": "2026-03-26T07:58:19.462Z"
+    }
+  ],
+  "updatedAt": "2026-03-26T08:24:41.776Z"
+}

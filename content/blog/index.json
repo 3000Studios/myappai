@@ -1,0 +1,33 @@
+{
+  "updatedFor": "myappai",
+  "posts": [
+    {
+      "slug": "how-to-automate-marketing-with-ai",
+      "title": "How how to automate marketing with AI strengthens an AI-run website stack",
+      "excerpt": "A practical look at using how to automate marketing with AI inside a local-model content and deployment workflow.",
+      "publishedAt": "2026-03-26",
+      "tags": ["ai", "automation", "how-to-automate-marketing-with-ai"]
+    },
+    {
+      "slug": "ai-marketing-automation-for-startups",
+      "title": "How AI marketing automation for startups strengthens an AI-run website stack",
+      "excerpt": "A practical look at using AI marketing automation for startups inside a local-model content and deployment workflow.",
+      "publishedAt": "2026-03-26",
+      "tags": ["ai", "automation", "ai-marketing-automation-for-startups"]
+    },
+    {
+      "slug": "ai-productivity-tools-comparison",
+      "title": "How AI productivity tools comparison strengthens an AI-run website stack",
+      "excerpt": "A practical look at using AI productivity tools comparison inside a local-model content and deployment workflow.",
+      "publishedAt": "2026-03-26",
+      "tags": ["ai", "automation", "ai-productivity-tools-comparison"]
+    },
+    {
+      "slug": "ai-automation",
+      "title": "How AI automation strengthens an AI-run website stack",
+      "excerpt": "A practical look at using AI automation inside a local-model content and deployment workflow.",
+      "publishedAt": "2026-03-26",
+      "tags": ["ai", "automation", "ai-automation"]
+    }
+  ]
+}

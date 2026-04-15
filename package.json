@@ -1,0 +1,120 @@
+{
+  "name": "myappai",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "main": "server/index.js",
+  "scripts": {
+    "prepare": "node scripts/run-husky.js",
+    "predev": "node scripts/generate-seo-assets.js",
+    "dev": "concurrently --kill-others-on-fail --names \"server,frontend\" --prefix-colors \"cyan,magenta\" \"npm:dev:server\" \"npm:dev:frontend\"",
+    "dev:frontend": "vite",
+    "dev:server": "node --watch server/index.js",
+    "prebuild": "node scripts/generate-seo-assets.js",
+    "build": "vite build",
+    "lint": "eslint . --cache --cache-location .cache/eslint",
+    "lint:fix": "eslint . --fix --cache --cache-location .cache/eslint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit --incremental --tsBuildInfoFile .cache/tsbuildinfo",
+    "preview": "vite preview",
+    "ui:mobile-smoke": "node scripts/mobile-visual-smoke.js",
+    "server": "node server/index.js",
+    "deploy": "node scripts/myappai-cli.js deploy",
+    "cli": "node scripts/myappai-cli.js",
+    "cli:doctor": "node scripts/myappai-cli.js doctor",
+    "cli:deploy": "node scripts/myappai-cli.js deploy",
+    "pages:deploy": "node scripts/myappai-cli.js pages:deploy",
+    "pages:project:list": "node scripts/myappai-cli.js pages:list",
+    "pages:project:create": "node scripts/myappai-cli.js pages:create",
+    "pages:secret:bulk": "node scripts/myappai-cli.js pages:secrets",
+    "cf:whoami": "node scripts/myappai-cli.js whoami",
+    "secrets:path": "node scripts/show-secrets-path.js",
+    "secrets:test": "node scripts/test-integrations.js",
+    "pages:dev": "wrangler pages dev dist",
+    "command": "node scripts/run-command.js",
+    "scheduler": "node ai/scheduler/aiScheduler.js",
+    "traffic": "node scripts/run-traffic-cycle.js",
+    "test": "node scripts/verify-platform.js && vitest run",
+    "test:unit": "vitest run",
+    "test:watch": "vitest",
+    "check:fast": "npm run lint && npm run typecheck && npm run test:unit",
+    "check:full": "npm run validate:env && npm run lint && npm run typecheck && npm run test && npm run build",
+    "validate:env": "node scripts/validate-environment.js",
+    "verify-platform": "node scripts/verify-platform.js",
+    "analyze": "cross-env ANALYZE=true vite build",
+    "ci": "npm run check:full"
+  },
+  "keywords": [
+    "myappai",
+    "myappai.net",
+    "operator",
+    "deployment",
+    "automation"
+  ],
+  "homepage": "https://myappai.net/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/3000Studios/myappai.git"
+  },
+  "bugs": {
+    "url": "https://github.com/3000Studios/myappai/issues"
+  },
+  "author": "3000Studios",
+  "license": "UNLICENSED",
+  "description": "MyAppAI operator platform for browser-based research, repository changes, and deployment workflows.",
+  "lint-staged": {
+    "*.{js,jsx,json,md,css}": [
+      "prettier --write"
+    ],
+    "*.{js,jsx}": [
+      "eslint --fix"
+    ]
+  },
+  "dependencies": {
+    "@cloudflare/workers-types": "^4.20260313.1",
+    "@google/generative-ai": "^0.24.1",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.5.0",
+    "axios": "^1.13.6",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "framer-motion": "^12.38.0",
+    "lucide-react": "^1.7.0",
+    "openai": "^6.29.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-router-dom": "^7.9.5",
+    "socket.io": "^4.8.3",
+    "stripe": "^20.4.1",
+    "three": "^0.183.2",
+    "vite": "^8.0.0",
+    "zustand": "^5.0.11"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.23.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/node": "^25.5.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.0",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
+    "eslint": "^10.0.3",
+    "globals": "^16.4.0",
+    "husky": "^9.1.7",
+    "jsdom": "^27.0.0",
+    "lint-staged": "^16.2.1",
+    "playwright": "^1.58.2",
+    "prettier": "^3.8.1",
+    "rollup-plugin-visualizer": "^6.0.3",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4",
+    "wrangler": "^4.77.0"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-win32-x64-msvc": "^4.60.0"
+  }
+}
