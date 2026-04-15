@@ -1,0 +1,11 @@
+:root {
+  --bg: #F6F6F4;
+  --void: #050507;
+  --stone: #CFCFCB;
+  --metal: #C9CCD1;
+}
+html, body {
+  background: var(--bg);
+  color: var(--void);
+  font-family: 'Inter', sans-serif;
+}
