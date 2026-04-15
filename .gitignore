@@ -1,0 +1,22 @@
+# Never commit real config — use config.template.yaml
+config.yaml
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+
+# Node
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Cloudflare tunnel credentials
+*.json
+!package.json

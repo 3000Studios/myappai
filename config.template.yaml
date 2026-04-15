@@ -1,0 +1,35 @@
+# OpenClaw Config Template
+# Copy this file to config.yaml and fill in your values
+# DO NOT commit config.yaml — it contains secrets
+
+gateway:
+  port: 18789
+  host: 127.0.0.1
+
+ollama:
+  host: http://127.0.0.1:11434
+  defaultModel: ollama/llama3.2:3b
+
+auth:
+  # Set to false in production
+  insecure: false
+  # Add your API key here
+  apiKey: YOUR_API_KEY_HERE
+
+plugins:
+  # Feishu and ZaloUser disabled — missing @larksuiteoapi/node-sdk causes HTTP 500
+  feishu:
+    enabled: false
+  zalouser:
+    enabled: false
+  # Add other plugins here as needed
+
+tunnel:
+  # Cloudflare tunnel config
+  enabled: true
+  url: https://openclaw.myappai.net
+
+logging:
+  level: info
+  # Set to debug for troubleshooting
+  # level: debug
