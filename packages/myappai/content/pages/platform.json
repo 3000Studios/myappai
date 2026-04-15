@@ -1,0 +1,18 @@
+{
+  "updatedFor": "myappai",
+  "headline": "One control plane for research, code, and deployment",
+  "intro": "MyAppAI keeps operator prompts, safe actions, and deploy results in one authenticated workspace.",
+  "items": [
+    {
+      "slug": "operator-workspace",
+      "title": "Operator Workspace",
+      "description": "Turn plain-language requests into safe repository edits, research, and deploy workflows."
+    },
+    {
+      "slug": "approved-integrations",
+      "title": "Approved Integrations",
+      "description": "Use Cloudflare, GitHub, and OpenAI intentionally instead of leaking into arbitrary external actions."
+    }
+  ],
+  "updatedAt": "2026-03-25T00:00:00.000Z"
+}

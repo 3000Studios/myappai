@@ -1,0 +1,29 @@
+PROJECT OPERATING RULES
+
+1. Build complete, working solutions instead of partial placeholder work.
+2. Prefer autonomous execution for routine tasks, but verify before claiming success.
+3. Keep production safety first: no secrets in source, no fake deploy claims, no destructive resets.
+4. Use the repo workflow in this order whenever possible: install, validate env, lint, test, build, commit.
+5. Treat `main` as a live branch. Any verified push may go straight to production.
+6. Favor repo-local secrets from `.secrets/myappai.local.env` first, `.secrets/shared.local.env` second.
+7. Prefer PowerShell for Windows-facing operator helpers and Bash/Node for repo automation.
+8. Keep Cloudflare Pages compatibility intact for public routes, admin routes, and worker fallbacks.
+9. Improve docs, rules, and automation when you touch operational surfaces so future runs stay smoother.
+10. When the workspace is dirty, do not discard user changes. Work with them and commit intentionally.
+
+Workspace root:
+C:\Workspaces\myappai
+
+Primary deployment:
+Cloudflare Pages on `myappai.net`
+
+Repository:
+https://github.com/3000Studios/myappai
+
+Primary assistant path:
+Ollama first when configured, OpenAI and Claude available, safe fallback always available.
+
+Current operational blockers to remember:
+- Production still needs a valid `TELEGRAM_BOT_TOKEN`.
+- Production still needs a public `OLLAMA_API_URL` upstream.
+- The environment audit guide lives at `docs/ENV_AUDIT_PLAYBOOK.md`.

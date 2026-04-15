@@ -1,0 +1,203 @@
+
+===== SYSTEM INFO =====
+
+Saturday, March 14, 2026 2:22:23 AM
+
+PRIVATENOACCESS
+
+===== CURRENT DIRECTORY =====
+
+Path
+----
+C:\WorkSpaces\myappai\myappai
+
+
+===== DIRECTORY TREE =====
+Folder PATH listing
+Volume serial number is F493-1E83
+C:.
+|   .gitignore
+|   package-lock.json
+|   package.json
+|   workspace_report.txt
+|   wrangler.toml
+|   
++---admin
+|   +---ai-console
+|   +---analytics
+|   +---content-editor
+|   \---dashboard
++---ai
++---content
++---frontend
+|   |   index.html
+|   |   vite.config.js
+|   |   
+|   +---animations
+|   +---assets
+|   +---backgrounds
+|   +---components
+|   |   \---admin
+|   +---pages
+|   +---src
+|   |       App.jsx
+|   |       main.jsx
+|   |       
+|   \---styles
++---scripts
++---server
+|   +---controllers
+|   +---routes
+|   \---services
++---src
+|       App.tsx
+|       
+\---worker
+        worker.js
+        
+
+===== TOP LEVEL FILES =====
+
+    Directory: C:\WorkSpaces\myappai\myappai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d--h-           3/14/2026  2:02 AM                .git
+d----           3/14/2026  2:05 AM                admin
+d----           3/14/2026  2:05 AM                ai
+d----           3/14/2026  2:05 AM                content
+d----           3/14/2026  2:05 AM                frontend
+d----           3/14/2026  2:05 AM                scripts
+d----           3/14/2026  2:05 AM                server
+d----           3/14/2026  2:19 AM                src
+d----           3/14/2026  1:09 AM                worker
+-a---           3/14/2026  1:09 AM             52 .gitignore
+-a---           3/14/2026  1:09 AM         109359 package-lock.json
+-a---           3/14/2026  1:09 AM            813 package.json
+-a---           3/14/2026  2:22 AM            928 workspace_report.txt
+-a---           3/14/2026  1:09 AM            129 wrangler.toml
+
+
+===== PACKAGE.JSON =====
+{
+  "name": "myappai",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@cloudflare/workers-types": "^4.20260313.1",
+    "axios": "^1.13.6",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "framer-motion": "^12.36.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "socket.io": "^4.8.3",
+    "three": "^0.183.2",
+    "vite": "^8.0.0",
+    "zustand": "^5.0.11"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^10.0.3",
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3"
+  }
+}
+
+===== VITE CONFIG =====
+
+===== WRANGLER CONFIG =====
+name = "myappai-worker"
+main = "worker/worker.js"
+compatibility_date = "2025-01-01"
+
+[vars]
+APP_NAME="AI System Manager"
+
+
+===== CONTINUE CONFIG =====
+
+===== SERVER FILES =====
+
+    Directory: C:\WorkSpaces\myappai\myappai\server
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           3/14/2026  2:05 AM                controllers
+d----           3/14/2026  2:05 AM                routes
+d----           3/14/2026  2:05 AM                services
+
+
+===== FRONTEND FILES =====
+
+    Directory: C:\WorkSpaces\myappai\myappai\frontend
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           3/14/2026  2:05 AM                animations
+d----           3/14/2026  2:05 AM                assets
+d----           3/14/2026  2:05 AM                backgrounds
+d----           3/14/2026  2:05 AM                components
+d----           3/14/2026  2:05 AM                pages
+d----           3/14/2026  1:09 AM                src
+d----           3/14/2026  2:05 AM                styles
+-a---           3/14/2026  1:09 AM            208 index.html
+-a---           3/14/2026  1:09 AM            173 vite.config.js
+
+    Directory: C:\WorkSpaces\myappai\myappai\frontend\components
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           3/14/2026  2:05 AM                admin
+
+    Directory: C:\WorkSpaces\myappai\myappai\frontend\src
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---           3/14/2026  1:09 AM            347 App.jsx
+-a---           3/14/2026  1:09 AM            169 main.jsx
+
+
+===== AI DIRECTORY =====
+
+===== CONTENT DIRECTORY =====
+
+===== GIT INFO =====
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	src/
+	workspace_report.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+* main
+origin	https://github.com/3000Studios/myappai.git (fetch)
+origin	https://github.com/3000Studios/myappai.git (push)
+
+===== OLLAMA MODELS =====
+NAME                           ID              SIZE      MODIFIED       
+llama3:8b                      365c0bd3c000    4.7 GB    47 minutes ago    
+codellama:13b                  9f438cb9cd58    7.4 GB    47 minutes ago    
+deepseek-coder:6.7b            ce298d984115    3.8 GB    50 minutes ago    
+llama3.1:latest                46e0c10c039e    4.9 GB    2 hours ago       
+mistral:7b                     6577803aa9a0    4.4 GB    6 hours ago       
+codellama:7b                   8fdf8f752f6e    3.8 GB    6 hours ago       
+phi:latest                     e2fd6321a5fe    1.6 GB    8 hours ago       
+codellama:34b                  685be00e1532    19 GB     8 hours ago       
+deepseek-coder:33b             acec7c0b0fd9    18 GB     8 hours ago       
+qwen2.5-coder:7b               dae161e27b0e    4.7 GB    4 days ago        
+gemma3:4b                      a2af6cc3eb7f    3.3 GB    10 days ago       
+llama3:latest                  365c0bd3c000    4.7 GB    11 days ago       
+qwen2.5:14b-instruct-q4_K_M    7cdf5a0187d5    9.0 GB    11 days ago       

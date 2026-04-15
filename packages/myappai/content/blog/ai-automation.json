@@ -1,0 +1,28 @@
+{
+  "slug": "ai-automation",
+  "title": "How AI automation strengthens an AI-run website stack",
+  "description": "A practical look at using AI automation inside a local-model content and deployment workflow.",
+  "excerpt": "A practical look at using AI automation inside a local-model content and deployment workflow.",
+  "publishedAt": "2026-03-26",
+  "tags": ["ai", "automation", "ai-automation"],
+  "sections": [
+    {
+      "heading": "Section 1: AI automation",
+      "body": "AI automation becomes more useful when commands, content generation, and deployment automation all live in the same repository."
+    },
+    {
+      "heading": "Section 2: AI automation",
+      "body": "AI automation becomes more useful when commands, content generation, and deployment automation all live in the same repository."
+    },
+    {
+      "heading": "Section 3: AI automation",
+      "body": "AI automation becomes more useful when commands, content generation, and deployment automation all live in the same repository."
+    },
+    {
+      "heading": "Section 4: AI automation",
+      "body": "AI automation becomes more useful when commands, content generation, and deployment automation all live in the same repository."
+    }
+  ],
+  "updatedFor": "myappai",
+  "updatedAt": "2026-03-26T08:14:22.882Z"
+}

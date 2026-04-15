@@ -1,0 +1,155 @@
+name: myappai-continue
+version: 1.1.0
+schema: v1
+
+# This config is set up to prefer free/local options first:
+# - Ollama for zero-cost local chat/edit/apply/autocomplete
+# - Gemini / Groq / OpenRouter for strong low-cost or free-tier cloud fallbacks
+# - OpenAI / Anthropic remain available when those keys exist
+#
+# Continue reads these keys from your shell environment. If you load secrets from
+# a vault into env vars before launching VS Code, Continue will pick them up.
+
+models:
+  # Local-first models
+  - name: DeepSeek Coder Local
+    provider: ollama
+    model: deepseek-coder
+    apiBase: ${OLLAMA_API_URL}
+    capabilities:
+      - tool_use
+    roles:
+      - chat
+      - edit
+      - apply
+
+  - name: Llama 3 Local
+    provider: ollama
+    model: llama3
+    apiBase: ${OLLAMA_API_URL}
+    roles:
+      - chat
+
+  - name: Mistral Local
+    provider: ollama
+    model: mistral
+    apiBase: ${OLLAMA_API_URL}
+    roles:
+      - chat
+
+  - name: DeepSeek Coder Local Autocomplete
+    provider: ollama
+    model: deepseek-coder
+    apiBase: ${OLLAMA_API_URL}
+    roles:
+      - autocomplete
+
+  # Best-value / free-tier cloud options
+  - name: Gemini 2.5 Flash
+    provider: gemini
+    model: gemini-2.5-flash
+    apiKey: ${GEMINI_API_KEY}
+    capabilities:
+      - tool_use
+    roles:
+      - chat
+      - edit
+      - apply
+
+  - name: Groq Llama 3.1 8B
+    provider: openai
+    model: llama-3.1-8b-instant
+    apiBase: https://api.groq.com/openai/v1
+    apiKey: ${GROQ_API_KEY}
+    capabilities:
+      - tool_use
+    roles:
+      - chat
+      - edit
+      - apply
+
+  - name: Groq Llama 3.1 8B Autocomplete
+    provider: openai
+    model: llama-3.1-8b-instant
+    apiBase: https://api.groq.com/openai/v1
+    apiKey: ${GROQ_API_KEY}
+    roles:
+      - autocomplete
+
+  - name: OpenRouter Free
+    provider: openai
+    model: qwen/qwen3-coder:free
+    apiBase: https://openrouter.ai/api/v1
+    apiKey: ${OPENROUTER_API_KEY}
+    capabilities:
+      - tool_use
+    roles:
+      - chat
+
+  # Premium options if you already have keys
+  - name: Claude Sonnet
+    provider: anthropic
+    model: claude-sonnet-4-5
+    apiKey: ${ANTHROPIC_API_KEY}
+    roles:
+      - chat
+      - edit
+      - apply
+
+  - name: GPT-4o
+    provider: openai
+    model: gpt-4o
+    apiKey: ${OPENAI_API_KEY}
+    roles:
+      - chat
+      - edit
+      - apply
+
+  - name: GPT-4o Mini
+    provider: openai
+    model: gpt-4o-mini
+    apiKey: ${OPENAI_API_KEY}
+    roles:
+      - autocomplete
+
+  - name: text-embedding-3-large
+    provider: openai
+    model: text-embedding-3-large
+    apiKey: ${OPENAI_API_KEY}
+    roles:
+      - embed
+
+context:
+  - provider: file
+  - provider: code
+  - provider: diff
+  - provider: terminal
+  - provider: problems
+  - provider: folder
+
+rules:
+  - Prefer TypeScript-first solutions when adding new code.
+  - Keep modules small, focused, and production-ready.
+  - Never expose secrets; use environment variables for all API keys.
+  - Respect the repository structure under dashboard, engine, scripts, workers, api, frontend, and server.
+
+prompts:
+  - name: Repo Review
+    description: Review the current change for bugs, regressions, and missing tests
+    prompt: |
+      Review the selected code or current diff like a senior engineer.
+      Focus on bugs, behavioral regressions, security risks, performance pitfalls, and missing tests.
+      Keep the findings concise and actionable.
+  - name: Build Feature
+    description: Turn a request into an implementation plan and patch
+    prompt: |
+      Read the current repository context and implement the requested feature end to end.
+      Keep the architecture modular, preserve existing routes, and explain any assumptions briefly.
+
+docs:
+  - name: Continue Docs
+    startUrl: https://docs.continue.dev/reference
+  - name: React Docs
+    startUrl: https://react.dev/
+  - name: Vite Docs
+    startUrl: https://vite.dev/guide/

@@ -1,0 +1,23 @@
+{
+  "slug": "growth-system-08-15",
+  "updatedFor": "myappai",
+  "title": "growth-system-08-15 page",
+  "headline": "AI powered growth system converts visitors into capture qualified leads",
+  "subheadline": "Built for teams shipping with local models, git-based publishing, and Cloudflare-ready deploys.",
+  "cta": "Launch workflow",
+  "sections": [
+    {
+      "title": "Command routing",
+      "description": "Route structured actions into content, media, and deployment services without manual handoffs."
+    },
+    {
+      "title": "Source-controlled content",
+      "description": "Keep every generated page diffable and reviewable by storing JSON content directly in the repo."
+    },
+    {
+      "title": "Automatic deployment",
+      "description": "Trigger git commits and Cloudflare rebuilds from a single AI-managed command path."
+    }
+  ],
+  "updatedAt": "2026-03-26T08:15:43.836Z"
+}

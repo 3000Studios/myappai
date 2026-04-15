@@ -1,0 +1,113 @@
+{
+  "history": [
+    {
+      "id": "deploy-1774513353518",
+      "status": "deployed",
+      "message": "AI planner deployment",
+      "branch": "main",
+      "commitSha": null,
+      "startedAt": "2026-03-26T08:21:49.521Z",
+      "finishedAt": "2026-03-26T08:22:33.518Z",
+      "strategy": "manual-wrangler",
+      "buildOutput": "\n> myappai@1.1.0 prebuild\n> node scripts/generate-seo-assets.js\n\n[dotenv@17.3.1] injecting env (87) from .secrets/myappai.local.env -- tip: 🛡️ auth for agents: https://vestauth.com\n[dotenv@17.3.1] injecting env (22) from .secrets/shared.local.env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild\n\n> myappai@1.1.0 build\n> vite build\n\nvite v8.0.0 building client environment for production...\n\u001b[2K\rtransforming...✓ 467 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   1.81 kB │ gzip:   0.63 kB\ndist/assets/index-z0fWsepz.css   61.08 kB │ gzip:  13.16 kB\ndist/assets/index-_m5Xw9ao.js   672.93 kB │ gzip: 197.64 kB\n\n✓ built in 9.27s\n",
+      "deployOutput": "\n ⛅️ wrangler 4.75.0 (update available 4.77.0)\n─────────────────────────────────────────────\nUploading... (40/51)\nUploading... (44/51)\nUploading... (47/51)\nUploading... (51/51)\n✨ Success! Uploaded 11 files (40 already uploaded) (2.03 sec)\n\n✨ Uploading _headers\n✨ Uploading _redirects\n✨ Compiled Worker successfully\n✨ Uploading Worker bundle\n🌎 Deploying...\n✨ Deployment complete! Take a peek over at https://e0e0332e.myappai.pages.dev\n"
+    },
+    {
+      "id": "deploy-1774513245975",
+      "status": "deployed",
+      "message": "AI planner deployment",
+      "branch": "main",
+      "commitSha": null,
+      "startedAt": "2026-03-26T08:20:01.355Z",
+      "finishedAt": "2026-03-26T08:20:45.975Z",
+      "strategy": "manual-wrangler",
+      "buildOutput": "\n> myappai@1.1.0 prebuild\n> node scripts/generate-seo-assets.js\n\n[dotenv@17.3.1] injecting env (87) from .secrets/myappai.local.env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild\n[dotenv@17.3.1] injecting env (22) from .secrets/shared.local.env -- tip: ⚙️  write to custom object with { processEnv: myObject }\n\n> myappai@1.1.0 build\n> vite build\n\nvite v8.0.0 building client environment for production...\n\u001b[2K\rtransforming...✓ 465 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   1.81 kB │ gzip:   0.63 kB\ndist/assets/index-z0fWsepz.css   61.08 kB │ gzip:  13.16 kB\ndist/assets/index-CgOxxsGe.js   670.93 kB │ gzip: 197.40 kB\n\n✓ built in 8.51s\n",
+      "deployOutput": "\n ⛅️ wrangler 4.75.0 (update available 4.77.0)\n─────────────────────────────────────────────\nUploading... (34/47)\nUploading... (38/47)\nUploading... (42/47)\nUploading... (47/47)\n✨ Success! Uploaded 13 files (34 already uploaded) (2.34 sec)\n\n✨ Uploading _headers\n✨ Uploading _redirects\n✨ Compiled Worker successfully\n✨ Uploading Worker bundle\n🌎 Deploying...\n✨ Deployment complete! Take a peek over at https://476b48fb.myappai.pages.dev\n"
+    },
+    {
+      "id": "deploy-1774513084683",
+      "status": "deployed",
+      "message": "AI planner deployment",
+      "branch": "main",
+      "commitSha": null,
+      "startedAt": "2026-03-26T08:17:28.618Z",
+      "finishedAt": "2026-03-26T08:18:04.684Z",
+      "strategy": "manual-wrangler",
+      "buildOutput": "\n> myappai@1.1.0 prebuild\n> node scripts/generate-seo-assets.js\n\n[dotenv@17.3.1] injecting env (87) from .secrets/myappai.local.env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }\n[dotenv@17.3.1] injecting env (22) from .secrets/shared.local.env -- tip: ⚙️  override existing env vars with { override: true }\n\n> myappai@1.1.0 build\n> vite build\n\nvite v8.0.0 building client environment for production...\n\u001b[2K\rtransforming...✓ 463 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   1.81 kB │ gzip:   0.63 kB\ndist/assets/index-z0fWsepz.css   61.08 kB │ gzip:  13.16 kB\ndist/assets/index-v5FBhV3i.js   670.41 kB │ gzip: 197.30 kB\n\n✓ built in 5.71s\n",
+      "deployOutput": "\n ⛅️ wrangler 4.75.0 (update available 4.77.0)\n─────────────────────────────────────────────\nUploading... (31/43)\nUploading... (35/43)\nUploading... (39/43)\nUploading... (43/43)\n✨ Success! Uploaded 12 files (31 already uploaded) (2.04 sec)\n\n✨ Uploading _headers\n✨ Uploading _redirects\n✨ Compiled Worker successfully\n✨ Uploading Worker bundle\n🌎 Deploying...\n✨ Deployment complete! Take a peek over at https://95f539d3.myappai.pages.dev\n"
+    },
+    {
+      "id": "deploy-1774512989168",
+      "status": "deployed",
+      "message": "AI planner deployment",
+      "branch": "main",
+      "commitSha": null,
+      "startedAt": "2026-03-26T08:15:43.998Z",
+      "finishedAt": "2026-03-26T08:16:29.168Z",
+      "strategy": "manual-wrangler",
+      "buildOutput": "\n> myappai@1.1.0 prebuild\n> node scripts/generate-seo-assets.js\n\n[dotenv@17.3.1] injecting env (87) from .secrets/myappai.local.env -- tip: ⚙️  override existing env vars with { override: true }\n[dotenv@17.3.1] injecting env (22) from .secrets/shared.local.env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild\n\n> myappai@1.1.0 build\n> vite build\n\nvite v8.0.0 building client environment for production...\n\u001b[2K\rtransforming...✓ 461 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   1.81 kB │ gzip:   0.63 kB\ndist/assets/index-z0fWsepz.css   61.08 kB │ gzip:  13.16 kB\ndist/assets/index-BqCu46bx.js   668.29 kB │ gzip: 196.96 kB\n\n✓ built in 9.20s\n",
+      "deployOutput": "\n ⛅️ wrangler 4.75.0 (update available 4.77.0)\n─────────────────────────────────────────────\nUploading... (24/37)\nUploading... (28/37)\nUploading... (32/37)\nUploading... (37/37)\n✨ Success! Uploaded 13 files (24 already uploaded) (2.03 sec)\n\n✨ Uploading _headers\n✨ Uploading _redirects\n✨ Compiled Worker successfully\n✨ Uploading Worker bundle\n🌎 Deploying...\n✨ Deployment complete! Take a peek over at https://38fb1fb6.myappai.pages.dev\n"
+    },
+    {
+      "id": "deploy-1774512903554",
+      "status": "deployed",
+      "message": "AI planner deployment",
+      "branch": "main",
+      "commitSha": null,
+      "startedAt": "2026-03-26T08:14:23.269Z",
+      "finishedAt": "2026-03-26T08:15:03.554Z",
+      "strategy": "manual-wrangler",
+      "buildOutput": "\n> myappai@1.1.0 prebuild\n> node scripts/generate-seo-assets.js\n\n[dotenv@17.3.1] injecting env (87) from .secrets/myappai.local.env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }\n[dotenv@17.3.1] injecting env (22) from .secrets/shared.local.env -- tip: ⚙️  write to custom object with { processEnv: myObject }\n\n> myappai@1.1.0 build\n> vite build\n\nvite v8.0.0 building client environment for production...\n\u001b[2K\rtransforming...✓ 459 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   1.81 kB │ gzip:   0.63 kB\ndist/assets/index-z0fWsepz.css   61.08 kB │ gzip:  13.16 kB\ndist/assets/index-u7hlXwq4.js   664.80 kB │ gzip: 196.58 kB\n\n✓ built in 8.23s\n",
+      "deployOutput": "\n ⛅️ wrangler 4.75.0 (update available 4.77.0)\n─────────────────────────────────────────────\nUploading... (19/31)\nUploading... (23/31)\nUploading... (27/31)\nUploading... (31/31)\n✨ Success! Uploaded 12 files (19 already uploaded) (1.75 sec)\n\n✨ Uploading _headers\n✨ Uploading _redirects\n✨ Compiled Worker successfully\n✨ Uploading Worker bundle\n🌎 Deploying...\n✨ Deployment complete! Take a peek over at https://584bb919.myappai.pages.dev\n"
+    },
+    {
+      "id": "deploy-1774512390716",
+      "status": "deploy_failed",
+      "message": "Update homepage copy to better resonate with SaaS founders",
+      "branch": "main",
+      "commitSha": null,
+      "startedAt": "2026-03-26T08:05:50.257Z",
+      "finishedAt": "2026-03-26T08:06:30.716Z",
+      "strategy": "manual-wrangler",
+      "buildOutput": "\n ⛅️ wrangler 4.75.0 (update available 4.77.0)\n─────────────────────────────────────────────\nUploading... (19/25)\nUploading... (21/25)\nUploading... (23/25)\nUploading... (25/25)\n✨ Success! Uploaded 6 files (19 already uploaded) (1.97 sec)\n\n✨ Uploading _headers\n✨ Uploading _redirects\n✨ Compiled Worker successfully\n✨ Uploading Worker bundle\n🌎 Deploying...\n",
+      "deployOutput": "\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mWarning: Your working directory is a git repo and has uncommitted changes\u001b[0m\n\n  To silence this warning, pass in --commit-dirty=true\n\n\n"
+    },
+    {
+      "id": "deploy-1774512335689",
+      "status": "deployed",
+      "message": "Update homepage copy for SaaS founders",
+      "branch": "main",
+      "commitSha": null,
+      "startedAt": "2026-03-26T08:04:41.459Z",
+      "finishedAt": "2026-03-26T08:05:35.689Z",
+      "strategy": "manual-wrangler",
+      "buildOutput": "\n> myappai@1.1.0 prebuild\n> node scripts/generate-seo-assets.js\n\n[dotenv@17.3.1] injecting env (87) from .secrets/myappai.local.env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit\n[dotenv@17.3.1] injecting env (22) from .secrets/shared.local.env -- tip: ⚙️  suppress all logs with { quiet: true }\n\n> myappai@1.1.0 build\n> vite build\n\nvite v8.0.0 building client environment for production...\n\u001b[2K\rtransforming...✓ 455 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   1.81 kB │ gzip:   0.63 kB\ndist/assets/index-z0fWsepz.css   61.08 kB │ gzip:  13.16 kB\ndist/assets/index-1B4vSkmI.js   655.64 kB │ gzip: 194.89 kB\n\n✓ built in 8.28s\n",
+      "deployOutput": "\n ⛅️ wrangler 4.75.0 (update available 4.77.0)\n─────────────────────────────────────────────\nUploading... (20/25)\nUploading... (21/25)\nUploading... (23/25)\nUploading... (25/25)\n✨ Success! Uploaded 5 files (20 already uploaded) (2.20 sec)\n\n✨ Uploading _headers\n✨ Uploading _redirects\n✨ Compiled Worker successfully\n✨ Uploading Worker bundle\n🌎 Deploying...\n✨ Deployment complete! Take a peek over at https://80e16716.myappai.pages.dev\n"
+    },
+    {
+      "id": "deploy-1773563553580",
+      "status": "pushed",
+      "message": "AI planner deployment",
+      "branch": "main",
+      "commitSha": "ecb94b6",
+      "startedAt": "2026-03-15T08:32:31.573Z",
+      "finishedAt": "2026-03-15T08:32:33.580Z",
+      "git": {
+        "status": "pushed",
+        "branch": "main",
+        "commitOutput": "[main ecb94b6] AI planner deployment\n 14 files changed, 515 insertions(+), 40 deletions(-)\n create mode 100644 ai/planner/aiPlanner.js\n create mode 100644 ai/scheduler/aiScheduler.js\n create mode 100644 content/blog/how-to-automate-marketing-with-ai.json\n create mode 100644 content/pages/growth-system-08-29.json\n create mode 100644 content/system/state.json\n create mode 100644 content/system/task-queue.json\n create mode 100644 frontend/assets/ai-marketing-automation-for-startups-1773563371495.svg\n create mode 100644 frontend/assets/how-to-automate-marketing-with-ai-1773563371503.svg\n",
+        "pushOutput": "remote: \nremote: GitHub found 6 vulnerabilities on 3000Studios/myappai's default branch (3 high, 3 moderate). To find out more, visit:        \nremote:      https://github.com/3000Studios/myappai/security/dependabot        \nremote: \nTo https://github.com/3000Studios/myappai.git\n   408d2a3..ecb94b6  main -> main\n",
+        "pushFailed": false
+      }
+    },
+    {
+      "id": "bootstrap-20260314",
+      "status": "idle",
+      "message": "Platform bootstrap ready for first AI-managed deploy.",
+      "branch": "main",
+      "commitSha": null,
+      "startedAt": "2026-03-14T00:00:00.000Z",
+      "finishedAt": "2026-03-14T00:00:00.000Z"
+    }
+  ]
+}
