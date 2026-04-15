@@ -1,0 +1,67 @@
+name: AI Dev Orchestrator
+version: 1.0.0
+schema: v1
+
+models:
+  # PRIMARY FAST LOCAL CODING AGENT
+  - name: deepseek
+    provider: ollama
+    model: deepseek-coder:33b-instruct
+    roles:
+      - chat
+      - edit
+      - apply
+
+  # DEBUGGING + REFACTORING AGENT
+  - name: codellama
+    provider: ollama
+    model: codellama:34b-instruct
+    roles:
+      - edit
+      - apply
+
+  # FAST REASONING AGENT
+  - name: mixtral
+    provider: ollama
+    model: mixtral:8x7b
+    roles:
+      - chat
+
+  # LIGHTNING CHAT AGENT
+  - name: mistral
+    provider: ollama
+    model: mistral
+    roles:
+      - chat
+
+  # HEAVY INTELLIGENCE AGENT (OPTIONAL CLOUD)
+  - name: gpt
+    provider: openai
+    model: gpt-4o
+    apiKey: ${OPENAI_API_KEY}
+    roles:
+      - chat
+      - edit
+      - apply
+
+  # CODE EDIT SPECIALIST
+  - name: claude
+    provider: anthropic
+    model: claude-3.5-sonnet
+    apiKey: ${ANTHROPIC_API_KEY}
+    roles:
+      - edit
+      - apply
+
+mcpServers:
+  - uses: continue/memory
+  - uses: continue/filesystem
+  - uses: continue/github
+  - uses: continue/terminal
+  - uses: continue/web-search
+
+contextProviders:
+  - provider: file
+  - provider: code
+  - provider: diff
+  - provider: terminal
