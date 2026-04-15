@@ -1,0 +1,46 @@
+version: 2
+updates:
+  # NPM / PNPM / Yarn dependencies
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+      time: '02:00'
+    open-pull-requests-limit: 20
+    commit-message:
+      prefix: 'ShadowBot'
+      include: 'scope'
+    allow:
+      - dependency-type: 'all'
+    rebase-strategy: 'auto'
+    reviewers:
+      - '3000Studios'
+    labels:
+      - 'dependencies'
+      - 'automerge'
+
+  # GitHub Actions (Workflows)
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: 'ShadowBot'
+    labels:
+      - 'ci'
+      - 'automerge'
+
+  # Security alerts & urgent hotfixes
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    allow:
+      - dependency-type: 'direct'
+    labels:
+      - 'security'
+      - 'urgent'
+    commit-message:
+      prefix: 'Security'
+      include: 'scope'

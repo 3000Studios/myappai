@@ -1,0 +1,48 @@
+name: Uptime Monitor
+
+on:
+  schedule:
+    # Run every 5 minutes
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Production Site
+        run: |
+          echo "Checking https://3000studios.com/api/health"
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://3000studios.com/api/health)
+          if [ "$STATUS" -ne 200 ]; then
+            echo "❌ Health check failed with status: $STATUS"
+            exit 1
+          fi
+          echo "✅ Site is healthy (HTTP $STATUS)"
+
+      - name: Check Status Endpoint
+        run: |
+          echo "Checking https://3000studios.com/api/status"
+          curl -s https://3000studios.com/api/status | jq .
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://3000studios.com/api/status)
+          if [ "$STATUS" -ne 200 ]; then
+            echo "❌ Status check failed with status: $STATUS"
+            exit 1
+          fi
+          echo "✅ Status endpoint healthy (HTTP $STATUS)"
+
+      - name: Check Matrix Page
+        run: |
+          echo "Checking https://3000studios.com/matrix"
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://3000studios.com/matrix)
+          if [ "$STATUS" -ne 200 ]; then
+            echo "⚠️ Matrix page returned: $STATUS"
+          else
+            echo "✅ Matrix page accessible (HTTP $STATUS)"
+          fi
+
+      - name: Notify on Failure
+        if: failure()
+        run: |
+          echo "🚨 ALERT: Production site health check failed!"
+          echo "Check logs at: https://github.com/${{ github.repository }}/actions"

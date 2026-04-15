@@ -1,0 +1,679 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Nabla:EDPT,EHLT@30..200,24&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* =========================================
+   NABLA COLOR FONTS
+   ========================================= */
+.font-nabla {
+  font-family: 'Nabla', display;
+  font-variation-settings: 'EDPT' 30;
+}
+
+@font-palette-values --Nabla {
+  font-family: Nabla;
+  base-palette: 2;
+}
+
+.nabla-char {
+  animation: depth 1s ease-in-out alternate infinite;
+  position: relative;
+  display: inline-block;
+  font-variation-settings: 'EDPT' 30;
+  font-palette: --Nabla;
+}
+
+.nabla-char:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.nabla-char:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.nabla-char:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.nabla-char:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.nabla-char:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.nabla-char:nth-child(6) {
+  animation-delay: 0.6s;
+}
+.nabla-char:nth-child(7) {
+  animation-delay: 0.7s;
+}
+.nabla-char:nth-child(8) {
+  animation-delay: 0.8s;
+}
+.nabla-char:nth-child(9) {
+  animation-delay: 0.9s;
+}
+.nabla-char:nth-child(10) {
+  animation-delay: 1s;
+}
+.nabla-char:nth-child(11) {
+  animation-delay: 1.1s;
+}
+.nabla-char:nth-child(12) {
+  animation-delay: 1.2s;
+}
+
+@keyframes depth {
+  0% {
+    transform: translatex(0) translatey(0);
+  }
+  100% {
+    font-variation-settings: 'EDPT' 200;
+    transform: translatex(0.15em) translatey(0.1em);
+  }
+}
+
+/* =========================================
+   HOVER UNDERLINE
+   ========================================= */
+.hover-underline {
+  font-size: 2rem;
+  color: #ffffff;
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.hover-underline::after,
+.hover-underline::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, #ff0000, #00ffff);
+  bottom: -5px;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease-out;
+}
+
+.hover-underline::before {
+  top: -5px;
+  transform-origin: left;
+}
+
+.hover-underline:hover::after,
+.hover-underline:hover::before {
+  transform: scaleX(1);
+}
+
+/* =========================================
+   3D CUBE NAVIGATION LINKS
+   ========================================= */
+.nav-cube-link {
+  position: relative;
+  width: 120px;
+  height: 40px;
+  transition: 0.5s;
+  transform-style: preserve-3d;
+  transform: perspective(1000px) rotateX(0deg);
+  display: inline-block;
+  text-decoration: none;
+}
+
+.nav-cube-link:hover {
+  transform: perspective(1000px) rotateX(360deg);
+}
+
+.nav-cube-link span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff; /* Adjusted for dark theme visibility */
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 1px;
+  transition: 0.5s;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-sizing: border-box;
+  backdrop-filter: blur(5px);
+}
+
+.nav-cube-link:hover span {
+  color: #fff;
+  background: rgba(3, 169, 244, 0.6);
+  border-color: #03a9f4;
+  box-shadow: 0 0 15px rgba(3, 169, 244, 0.5);
+}
+
+/* Cube Faces */
+.nav-cube-link span:nth-child(1) {
+  transform: rotateX(360deg) translateZ(20px);
+}
+.nav-cube-link span:nth-child(2) {
+  transform: rotateX(270deg) translateZ(20px);
+}
+.nav-cube-link span:nth-child(3) {
+  transform: rotateX(180deg) translateZ(20px);
+}
+.nav-cube-link span:nth-child(4) {
+  transform: rotateX(90deg) translateZ(20px);
+}
+
+/* =========================================
+   GLOW BUTTON (Gold/Blue/Green/Orange)
+   ========================================= */
+.glow-on-hover {
+  width: 100%;
+  height: 50px;
+  border: none;
+  outline: none;
+  color: #fff;
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.glow-on-hover:before {
+  content: '';
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+  );
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+.glow-on-hover:active {
+  color: #000;
+}
+
+.glow-on-hover:active:after {
+  background: transparent;
+}
+
+.glow-on-hover:hover:before {
+  opacity: 1;
+}
+
+.glow-on-hover:after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #111;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+/* =========================================
+   SUBMIT BUTTON ANIMATION
+   ========================================= */
+.btn-submit-anim {
+  width: 150px;
+  height: 50px;
+  background: none;
+  border: 4px solid #d4af37; /* Gold */
+  border-radius: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 100ms;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-submit-anim span,
+.btn-submit-anim svg {
+  position: absolute;
+  color: #fff;
+  fill: transparent;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.btn-submit-anim:focus,
+.btn-submit-anim.active {
+  outline: none;
+  border: 2px solid #d4af37;
+  width: 50px;
+  border-left: 4px solid #d4af37;
+  border-bottom: 4px solid #d4af37;
+  animation: spin 2s 500ms forwards;
+}
+
+.btn-submit-anim:focus span,
+.btn-submit-anim.active span {
+  color: transparent;
+}
+
+.btn-submit-anim:focus svg,
+.btn-submit-anim.active svg {
+  animation: check 500ms 2300ms forwards;
+}
+
+@keyframes spin {
+  80% {
+    border: 4px solid transparent;
+    border-left: 4px solid #d4af37;
+  }
+  100% {
+    transform: rotate(1080deg);
+    border: 4px solid #d4af37;
+  }
+}
+
+@keyframes check {
+  to {
+    fill: #17b978;
+  }
+}
+
+/* =========================================
+   FINGERPRINT LOGIN
+   ========================================= */
+.fingerprint-container {
+  align-items: center;
+  background: #000;
+  border-radius: 40px;
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.25),
+    0 10px 10px rgba(0, 0, 0, 0.22);
+  display: flex;
+  height: 80px;
+  justify-content: center;
+  position: relative;
+  width: 200px;
+  cursor: pointer;
+}
+
+.fingerprint-text {
+  color: white;
+  position: absolute;
+  transition: opacity 300ms;
+  font-family: sans-serif;
+  font-weight: 600;
+  font-size: 26px;
+  user-select: none;
+}
+
+.fingerprint-svg {
+  left: -8px;
+  opacity: 0;
+  position: absolute;
+  stroke: #777;
+  top: -9px;
+  transition: opacity 1ms;
+}
+
+.fingerprint-active {
+  stroke: #fff;
+}
+.fingerprint-out {
+  opacity: 1;
+}
+
+.fingerprint-odd {
+  stroke-dasharray: 0px 50px;
+  stroke-dashoffset: 1px;
+  transition: stroke-dasharray 1ms;
+}
+
+.fingerprint-even {
+  stroke-dasharray: 50px 50px;
+  stroke-dashoffset: -41px;
+  transition: stroke-dashoffset 1ms;
+}
+
+.fingerprint-ok {
+  opacity: 0;
+}
+
+.fingerprint-container.active {
+  animation: fp-Container 6s;
+}
+.fingerprint-container.active .fingerprint-text {
+  opacity: 0;
+  animation: fp-Text 6s forwards;
+}
+.fingerprint-container.active .fingerprint-svg {
+  opacity: 1;
+  transition: opacity 300ms 200ms;
+}
+
+.fingerprint-container.active .fingerprint-base .fingerprint-odd {
+  stroke-dasharray: 50px 50px;
+  transition: stroke-dasharray 800ms 100ms;
+}
+.fingerprint-container.active .fingerprint-base .fingerprint-even {
+  stroke-dashoffset: 0px;
+  transition: stroke-dashoffset 800ms;
+}
+
+.fingerprint-container.active .fingerprint-active .fingerprint-odd {
+  stroke-dasharray: 50px 50px;
+  transition: stroke-dasharray 2000ms 1500ms;
+}
+.fingerprint-container.active .fingerprint-active .fingerprint-even {
+  stroke-dashoffset: 0px;
+  transition: stroke-dashoffset 2000ms 1300ms;
+}
+.fingerprint-container.active .fingerprint-out {
+  opacity: 0;
+  transition: opacity 300ms 4100ms;
+}
+.fingerprint-container.active .fingerprint-ok {
+  opacity: 1;
+  animation: fp-Ok 6s forwards;
+}
+
+@keyframes fp-Container {
+  0% {
+    width: 200px;
+  }
+  6% {
+    width: 80px;
+  }
+  71% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(1.2);
+  }
+  77% {
+    transform: scale(1);
+  }
+  94% {
+    width: 80px;
+  }
+  100% {
+    width: 200px;
+  }
+}
+
+@keyframes fp-Text {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  6% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  94% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fp-Ok {
+  0% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  75% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  77% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  92% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  96% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* =========================================
+   CARD HOVER EFFECTS (Shine & Tiles)
+   ========================================= */
+:root {
+  --card-background-color: rgba(255, 255, 255, 0.015);
+  --card-border-color: rgba(255, 255, 255, 0.1);
+  --card-shine-opacity: 0.1;
+  --card-shine-gradient: conic-gradient(
+    from 205deg at 50% 50%,
+    rgba(16, 185, 129, 0) 0deg,
+    #10b981 25deg,
+    rgba(52, 211, 153, 0.18) 295deg,
+    rgba(16, 185, 129, 0) 360deg
+  );
+  --card-tile-color: rgba(16, 185, 129, 0.05);
+}
+
+.card-3d-hover {
+  background-color: var(--card-background-color);
+  box-shadow:
+    0px 3px 6px rgba(0, 0, 0, 0.05),
+    0px 8px 15px rgba(0, 0, 0, 0.1),
+    0 0 0 1px var(--card-border-color);
+  border-radius: 15px;
+  cursor: pointer;
+  position: relative;
+  transition: box-shadow 0.25s;
+  overflow: hidden;
+}
+
+.card-3d-hover .shine {
+  border-radius: inherit;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none;
+}
+
+.card-3d-hover .shine:before {
+  content: '';
+  width: 150%;
+  padding-bottom: 150%;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  bottom: 55%;
+  filter: blur(35px);
+  opacity: var(--card-shine-opacity);
+  transform: translateX(-50%);
+  background-image: var(--card-shine-gradient);
+}
+
+.card-3d-hover:hover {
+  box-shadow:
+    0px 5px 10px rgba(0, 0, 0, 0.04),
+    0px 15px 25px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.card-3d-hover:hover .shine {
+  opacity: 1;
+}
+
+/* =========================================
+   LIVE LOADING RING
+   ========================================= */
+.live-ring {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff000;
+  box-shadow: 0 0 20px #fff000;
+  animation: animateC 4s linear infinite;
+}
+
+@keyframes animateC {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================
+   SOCIAL LINKS HOVER
+   ========================================= */
+.social-link-item {
+  position: relative;
+  width: 150px;
+  height: 50px;
+  transition: 0.5s;
+  transform-style: preserve-3d;
+  transform: perspective(1000px) rotateX(0deg);
+}
+
+.social-link-item:hover {
+  transform: perspective(1000px) rotateX(360deg);
+}
+
+.social-link-item span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  background: rgba(255, 255, 255, 0.9);
+  font-family: sans-serif;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 2px;
+  transition: 0.5s;
+  border: 2px solid #000;
+  box-sizing: border-box;
+}
+
+.social-link-item:hover span {
+  color: #fff;
+  background: rgba(3, 169, 244, 0.8);
+}
+
+.social-link-item span:nth-child(1) {
+  transform: rotateX(360deg) translateZ(25px);
+}
+.social-link-item span:nth-child(2) {
+  transform: rotateX(270deg) translateZ(25px);
+}
+.social-link-item span:nth-child(3) {
+  transform: rotateX(180deg) translateZ(25px);
+}
+.social-link-item span:nth-child(4) {
+  transform: rotateX(90deg) translateZ(25px);
+}
+
+/* =========================================
+   MOBILE HAMBURGER (Animated)
+   ========================================= */
+.menu-icon-wrapper {
+  display: block;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  cursor: pointer;
+  z-index: 50;
+}
+
+.menu-icon-wrapper span {
+  display: block;
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  background: #d4af37;
+  border-radius: 9px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: 0.25s ease-in-out;
+}
+
+.menu-icon-wrapper span:nth-child(1) {
+  top: 0px;
+}
+.menu-icon-wrapper span:nth-child(2) {
+  top: 10px;
+}
+.menu-icon-wrapper span:nth-child(3) {
+  top: 20px;
+}
+
+.menu-icon-wrapper.open span:nth-child(1) {
+  top: 10px;
+  transform: rotate(135deg);
+}
+
+.menu-icon-wrapper.open span:nth-child(2) {
+  opacity: 0;
+  left: -60px;
+}
+
+.menu-icon-wrapper.open span:nth-child(3) {
+  top: 10px;
+  transform: rotate(-135deg);
+}

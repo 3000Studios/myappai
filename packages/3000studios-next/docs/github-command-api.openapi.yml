@@ -1,0 +1,43 @@
+openapi: 3.1.0
+info:
+  title: 3000Studios GitHub Workflow Dispatch API
+  version: 1.0.0
+
+servers:
+  - url: https://api.github.com
+
+components:
+  securitySchemes:
+    githubBearer:
+      type: http
+      scheme: bearer
+      bearerFormat: GitHub PAT
+
+security:
+  - githubBearer: []
+
+paths:
+  /repos/3000Studios/3000studios-next/actions/workflows/command-dispatch.yml/dispatches:
+    post:
+      operationId: triggerWorkflow
+      summary: Trigger Command Dispatch workflow
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ref
+              properties:
+                ref:
+                  type: string
+                  example: main
+                inputs:
+                  type: object
+                  properties:
+                    intent:
+                      type: string
+      responses:
+        '204':
+          description: Workflow dispatched

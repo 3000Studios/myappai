@@ -1,0 +1,468 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Copilot <copilot@github.com>
+Date: Sat, 10 Jan 2026 00:00:00 +0000
+Subject: [PATCH] fix: stabilize build, add admin voice-logs API, env validation, CI updates
+
+- Fix TypeScript catch-variable and logging issues across multiple files
+- Add Cloudinary typing fix to avoid never[] inference
+- Ensure Mongo service functions return on all code paths
+- Add a minimal file-backed admin voice-logs API for dev/prod fallback
+- Add env validation helper and .env.example
+- Add outputFileTracingRoot to next.config.js to silence multi-lockfile warning
+- Add GitHub Actions workflow for build/deploy (example using Vercel)
+---
+ components/webeditor/EditorMain.tsx   |  12 ++++---------
+ lib/apiClients.ts                      |  68 ++++++++++++++++++++++++++++++++++++++-------
+ lib/cloudinary.ts                      |  28 ++++++++++++++++----
+ lib/env.ts                             |  34 ++++++++++++++++++++++++++
+ lib/services/mongodb.ts                |  78 ++++++++++++++++++++++++++++++++++++++++++-------
+ app/api/admin/voice-logs/route.ts      | 151 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ next.config.js                         |   9 +++++++++
+ .env.example                           |  12 ++++++++++
+ .github/workflows/deploy.yml           | 118 +++++++++++++++++++++++++++++++++++++++++++++
+ 9 files changed, 549 insertions(+), 41 deletions(-)
+ create mode 100644 app/api/admin/voice-logs/route.ts
+ create mode 100644 lib/env.ts
+ create mode 100644 .env.example
+ create mode 100644 .github/workflows/deploy.yml
+
+diff --git a/components/webeditor/EditorMain.tsx b/components/webeditor/EditorMain.tsx
+index e69de29..0000000 100644
+--- a/components/webeditor/EditorMain.tsx
++++ b/components/webeditor/EditorMain.tsx
+@@ -1,12 +1,12 @@
+ 'use client';
+ 
+ /**
+  * Web Editor Main
+  *
+  * NOTE: only the relevant try/catch change is applied here to avoid "Cannot find name 'e'".
+  */
+ 
+-import React from 'react';
++import React from 'react';
+ 
+ export default function EditorMain(props: any) {
+-  async function syncIfNeeded(config: any, memory: any) {
+-    try {
+-      await syncMemory(config, memory);
+-    } catch (_e) {
+-      console.error("", e);
+-    }
+-  }
++  async function syncIfNeeded(config: any, memory: any) {
++    try {
++      await syncMemory(config, memory);
++    } catch (_e) {
++      // Use the caught variable name (_e). This prevents a TS error referencing `e`.
++      console.error('syncMemory failed', _e);
++    }
++  }
+ 
+   return <div>{/* Editor UI... */}</div>;
+ }
+diff --git a/lib/apiClients.ts b/lib/apiClients.ts
+index 0000000..0000000 100644
+--- a/lib/apiClients.ts
++++ b/lib/apiClients.ts
+@@ -1,6 +1,71 @@
++/**
++ * API clients and connection helpers.
++ *
++ * This file centralizes Mongo client logic with safe error handling so
++ * the build will not fail due to undefined catch variable usage.
++ */
++
++import { MongoClient } from 'mongodb';
++
++let mongoClient: MongoClient | null = null;
++let isConnecting = false;
++
++export async function getMongoClient(uri?: string) {
++  const mongoUri = uri || process.env.MONGO_URI || process.env.MONGODB_URI;
++  if (!mongoUri) {
++    throw new Error('MONGO_URI or MONGODB_URI environment variable is required');
++  }
++
++  if (mongoClient) return mongoClient;
++  if (isConnecting) {
++    // Wait for existing connect to complete (simple backoff)
++    let tries = 0;
++    while (!mongoClient && tries < 50) {
++      // eslint-disable-next-line no-await-in-loop
++      await new Promise((r) => setTimeout(r, 100));
++      tries++;
++    }
++    if (mongoClient) return mongoClient;
++  }
++
++  isConnecting = true;
++  try {
++    mongoClient = new MongoClient(mongoUri, { connectTimeoutMS: 10000 });
++    await mongoClient.connect();
++    return mongoClient;
++  } catch (err: unknown) {
++    console.error('Failed to connect to MongoDB', err);
++    mongoClient = null;
++    throw err;
++  } finally {
++    isConnecting = false;
++  }
++}
++
++export async function closeMongoClient() {
++  if (mongoClient) {
++    try {
++      await mongoClient.close();
++    } catch (err: unknown) {
++      console.warn('Error closing Mongo client', err);
++    } finally {
++      mongoClient = null;
++    }
++  }
++}
++
++// NOTE: other API client helpers (Stripe, Cloudinary, etc.) live in their own modules.
++
++export default {};
+diff --git a/lib/cloudinary.ts b/lib/cloudinary.ts
+index 0000000..0000000 100644
+--- a/lib/cloudinary.ts
++++ b/lib/cloudinary.ts
+@@ -1,17 +1,33 @@
+-/**
+- * Cloudinary helpers
+- */
+-
+-export function buildCloudinaryUrl(publicId: string, opts: any = {}) {
+-  const { width, height, crop = 'fill', gravity = 'auto' } = opts;
+-  const transforms = [];
+-
+-  if (width || height || crop || gravity) {
+-    const w = width ? `w_${width}` : '';
+-    const h = height ? `h_${height}` : '';
+-    transforms.push([w, h, `c_${crop}`, `g_${gravity}`].filter(Boolean).join(','));
+-  }
+-
+-  const transformation = transforms.join('/');
+-  return `https://res.cloudinary.com/your-cloud-name/image/upload/${transformation}/${publicId}`;
+-}
++/**
++ * Cloudinary helpers
++ *
++ * Ensure transforms array has an explicit element type so TypeScript does not infer never[].
++ */
++
++export function buildCloudinaryUrl(
++  publicId: string,
++  opts: { width?: number; height?: number; crop?: string; gravity?: string } = {}
++) {
++  const { width, height, crop = 'fill', gravity = 'auto' } = opts;
++  const transforms: string[] = [];
++
++  if (width || height || crop || gravity) {
++    const w = width ? `w_${width}` : '';
++    const h = height ? `h_${height}` : '';
++    transforms.push([w, h, `c_${crop}`, `g_${gravity}`].filter(Boolean).join(','));
++  }
++
++  const transformation = transforms.join('/');
++  return `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || 'your-cloud-name'}/image/upload/${transformation}/${publicId}`;
++}
+diff --git a/lib/env.ts b/lib/env.ts
+new file mode 100644
+index 0000000..0000000
+--- /dev/null
++++ b/lib/env.ts
+@@ -0,0 +1,34 @@
++/**
++ * lib/env.ts
++ *
++ * Simple environment validation helper used in CI and at runtime to fail fast
++ * when required environment variables are missing.
++ */
++
++export function validateEnv(required: string[] = []) {
++  const missing: string[] = [];
++  for (const k of required) {
++    const v = process.env[k];
++    if (!v || String(v).trim() === '') missing.push(k);
++  }
++
++  if (missing.length > 0) {
++    const message = `Missing required environment variables: ${missing.join(', ')}`;
++    if (process.env.NODE_ENV === 'production') {
++      throw new Error(message);
++    } else {
++      // In dev warn rather than throwing
++      // eslint-disable-next-line no-console
++      console.warn(message);
++    }
++  }
++
++  return missing;
++}
+diff --git a/lib/services/mongodb.ts b/lib/services/mongodb.ts
+index e69de29..0000000 100644
+--- a/lib/services/mongodb.ts
++++ b/lib/services/mongodb.ts
+@@ -1,1 +1,79 @@
++/**
++ * Mongo-backed services
++ *
++ * Provides getProduct with consistent return values and safe error handling.
++ */
++
++import { getMongoClient } from '../apiClients';
++
++export type Product = {
++  id: string;
++  title: string;
++  price: number;
++  // extend with additional fields if necessary
++};
++
++export async function getProduct(productId: string): Promise<Product | null> {
++  const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI;
++  if (!mongoUri) {
++    // No DB configured; return null so callers can handle absence gracefully.
++    console.warn('getProduct: no Mongo URI provided');
++    return null;
++  }
++
++  try {
++    const client = await getMongoClient(mongoUri);
++    const dbName = process.env.MONGO_DB_NAME || undefined;
++    const db = dbName ? client.db(dbName) : client.db();
++    const doc = await db.collection('products').findOne({ _id: productId });
++    if (!doc) return null;
++
++    const product: Product = {
++      id: String(doc._id),
++      title: String(doc.title ?? ''),
++      price: Number(doc.price ?? 0),
++    };
++
++    return product;
++  } catch (err: unknown) {
++    console.error('getProduct error', err);
++    return null;
++  }
++}
++
++// You can add additional Mongo-backed helpers below (createProduct, listProducts, etc.)
++
++export default {};
+diff --git a/app/api/admin/voice-logs/route.ts b/app/api/admin/voice-logs/route.ts
+new file mode 100644
+index 0000000..0000000
+--- /dev/null
++++ b/app/api/admin/voice-logs/route.ts
+@@ -0,0 +1,151 @@
++import { NextRequest, NextResponse } from 'next/server';
++import { promises as fs } from 'fs';
++import path from 'path';
++
++/**
++ * Minimal admin voice-logs API.
++ *
++ * - GET: returns last N logs (default 100)
++ * - POST: { action: 'clear' } to remove logs
++ *         { action: 'append', entry: {...} } to append a log (dev)
++ *
++ * Persisted to .data/voice-logs.json in project root for simplicity.
++ * Replace with DB-backed storage (Prisma/Mongo) for production.
++ */
++
++const DATA_DIR = path.join(process.cwd(), '.data');
++const LOG_FILE = path.join(DATA_DIR, 'voice-logs.json');
++
++async function ensureStore() {
++  try {
++    await fs.mkdir(DATA_DIR, { recursive: true });
++    try {
++      await fs.access(LOG_FILE);
++    } catch {
++      await fs.writeFile(LOG_FILE, JSON.stringify([], null, 2), 'utf-8');
++    }
++  } catch (err) {
++    // ignore; read/write will fail later if needed
++    console.warn('ensureStore warning', err);
++  }
++}
++
++async function readLogs(): Promise<any[]> {
++  await ensureStore();
++  try {
++    const raw = await fs.readFile(LOG_FILE, 'utf-8');
++    return JSON.parse(raw || '[]');
++  } catch (err) {
++    console.error('readLogs error', err);
++    return [];
++  }
++}
++
++async function writeLogs(logs: any[]) {
++  await ensureStore();
++  await fs.writeFile(LOG_FILE, JSON.stringify(logs, null, 2), 'utf-8');
++}
++
++export async function GET(request: NextRequest) {
++  try {
++    const url = new URL(request.url);
++    const limit = Number(url.searchParams.get('limit') || '100');
++    const logs = await readLogs();
++    return NextResponse.json({ logs: logs.slice(0, limit) });
++  } catch (err) {
++    console.error('GET /api/admin/voice-logs failed', err);
++    return NextResponse.json({ error: 'Failed to read logs' }, { status: 500 });
++  }
++}
++
++export async function POST(request: NextRequest) {
++  try {
++    const body = await request.json().catch(() => null);
++    if (!body || !body.action) {
++      return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
++    }
++
++    if (body.action === 'clear') {
++      await writeLogs([]);
++      return NextResponse.json({ success: true });
++    }
++
++    if (body.action === 'append' && body.entry) {
++      const logs = await readLogs();
++      logs.unshift(body.entry);
++      await writeLogs(logs);
++      return NextResponse.json({ success: true });
++    }
++
++    return NextResponse.json({ error: 'Unknown action' }, { status: 400 });
++  } catch (err) {
++    console.error('POST /api/admin/voice-logs failed', err);
++    return NextResponse.json({ error: 'Failed to write logs' }, { status: 500 });
++  }
++}
++diff --git a/next.config.js b/next.config.js
++new file mode 100644
++index 0000000..0000000
+--- /dev/null
++++ b/next.config.js
+@@ -0,0 +1,9 @@
++const path = require('path');
++
++/** @type {import('next').NextConfig} */
++module.exports = {
++  // This helps Next.js correctly infer the workspace root when multiple lockfiles exist
++  outputFileTracingRoot: path.resolve(__dirname),
++  // Keep other Next.js config values (e.g., experimental) in your existing file if present.
++};
++diff --git a/.env.example b/.env.example
++new file mode 100644
++index 0000000..0000000
+--- /dev/null
++++ b/.env.example
+@@ -0,0 +1,12 @@
++# Example environment variables for local development
++DATABASE_URL=postgresql://postgres:postgres@localhost:5432/postgres
++MONGO_URI=mongodb://localhost:27017
++MONGO_DB_NAME=3000studios
++NEXT_PUBLIC_API_URL=http://localhost:3000
++NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=your-cloud-name
++NEXTAUTH_SECRET=dev-secret
++# Add provider keys below:
++# STRIPE_SECRET_KEY=
++# OPENAI_API_KEY=
+diff --git b/.github/workflows/deploy.yml
+new file mode 100644
+index 0000000..0000000
+--- /dev/null
++++ b/.github/workflows/deploy.yml
+@@ -0,0 +1,118 @@
++name: CI / Build / Deploy
++
++on:
++  push:
++    branches: [ main ]
++  pull_request:
++    branches: [ main ]
++
++jobs:
++  build:
++    runs-on: ubuntu-latest
++    env:
++      CI: true
++    steps:
++      - name: Checkout repo
++        uses: actions/checkout@v4
++
++      - name: Setup Node.js
++        uses: actions/setup-node@v4
++        with:
++          node-version: '20'
++          cache: 'pnpm'
++
++      - name: Setup pnpm
++        uses: pnpm/action-setup@v2
++        with:
++          version: 8
++
++      - name: Install dependencies
++        run: pnpm install --frozen-lockfile
++
++      - name: Validate env variables
++        run: |
++          node -e "const { validateEnv } = require('./lib/env'); const missing = validateEnv(['DATABASE_URL','NEXTAUTH_SECRET']); if (missing && missing.length) { console.error('Missing envs:', missing); process.exit(1); }"
++        env:
++          DATABASE_URL: ${{ secrets.DATABASE_URL }}
++          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
++
++      - name: Run prebuild validations
++        run: pnpm run prebuild
++
++      - name: Type check
++        run: pnpm run type-check
++
++      - name: Build
++        run: pnpm run build
++
++      - name: Upload build artifact
++        uses: actions/upload-artifact@v4
++        with:
++          name: next-build
++          path: .next
++
++  deploy:
++    needs: build
++    runs-on: ubuntu-latest
++    if: github.ref == 'refs/heads/main'
++    steps:
++      - name: Checkout code
++        uses: actions/checkout@v4
++
++      - name: Download build artifact
++        uses: actions/download-artifact@v4
++        with:
++          name: next-build
++          path: .next
++
++      # Example deployment step. Replace with your hosting provider (Vercel/Netlify/Fly/etc.)
++      - name: Deploy to Vercel (if VERCEL_TOKEN provided)
++        if: ${{ secrets.VERCEL_TOKEN != '' }}
++        env:
++          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
++        run: |
++          npm i -g vercel
++          vercel --prod --token $VERCEL_TOKEN
++
++      - name: Deployment completed notice
++        run: echo "Deployment job finished (check logs for deploy provider status)."
++
++# Note:
++# - Set required secrets (DATABASE_URL, NEXTAUTH_SECRET, VERCEL_TOKEN) in the repository settings.
++# - Replace the Vercel deploy step with any provider-specific CLI you use in production.
++
++-- 
++2.42.0
++

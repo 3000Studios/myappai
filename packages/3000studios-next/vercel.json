@@ -1,0 +1,8 @@
+{
+  "build": {
+    "env": {
+      "PNPM_HOME": "/vercel/.pnpm",
+      "NODE_OPTIONS": "--max-old-space-size=4096"
+    }
+  }
+}

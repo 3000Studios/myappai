@@ -1,0 +1,2 @@
+export const GlobalEffects = () => null;
+

@@ -1,0 +1,223 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "3KAI Autonomous Web Control API",
+    "description": "Full control interface for executing changes, deploying previews, fetching assets, analyzing monetization, and managing production for 3000Studios.com.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://3000studios.com"
+    }
+  ],
+  "paths": {
+    "/api/health": {
+      "get": {
+        "operationId": "check_health",
+        "summary": "Check if the API is reachable",
+        "description": "Public endpoint with no authentication to verify firewall state.",
+        "responses": {
+          "200": { "description": "API is online" }
+        }
+      }
+    },
+
+    "/api/gpt-bridge": {
+      "post": {
+        "operationId": "send_instruction",
+        "summary": "Execute a site change",
+        "description": "Modify code, content, configuration, or structure. Commits to main and deploys automatically.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InstructionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Instruction accepted" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+
+    "/api/previews": {
+      "get": {
+        "operationId": "get_preview",
+        "summary": "Get live preview URLs",
+        "description": "Returns preview or development URLs for the current site state.",
+        "responses": {
+          "200": {
+            "description": "Preview URLs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "previews": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": { "type": "string" },
+                          "url": { "type": "string" },
+                          "status": { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+
+    "/api/assets": {
+      "post": {
+        "operationId": "fetch_assets",
+        "summary": "Fetch videos or media assets",
+        "description": "Fetch or reference stock videos, images, embeds, or external assets.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Assets returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "assets": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": { "type": "string" },
+                          "url": { "type": "string" },
+                          "type": { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+
+    "/api/status": {
+      "get": {
+        "operationId": "get_status",
+        "summary": "Get deployment status",
+        "responses": {
+          "200": {
+            "description": "Current build/deploy status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "status": { "type": "string" },
+                    "timestamp": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+
+    "/api/monetization": {
+      "post": {
+        "operationId": "analyze_monetization",
+        "summary": "Analyze monetization opportunities",
+        "description": "Returns raw site metrics, detected revenue leaks, AdSense compliance audit, and suggested experiments.",
+        "responses": {
+          "200": {
+            "description": "Monetization analysis",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "metrics": { "type": "object" },
+                    "leaks": { "type": "array", "items": { "type": "object" } },
+                    "adsenseAudit": { "type": "object" },
+                    "experiments": { "type": "array", "items": { "type": "object" } },
+                    "recommendation": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+
+    "/api/rollback": {
+      "post": {
+        "operationId": "rollback",
+        "summary": "Rollback last deployment",
+        "responses": {
+          "200": { "description": "Rollback executed" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    }
+  },
+
+  "components": {
+    "schemas": {
+      "InstructionRequest": {
+        "type": "object",
+        "properties": {
+          "instruction": {
+            "type": "string",
+            "description": "Clear, direct instruction describing the change to make."
+          }
+        },
+        "required": ["instruction"]
+      },
+      "AssetRequest": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "What kind of asset is needed (video, image, animation, etc.)"
+          }
+        },
+        "required": ["query"]
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

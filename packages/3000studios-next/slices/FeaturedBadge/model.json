@@ -1,0 +1,37 @@
+{
+  "type": "SharedSlice",
+  "id": "featured_badge",
+  "name": "FeaturedBadge",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "description": "Default variation with an image (for the badge graphic) and two main structured text fields (for upper and lower lines of bold text).",
+      "version": "initial",
+      "imageUrl": "",
+      "docURL": "...",
+      "primary": {
+        "badge_graphic": {
+          "type": "Image",
+          "config": {
+            "label": "Badge Graphic"
+          }
+        },
+        "primary_text": {
+          "type": "StructuredText",
+          "config": {
+            "single": "heading1,strong",
+            "label": "Primary Text"
+          }
+        },
+        "secondary_text": {
+          "type": "StructuredText",
+          "config": {
+            "single": "heading2,strong",
+            "label": "Secondary Text"
+          }
+        }
+      }
+    }
+  ]
+}

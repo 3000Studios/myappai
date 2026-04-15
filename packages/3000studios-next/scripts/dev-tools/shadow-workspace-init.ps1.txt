@@ -1,0 +1,157 @@
+# ============================================================
+# SHADOW MATRIX — VS CODE WORKSPACE BOOTSTRAP
+# Repo: 3000studios-next
+# Purpose: One-command full IDE control center
+# ============================================================
+
+Set-StrictMode -Version Latest
+$ErrorActionPreference = "Stop"
+
+# -----------------------------
+# CONFIG
+# -----------------------------
+$ROOT = "C:\DEV\3000studios-next"
+$WS   = "$ROOT\3000studios-next.code-workspace"
+$VSCODE = "code"
+
+if (-not (Test-Path $ROOT)) {
+    Write-Error "❌ Repo root not found at $ROOT"
+    exit 1
+}
+
+cd $ROOT
+Write-Host "🧠 INITIALIZING SHADOW WORKSPACE" -ForegroundColor Cyan
+
+# -----------------------------
+# 1. INSTALL REQUIRED EXTENSIONS
+# -----------------------------
+$extensions = @(
+  "ms-vscode.powershell",
+  "dbaeumer.vscode-eslint",
+  "esbenp.prettier-vscode",
+  "bradlc.vscode-tailwindcss",
+  "ms-vscode.vscode-typescript-next",
+  "GitHub.copilot",
+  "GitHub.copilot-chat",
+  "ms-azuretools.vscode-docker",
+  "eamodio.gitlens",
+  "streetsidesoftware.code-spell-checker"
+)
+
+Write-Host "📦 Installing VS Code extensions..." -ForegroundColor Cyan
+foreach ($ext in $extensions) {
+    & $VSCODE --install-extension $ext --force | Out-Null
+}
+
+# -----------------------------
+# 2. CREATE WORKSPACE FILE
+# -----------------------------
+@"
+{
+  "folders": [
+    { "path": "." }
+  ],
+  "settings": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+
+    "files.exclude": {
+      "**/.next": true,
+      "**/node_modules": true
+    },
+
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "typescript.enablePromptUseWorkspaceTsdk": true,
+
+    "eslint.validate": ["javascript","typescript","typescriptreact"],
+
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.profiles.windows": {
+      "PowerShell": {
+        "path": "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
+      }
+    },
+
+    "git.autofetch": true,
+    "git.confirmSync": false,
+
+    "copilot.enable": {
+      "*": true
+    },
+
+    "security.workspace.trust.enabled": false
+  }
+}
+"@ | Set-Content $WS -Encoding UTF8
+
+Write-Host "✔ Workspace file created" -ForegroundColor Green
+
+# -----------------------------
+# 3. TASKS (BUILD / DEV / DEPLOY)
+# -----------------------------
+New-Item -ItemType Directory -Force "$ROOT\.vscode" | Out-Null
+
+@"
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "dev",
+      "type": "shell",
+      "command": "npm run dev",
+      "problemMatcher": []
+    },
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "npm run build",
+      "problemMatcher": []
+    },
+    {
+      "label": "deploy",
+      "type": "shell",
+      "command": "vercel --prod --yes",
+      "problemMatcher": []
+    },
+    {
+      "label": "clean",
+      "type": "shell",
+      "command": "rm -rf .next node_modules && npm install",
+      "problemMatcher": []
+    }
+  ]
+}
+"@ | Set-Content "$ROOT\.vscode\tasks.json" -Encoding UTF8
+
+Write-Host "✔ Tasks configured" -ForegroundColor Green
+
+# -----------------------------
+# 4. LAUNCH CONFIG (DEBUG API)
+# -----------------------------
+@"
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Next.js Dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run","dev"],
+      "console": "integratedTerminal"
+    }
+  ]
+}
+"@ | Set-Content "$ROOT\.vscode\launch.json" -Encoding UTF8
+
+Write-Host "✔ Debug config ready" -ForegroundColor Green
+
+# -----------------------------
+# 5. FINAL OPEN
+# -----------------------------
+Write-Host "🚀 OPENING SHADOW CONTROL CENTER" -ForegroundColor Cyan
+& $VSCODE $WS
+
+Write-Host "✅ SHADOW WORKSPACE LIVE — STOP FUCKING AROUND AND BUILD" -ForegroundColor Green

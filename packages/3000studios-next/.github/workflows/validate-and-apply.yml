@@ -1,0 +1,52 @@
+name: Validate and Apply Command
+
+on:
+  repository_dispatch:
+    types: [apply-command]
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      - name: Apply intent
+        run: |
+          node scripts/apply-intent.mjs <<'EOF'
+          ${{ github.event.client_payload.intent }}
+          EOF
+
+      - name: Format + lint
+        run: pnpm run fix
+
+      - name: Validate
+        run: pnpm run validate
+
+      - name: Commit changes
+        run: |
+          git config user.name "3000 Agent"
+          git config user.email "agent@3000studios.com"
+          git add .
+          git commit -m "chore(agent): apply command intent" || echo "No changes"
+
+      - name: Push changes
+        run: git push origin main

@@ -1,0 +1,144 @@
+/* --- Moving Black Marble Background --- */
+.editor-body {
+  background-color: #050505;
+  background-image: url('https://www.transparenttextures.com/patterns/black-mamba.png');
+  animation: moveBackground 60s linear infinite;
+  font-family: 'Playfair Display', serif;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+@keyframes moveBackground {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+/* --- Electric Perimeter Lighting --- */
+.electric-border {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 50;
+  box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.2);
+}
+.electric-border::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+  );
+  background-size: 400%;
+  z-index: -1;
+  animation: glowing 20s linear infinite;
+  opacity: 0.3;
+  filter: blur(10px);
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+/* --- 3D Pop Text & Color Cycling --- */
+.text-3d-animated {
+  animation: colorCycle 5s infinite alternate;
+  text-shadow:
+    1px 1px 0 #000,
+    2px 2px 0 #000,
+    3px 3px 0 #000,
+    4px 4px 0 rgba(0, 0, 0, 0.5);
+  transform: perspective(500px) rotateX(5deg);
+  display: inline-block;
+}
+
+@keyframes colorCycle {
+  0% {
+    color: #3b82f6;
+  } /* Blue */
+  20% {
+    color: #22c55e;
+  } /* Green */
+  40% {
+    color: #d4af37;
+  } /* Gold */
+  60% {
+    color: #ffffff;
+  } /* White */
+  80% {
+    color: #f97316;
+  } /* Orange */
+  100% {
+    color: #eab308;
+  } /* Yellow */
+}
+
+/* --- UI Panels --- */
+.panel-glass {
+  background: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  border-radius: 12px;
+}
+
+.btn-glossy {
+  background: linear-gradient(145deg, #333, #111);
+  border: 1px solid #555;
+  color: white;
+  box-shadow:
+    5px 5px 10px #0b0b0b,
+    -5px -5px 10px #2a2a2a;
+  transition: all 0.2s ease;
+}
+.btn-glossy:active {
+  box-shadow:
+    inset 5px 5px 10px #0b0b0b,
+    inset -5px -5px 10px #2a2a2a;
+}
+
+/* Scrollbar */
+.editor-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.editor-scroll::-webkit-scrollbar-track {
+  background: #000;
+}
+.editor-scroll::-webkit-scrollbar-thumb {
+  background: #d4af37;
+  border-radius: 3px;
+}
+
+/* Font Faces */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=JetBrains+Mono:wght@400;700&display=swap');
