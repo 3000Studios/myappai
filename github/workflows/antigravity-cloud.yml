@@ -1,0 +1,32 @@
+name: ANTIGRAVITY Cloud Sync
+
+on:
+  repository_dispatch:
+    types: [antigravity-command]
+
+jobs:
+  apply-command:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_BOT_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Apply changes
+        run: |
+          node scripts/cloud-apply.js
+
+      - name: Commit & Push
+        run: |
+          git config user.name "ANTIGRAVITY"
+          git config user.email "bot@3000studios.ai"
+          git add .
+          git commit -m "cloud: voice command update" || echo "No changes"
+          git push

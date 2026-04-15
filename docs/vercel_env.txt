@@ -1,0 +1,7 @@
+
+ name                       value               environments                        created    
+ MONGODB_URI                Encrypted           Production, Preview, Development    10h ago    
+ NEXT_PUBLIC_SITE_URL       Encrypted           Production, Preview, Development    15h ago    
+ PAYPAL_CLIENT_ID           Encrypted           Production, Preview, Development    15h ago    
+ PAYPAL_CLIENT_SECRET       Encrypted           Production, Preview, Development    15h ago    
+

@@ -1,0 +1,11 @@
+name = "3000studios"
+compatibility_date = "2024-12-01"
+
+[site]
+bucket = ".next"
+
+[env.production]
+workers_dev = true
+
+[vars]
+NODE_ENV = "production"

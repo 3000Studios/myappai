@@ -1,0 +1,23 @@
+:root {
+  --gold: linear-gradient(135deg, #c9a24d, #fff1b8, #b88a2e);
+  --glass: rgba(0, 0, 0, 0.65);
+}
+
+.glass {
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  background: var(--glass);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.gold-text {
+  background: var(--gold);
+  -webkit-background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+body {
+  background-color: #000;
+  color: #fff;
+}

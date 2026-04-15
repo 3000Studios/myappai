@@ -1,0 +1,121 @@
+// This is your Prisma schema file for PostgreSQL (Creation only, not active)
+// To use this: rename to schema.prisma and update DATABASE_URL in .env
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Stats {
+  id        Int      @id @default(autoincrement())
+  title     String
+  value     String
+  change    String
+  trend     String   // "up" or "down"
+  iconName  String
+  color     String
+  updatedAt DateTime @updatedAt
+}
+
+model Stream {
+  id        Int      @id @default(autoincrement())
+  isLive    Boolean  @default(false)
+  playbackId String?
+  streamKey  String?
+  startedAt  DateTime?
+}
+
+model Product {
+  id               String   @id @default(cuid())
+  name             String
+  description      String?
+  price            Float
+  compareAtPrice   Float?
+  category         String
+  images           String // Comma-separated list of URLs
+  inStock          Boolean  @default(true)
+  inventory        Int      @default(0)
+  sku              String?  @unique
+  supplier         String?
+  features         String // Comma-separated list
+  specifications   String? // JSON string
+  shippingWeight   Float?
+  tags             String // Comma-separated list
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  orderItems       OrderItem[]
+}
+
+model Order {
+  id              String      @id @default(cuid())
+  total           Float
+  status          String 
+  provider        String 
+  providerOrderId String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  items           OrderItem[]
+  userId          String?
+  user            User?       @relation(fields: [userId], references: [id])
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  accounts      Account[]
+  sessions      Session[]
+  orders        Order[]
+}
+
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?
+  access_token       String?
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  quantity  Int
+  price     Float
+  order     Order   @relation(fields: [orderId], references: [id])
+  orderId   String
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+}

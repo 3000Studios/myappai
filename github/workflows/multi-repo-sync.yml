@@ -1,0 +1,36 @@
+name: Sync VIP → Main
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout VIP
+        uses: actions/checkout@v4
+        with:
+          repository: 3000Studios/3000Studios-VIP
+          token: ${{ secrets.GH_BOT_TOKEN }}
+          path: vip
+
+      - name: Checkout Main
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_BOT_TOKEN }}
+          path: main
+
+      - name: Sync shared logic
+        run: |
+          rsync -av vip/shared/ main/shared/
+
+      - name: Commit sync
+        run: |
+          cd main
+          git config user.name "ANTIGRAVITY"
+          git config user.email "bot@3000studios.ai"
+          git add .
+          git commit -m "sync: VIP shared updates" || echo "No changes"
+          git push

@@ -1,0 +1,31 @@
+/*
+ *   Copyright (c) 2025 NAME.
+ *   All rights reserved.
+ *   Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
+ */
+
+.shadow-glow {
+  text-shadow:
+    0 0 10px rgba(157, 78, 221, 0.8),
+    0 0 20px rgba(0, 240, 255, 0.6),
+    0 0 30px rgba(157, 78, 221, 0.4);
+}
+
+.shadow-pulse {
+  animation: shadow-pulse 2s ease-in-out infinite;
+}
+
+@keyframes shadow-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(157, 78, 221, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(0, 240, 255, 0.8);
+  }
+}
+
+.shadow-terminal {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+  border: 1px solid rgba(157, 78, 221, 0.3);
+}

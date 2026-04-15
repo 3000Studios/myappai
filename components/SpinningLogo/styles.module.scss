@@ -1,0 +1,58 @@
+.container {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.char {
+  font-size: 55px;
+  font-family: 'Dusseldot', sans-serif;
+  text-shadow: -5px 6px 13px rgba(150, 675, 150, 1);
+  height: 250px;
+  position: absolute;
+  width: 80px;
+  top: 50px;
+  color: #f67d7e;
+  transform-origin: bottom center;
+  text-align: center;
+  font-weight: 250;
+  will-change: transform, font-variation-settings;
+}
+
+@for $i from 1 through 100 {
+  @keyframes spin#{$i} {
+    0% {
+      transform: rotate(($i * 17) + deg);
+      font-variation-settings: 'wdth' 50;
+    }
+
+    20% {
+      font-variation-settings: 'wdth' 145;
+    }
+    30% {
+      font-variation-settings: 'wdth' 155;
+    }
+    50% {
+      font-variation-settings: 'wdth' 250;
+    }
+    70% {
+      font-variation-settings: 'wdth' 155;
+    }
+    80% {
+      font-variation-settings: 'wdth' 145;
+    }
+
+    100% {
+      transform: rotate((($i * 17) + 360) + deg);
+      font-variation-settings: 'wdth' 50;
+    }
+  }
+
+  .ch#{$i} {
+    transform: rotate(($i * 17) + deg);
+    animation: spin#{$i} 10s linear infinite;
+  }
+}

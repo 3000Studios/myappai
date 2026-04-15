@@ -1,0 +1,24 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 3000 Studios Logo -->
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0F52BA;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Outer Circle -->
+  <circle cx="24" cy="24" r="22" stroke="url(#logoGradient)" stroke-width="2" fill="none"/>
+  
+  <!-- 3000 Text -->
+  <text x="24" y="20" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="url(#logoGradient)" text-anchor="middle">3000</text>
+  
+  <!-- STUDIOS Text -->
+  <text x="24" y="32" font-family="Arial, sans-serif" font-size="6" font-weight="bold" fill="#E5E4E2" text-anchor="middle">STUDIOS</text>
+  
+  <!-- Decorative elements -->
+  <circle cx="24" cy="8" r="1.5" fill="#FFD700"/>
+  <circle cx="24" cy="40" r="1.5" fill="#0F52BA"/>
+  <circle cx="8" cy="24" r="1.5" fill="#E5E4E2"/>
+  <circle cx="40" cy="24" r="1.5" fill="#E5E4E2"/>
+</svg>

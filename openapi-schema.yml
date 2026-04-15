@@ -1,0 +1,35 @@
+openapi: 3.1.0
+info:
+  title: 3000Studios Command Execution API
+  version: 1.0.0
+servers:
+  - url: https://api.github.com
+
+paths:
+  /repos/3000Studios/3000studios-next/actions/workflows/command-dispatch.yml/dispatches:
+    post:
+      operationId: triggerWorkflow
+      summary: Execute a natural language command
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ref
+                - inputs
+              properties:
+                ref:
+                  type: string
+                  enum: ['main']
+                inputs:
+                  type: object
+                  required:
+                    - intent
+                  properties:
+                    intent:
+                      type: string
+      responses:
+        '204':
+          description: Workflow triggered

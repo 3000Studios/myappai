@@ -1,0 +1,96 @@
+name: Command Executor
+
+on:
+  push:
+    paths:
+      - 'commands/pending/*.json'
+
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Process Commands
+        id: process
+        run: |
+          node <<'EOF'
+          const fs = require('fs');
+          const path = require('path');
+          const { execSync } = require('child_process');
+
+          const pendingDir = path.join(process.cwd(), 'commands/pending');
+
+          if (!fs.existsSync(pendingDir)) {
+            console.log('No pending commands directory');
+            process.exit(0);
+          }
+
+          const files = fs.readdirSync(pendingDir).filter(f => f.endsWith('.json'));
+
+          if (files.length === 0) {
+            console.log('No pending command files');
+            process.exit(0);
+          }
+
+          console.log(`Found ${files.length} commands`);
+
+          files.forEach(file => {
+            const filePath = path.join(pendingDir, file);
+            try {
+              const content = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+              console.log(`Processing ${file}:`, content.intent);
+
+              // HANDLE INTENTS
+              if (content.intent === 'create-page') {
+                const route = content.payload.route; // e.g., 'about' or 'blog/post-1'
+                const code = content.payload.code; 
+                const targetPath = path.join(process.cwd(), 'app', route, 'page.tsx');
+                
+                fs.mkdirSync(path.dirname(targetPath), { recursive: true });
+                fs.writeFileSync(targetPath, code);
+                console.log(`Created page at ${targetPath}`);
+              } else if (content.intent === 'update-file') {
+                 const targetPath = path.join(process.cwd(), content.payload.path);
+                 const code = content.payload.code;
+                 fs.mkdirSync(path.dirname(targetPath), { recursive: true });
+                 fs.writeFileSync(targetPath, code);
+                 console.log(`Updated file at ${targetPath}`);
+              }
+              // Add more intents here
+
+              // Move to processed
+              const processedDir = path.join(process.cwd(), 'commands/processed');
+              fs.mkdirSync(processedDir, { recursive: true });
+              fs.renameSync(filePath, path.join(processedDir, file));
+
+            } catch (e) {
+              console.error(`Failed to process ${file}:`, e);
+              // Move to failed
+              const failedDir = path.join(process.cwd(), 'commands/failed');
+              fs.mkdirSync(failedDir, { recursive: true });
+              if (fs.existsSync(filePath)) {
+                 fs.renameSync(filePath, path.join(failedDir, file));
+              }
+            }
+          });
+          EOF
+
+      - name: Commit Changes
+        run: |
+          git config user.name "Command Executor"
+          git config user.email "bot@3000studios.ai"
+          git add .
+          git commit -m "feat: executed commands" || echo "No changes to commit"
+          git push

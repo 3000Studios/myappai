@@ -1,0 +1,32 @@
+# Robots.txt for 3000 Studios
+# https://3000studios.com
+
+User-agent: *
+Allow: /
+
+# Block development and internal paths
+Disallow: /api/
+Disallow: /admin/
+Disallow: /matrix/
+Disallow: /login
+Disallow: /_next/
+Disallow: /archive/
+
+# Sitemap location
+Sitemap: https://3000studios.com/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Special rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2

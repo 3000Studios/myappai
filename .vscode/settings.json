@@ -1,0 +1,153 @@
+{
+  // =========================================================
+  // CORE BEHAVIOR — AUTONOMOUS BUT SAFE
+  // =========================================================
+  "files.autoSave": "onFocusChange",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  // Format automatically on save
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": false,
+  "editor.formatOnType": false,
+  // Run fixes automatically on save
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // =========================================================
+  // AI / ANTIGRAVITY — FULL POWER, GUARDED
+  // =========================================================
+  "editor.largeFileOptimizations": false,
+  "extensions.ignoreRecommendations": false,
+  // Remove unsafe / undefined keys
+  // antigravity settings intentionally minimal for stability
+  // =========================================================
+  // VOICE → WEB → CODE (STABLE MODE)
+  // =========================================================
+  "editor.inlineSuggest.enabled": true,
+  "editor.suggest.preview": true,
+  // =========================================================
+  // NEXT.JS / TAILWIND / UI-UX
+  // =========================================================
+  "css.validate": false,
+  "scss.validate": false,
+  "tailwindCSS.emmetCompletions": true,
+  "tailwindCSS.classAttributes": ["class", "className"],
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "typescript": "typescriptreact"
+  },
+  "emmet.showExpandedAbbreviation": "always",
+  // =========================================================
+  // GIT — FULL AUTO, NO PROMPTS (SAFE)
+  // =========================================================
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  "git.smartCommitChanges": "all",
+  "git.useEditorAsCommitInput": false,
+  "git.terminalAuthentication": true,
+  // Force push allowed, but controlled
+  "git.allowForcePush": true,
+  // =========================================================
+  // TERMINAL / CI / DEPLOYMENT
+  // =========================================================
+  "terminal.integrated.confirmOnExit": "never",
+  "terminal.integrated.scrollback": 100000,
+  "terminal.integrated.enablePersistentSessions": true,
+  // =========================================================
+  // PERFORMANCE — LARGE REPO OPTIMIZED
+  // =========================================================
+  "editor.minimap.enabled": false,
+  "editor.renderWhitespace": "none",
+  // =========================================================
+  // 🚀 AUTONOMOUS AGENT — FULL UNRESTRICTED ACCESS
+  // =========================================================
+  "antigravity.agent.respectGitignore": false,
+  "antigravity.agent.enforceGitignore": false,
+  "antigravity.agent.autonomousMode": true,
+  "antigravity.agent.allowAllFileOperations": true,
+  "antigravity.agent.allowHiddenFiles": true,
+  "explorer.excludeGitIgnore": false,
+  "search.useIgnoreFiles": false,
+  "search.useGlobalIgnoreFiles": false,
+  "search.useParentIgnoreFiles": false,
+  "cSpell.words": [
+    "Pexels",
+    "headshot",
+    "3KAI",
+    "Studos",
+    "Antigravity",
+    "Prismic",
+    "Clerk",
+    "Vercel",
+    "Cloudinary"
+  ],
+  "todo-tree.tree.scanMode": "workspace",
+  // =========================================================
+  // ERROR DETECTION & AUTO-FIX EXTENSIONS
+  // =========================================================
+  // ESLint — Auto-fix on save
+  "eslint.enable": true,
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "eslint.codeActionsOnSave.mode": "all",
+  "eslint.run": "onType",
+  "eslint.format.enable": true,
+  "eslint.lintTask.enable": true,
+  // Error Lens — Inline error display
+  "errorLens.enabled": true,
+  "errorLens.enabledDiagnosticLevels": ["error", "warning", "info"],
+  "errorLens.fontSize": "90%",
+  "errorLens.fontWeight": "600",
+  "errorLens.messageBackgroundMode": "line",
+  "errorLens.messageTemplate": "$message",
+  "errorLens.severityText": ["ERROR", "WARNING", "INFO", "HINT"],
+  "errorLens.excludeBySource": [],
+  "errorLens.followCursor": "activeLine",
+  "errorLens.delay": 500,
+  // SonarLint — Security & Code Quality
+  "sonarlint.rules": {
+    "typescript:S1192": {
+      "level": "on"
+    },
+    "typescript:S3776": {
+      "level": "on"
+    }
+  },
+  "sonarlint.connectedMode.connections.sonarqube": [],
+  "sonarlint.pathToNodeExecutable": "",
+  // TypeScript Error Translator
+  "tsErrorTranslator.enabled": true,
+  // Tailwind CSS IntelliSense
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ],
+  "tailwindCSS.validate": true,
+  "tailwindCSS.lint.cssConflict": "error",
+  "tailwindCSS.lint.invalidApply": "error",
+  "tailwindCSS.lint.invalidScreen": "error",
+  "tailwindCSS.lint.invalidVariant": "error",
+  "tailwindCSS.lint.invalidConfigPath": "error",
+  "tailwindCSS.lint.invalidTailwindDirective": "error",
+  "tailwindCSS.lint.recommendedVariantOrder": "warning",
+  "python.testing.unittestArgs": ["-v", "-s", "./packages", "-p", "*test.py"],
+  "python.testing.pytestEnabled": false,
+  "python.testing.unittestEnabled": true
+}

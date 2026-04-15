@@ -1,0 +1,36 @@
+name: Vercel Preview
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  deployments: write
+  id-token: write
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.19.6
+          cache: pnpm
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - name: Configure pnpm (relax engine)
+        run: pnpm config set engine-strict false
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+      - name: Build preview bundle
+        run: pnpm run build
+      - uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prebuilt'

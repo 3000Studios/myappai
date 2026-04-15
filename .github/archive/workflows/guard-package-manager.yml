@@ -1,0 +1,16 @@
+name: Guard Package Manager
+
+on: [push, pull_request]
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Block npm/yarn lockfiles
+        run: |
+          if [ -f package-lock.json ] || [ -f yarn.lock ]; then
+            echo "❌ Forbidden lockfile detected."
+            exit 1
+          fi

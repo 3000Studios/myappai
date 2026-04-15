@@ -1,0 +1,7 @@
+{
+  "pnpm": {
+    "overrides": {
+      "camera-controls": "3.1.1"
+    }
+  }
+}

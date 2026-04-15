@@ -1,0 +1,92 @@
+
+> 3000studios-next@1.0.1 prebuild
+> node scripts/validate-app-structure.mjs
+
+Γ£à App structure validated. Safe to build.
+
+> 3000studios-next@1.0.1 build
+> next build --webpack
+
+ΓÜá Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\ANTIGRAVITY\pnpm-lock.yaml as the root directory.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
+ Detected additional lockfiles: 
+   * C:\ANTIGRAVITY\3000studios-next\pnpm-lock.yaml
+
+Γû▓ Next.js 16.1.1 (webpack)
+- Experiments (use with caution):
+  ┬╖ optimizePackageImports
+
+ΓÜá The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+Failed to compile.
+
+./app/api/health/revenue/route.ts
+Error:   x Expected a semicolon
+    ,-[C:\ANTIGRAVITY\3000studios-next\app\api\health\revenue\route.ts:59:1]
+ 56 |       }
+ 57 |     }
+ 58 | 
+ 59 |     const allHealthy = results.every((r) => r.status === 'healthy');
+    :     ^
+ 60 |     const criticalDown = results.filter((r) => r.status === 'down');
+ 61 | 
+ 61 |     return NextResponse.json({
+    `----
+  x Expected a semicolon
+    ,-[C:\ANTIGRAVITY\3000studios-next\app\api\health\revenue\route.ts:68:1]
+ 65 |       endpoints: results,
+ 66 |       alerts: criticalDown.length > 0 ? `${criticalDown.length} critical endpoints down` : null,
+ 67 |     });
+ 68 |   } catch (error: unknown) {
+    :     ^^^^^
+ 69 |     console.error("", error);
+ 70 |     return NextResponse.json({ error: 'Health check failed' }, { status: 500 });
+ 70 |   }
+    `----
+  x Expected a semicolon
+    ,-[C:\ANTIGRAVITY\3000studios-next\app\api\health\revenue\route.ts:72:1]
+ 69 |     console.error("", error);
+ 70 |     return NextResponse.json({ error: 'Health check failed' }, { status: 500 });
+ 71 |   }
+ 72 | }
+    :  ^
+ 73 | 
+    `----
+  x Expected '}', got '<eof>'
+    ,-[C:\ANTIGRAVITY\3000studios-next\app\api\health\revenue\route.ts:72:1]
+ 69 |     console.error("", error);
+ 70 |     return NextResponse.json({ error: 'Health check failed' }, { status: 500 });
+ 71 |   }
+ 72 | }
+    :  ^
+ 73 | 
+    `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/api/health/revenue/route.ts
+
+./lib/memory-pruner.ts
+Error:   x Expected a semicolon
+    ,-[C:\ANTIGRAVITY\3000studios-next\lib\memory-pruner.ts:19:1]
+ 16 |     });
+ 17 |     console.log("", error);
+ 18 |   }
+ 19 | }
+    : ^
+ 20 | 
+    `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./lib/memory-pruner.ts
+./app/api/cron/prune-memory/route.ts
+
+
+> Build failed because of webpack errors

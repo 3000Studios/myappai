@@ -1,0 +1,305 @@
+@import "tailwindcss";
+
+
+:root {
+  /* Marble Black & White with Gold Glass Morphism Palette */
+  --gold-primary: #D4AF37;
+  --gold-highlight: #FFD700;
+  --gold-shadow: #8A6E2F;
+  --gold-shine: #FFF8DC;
+
+  --glass-bg: rgba(15, 15, 15, 0.75);
+  --glass-border: rgba(212, 175, 55, 0.4);
+  --glass-shine: rgba(255, 255, 255, 0.15);
+
+  --marble-black: #0a0a0a;
+  --marble-white: #f5f5f5;
+  --marble-gray: #2a2a2a;
+
+  --hover-scale: 1.05;
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-black text-white overflow-x-hidden;
+    font-family: 'Georgia', serif;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+  }
+
+  /* Apply Gugi + metallic 3D shine to headings */
+  h1, h2, h3, .font-title {
+    font-family: var(--font-gugi), cursive;
+    background: linear-gradient(to bottom, var(--gold-shine), var(--gold-highlight), var(--gold-primary), var(--gold-shadow));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow:
+      1px 1px 0 rgba(138, 110, 47, 0.8),
+      2px 2px 0 rgba(0, 0, 0, 0.6),
+      0 0 12px rgba(212, 175, 55, 0.45);
+    animation: title-shine 6s ease-in-out infinite;
+  }
+
+  @keyframes title-shine {
+    0%, 100% { filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.3)); }
+    50% { filter: drop-shadow(0 0 18px rgba(212, 175, 55, 0.8)); }
+  }
+
+  /* Glossy Screen Effect */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.9), inset 0 0 3px rgba(212, 175, 55, 0.2);
+    border: 2px solid rgba(212, 175, 55, 0.15);
+  }
+
+  /* Subtle Vignette */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    pointer-events: none;
+    background: radial-gradient(circle at center, transparent 50%, rgba(0,0,0,0.7) 100%);
+  }
+}
+
+@layer components {
+  /* 3D card block utility (alias) */
+  .card-3d-glass { @apply backdrop-blur-2xl overflow-hidden; background: var(--glass-bg); border: 2px solid var(--glass-border); border-radius: 8px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 0 0 2px rgba(212, 175, 55, 0.12), 0 2px 0 rgba(255, 255, 255, 0.06); }
+  /* Glass Morphism Panel */
+  .glass-panel {
+    @apply relative backdrop-blur-2xl overflow-hidden;
+    background: var(--glass-bg);
+    border: 2px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.6),
+      inset 0 0 0 2px rgba(212, 175, 55, 0.15),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+  }
+
+  .glass-panel::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold-highlight), transparent);
+    opacity: 0.8;
+  }
+
+  .glass-panel::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.6s ease;
+  }
+
+  .glass-panel:hover::after {
+    left: 100%;
+  }
+
+  /* Gold Text Gradient with 3D Effect */
+  .text-gold-gradient {
+    background: linear-gradient(to bottom, var(--gold-shine), var(--gold-highlight), var(--gold-primary), var(--gold-shadow));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
+  }
+
+  /* 3D Text Effect for Headers */
+  .text-3d {
+    color: var(--marble-white);
+    text-shadow:
+      1px 1px 0 var(--gold-shadow),
+      2px 2px 0 var(--gold-shadow),
+      3px 3px 0 rgba(0, 0, 0, 0.8),
+      4px 4px 8px rgba(0, 0, 0, 0.6),
+      0 0 20px rgba(212, 175, 55, 0.4);
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+
+  /* Glossy Gold Button */
+  .btn-gold {
+    @apply px-8 py-4 rounded-2xl font-bold uppercase tracking-wider relative overflow-hidden cursor-pointer;
+    background: linear-gradient(135deg, var(--gold-shadow) 0%, var(--gold-primary) 50%, var(--gold-highlight) 100%);
+    color: var(--marble-black);
+    border: 2px solid var(--gold-highlight);
+    box-shadow:
+      0 4px 15px rgba(212, 175, 55, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .btn-gold::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+  }
+
+  .btn-gold:hover {
+    transform: translateY(-3px) scale(var(--hover-scale));
+    box-shadow:
+      0 8px 25px rgba(212, 175, 55, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      0 0 30px rgba(212, 175, 55, 0.5);
+  }
+
+  .btn-gold:hover::before {
+    left: 100%;
+  }
+
+  .btn-gold:active {
+    transform: translateY(-1px) scale(1.02);
+  }
+
+  /* Navigation Link with 3D Text and Underline Animation */
+  .nav-link {
+    @apply relative transition-all duration-300 uppercase tracking-widest text-sm font-bold cursor-pointer;
+    color: var(--marble-white);
+    text-shadow:
+      1px 1px 2px rgba(0, 0, 0, 0.8),
+      0 0 10px rgba(212, 175, 55, 0.3);
+    padding: 8px 16px;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold-highlight), transparent);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px var(--gold-primary);
+  }
+
+  .nav-link:hover {
+    color: var(--gold-highlight);
+    text-shadow:
+      1px 1px 2px rgba(0, 0, 0, 0.9),
+      0 0 15px rgba(212, 175, 55, 0.6),
+      2px 2px 0 var(--gold-shadow);
+    transform: translateY(-2px);
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  /* Hover Pop-Out Effect (NOT Pop-In) */
+  .hover-pop {
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .hover-pop:hover {
+    transform: translateZ(10px) scale(var(--hover-scale));
+    z-index: 10;
+  }
+
+  /* Glossy Border Effect */
+  .glossy-border {
+    border: 2px solid transparent;
+    background:
+      linear-gradient(var(--marble-black), var(--marble-black)) padding-box,
+      linear-gradient(135deg, var(--gold-shadow), var(--gold-primary), var(--gold-highlight)) border-box;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glossy-border::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+    animation: glossy-shine 3s linear infinite;
+  }
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(2deg);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% {
+    opacity: 0.6;
+    filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.3));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.8));
+  }
+}
+
+.animate-glow {
+  animation: glow 3s ease-in-out infinite;
+}
+
+@keyframes glossy-shine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+/* Cursor lightning trail colors are handled in MouseTrails; we keep default OS cursor visible */
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
