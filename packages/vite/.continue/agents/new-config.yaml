@@ -1,0 +1,22 @@
+{
+  "name": "Local Config",
+  "version": "1.0.0",
+  "schema": "v1",
+
+  "models": [
+    {
+      "title": "Primary Assistant",
+      "provider": "openai",
+      "model": "gpt-4.1",
+      "apiKey": "${env:OPENAI_API_KEY}"
+    }
+  ],
+
+  "allowAnonymousTelemetry": false,
+
+  "experimental": {
+    "enableFileEdits": true,
+    "enableShellCommands": false
+  }
+}
+    
