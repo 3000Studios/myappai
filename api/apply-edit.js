@@ -1,0 +1,1 @@
+export default (req, res) => res.json({status:'apply-edit-ready'});
