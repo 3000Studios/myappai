@@ -12,7 +12,7 @@ const SITE_URL = process.env.SITE_URL || 'https://myappai.net'
 const ADSENSE_PUBLISHER_ID =
   process.env.ADSENSE_PUBLISHER_ID ||
   process.env.ADSENSE_PUBLISHER ||
-  'pub-0000000000000000'
+  'pub-5800977493749262'
 
 async function collectRoutes() {
   void contentPagesDir
