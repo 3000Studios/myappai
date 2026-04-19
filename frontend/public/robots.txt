@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin
 
-Sitemap: https://myappai.net/sitemap.xml
+Sitemap: SITE_URL=https://campdreamga.com/sitemap.xml
