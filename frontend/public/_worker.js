@@ -15,6 +15,8 @@ const JSON_HEADERS = {
   'content-type': 'application/json; charset=utf-8',
   'cache-control': 'no-store',
 }
+const ADS_TXT_CONTENT =
+  'google.com, pub-5800977493749262, DIRECT, f08c47fec0942fa0'
 const textEncoder = new TextEncoder()
 const textDecoder = new TextDecoder()
 
@@ -1314,6 +1316,14 @@ async function handleApi(request, env) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url)
+
+    if (url.pathname === '/ads.txt') {
+      return new Response(ADS_TXT_CONTENT, {
+        headers: {
+          'content-type': 'text/plain; charset=utf-8',
+        },
+      })
+    }
 
     if (url.pathname.startsWith('/api/')) {
       return handleApi(request, env)

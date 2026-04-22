@@ -7,6 +7,9 @@ function jsonResponse(payload, status = 200) {
   })
 }
 
+const ADS_TXT_CONTENT =
+  'google.com, pub-5800977493749262, DIRECT, f08c47fec0942fa0'
+
 async function proxyToAdmin(request, env) {
   if (!env.ADMIN_API_ORIGIN) {
     return jsonResponse(
@@ -31,6 +34,14 @@ async function proxyToAdmin(request, env) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url)
+
+    if (url.pathname === '/ads.txt') {
+      return new Response(ADS_TXT_CONTENT, {
+        headers: {
+          'content-type': 'text/plain; charset=utf-8',
+        },
+      })
+    }
 
     if (url.pathname.startsWith('/api/')) {
       if (url.pathname === '/api/health') {
