@@ -76,7 +76,7 @@
     "@google/generative-ai": "^0.24.1",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
-    "axios": "^1.15.0",
+    "axios": "^1.16.0",
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
@@ -85,7 +85,7 @@
     "openai": "^6.29.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "react-router-dom": "^7.9.5",
+    "react-router-dom": "^7.17.0",
     "socket.io": "^4.8.3",
     "stripe": "^20.4.1",
     "three": "^0.183.2",
@@ -100,7 +100,7 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.0",
-    "concurrently": "^9.2.1",
+    "concurrently": "^10.0.3",
     "cross-env": "^10.1.0",
     "eslint": "^10.0.3",
     "globals": "^16.4.0",
@@ -111,8 +111,8 @@
     "prettier": "^3.8.1",
     "rollup-plugin-visualizer": "^6.0.3",
     "typescript": "^5.9.3",
-    "vitest": "^3.2.4",
-    "wrangler": "^4.77.0"
+    "vitest": "^3.2.6",
+    "wrangler": "^4.100.0"
   },
   "optionalDependencies": {
     "@rollup/rollup-win32-x64-msvc": "^4.60.0"
