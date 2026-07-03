@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin
 
-Sitemap: SITE_URL=https://campdreamga.com/sitemap.xml
+Sitemap: https://voicetowebsite.com/sitemap.xml
