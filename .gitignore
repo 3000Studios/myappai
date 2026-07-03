@@ -20,3 +20,14 @@ dist
 .tmp-pagesdev-out.log
 .tmp-pagesdev-err.log
 .cache
+
+.env
+.env.*
+!.env.example
+*.local
+serviceAccount*.json
+firebase-service-account*.json
+.google-credentials*.json
+.gitleaks-report.json
+.trivy-report.json
+.semgrep/
