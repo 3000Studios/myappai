@@ -1,28 +1,64 @@
 {
+  "updatedFor": "myappai",
   "slug": "how-to-automate-marketing-with-ai",
-  "title": "How how to automate marketing with AI strengthens an AI-run website stack",
-  "description": "A practical look at using how to automate marketing with AI inside a local-model content and deployment workflow.",
-  "excerpt": "A practical look at using how to automate marketing with AI inside a local-model content and deployment workflow.",
-  "publishedAt": "2026-03-26",
-  "tags": ["ai", "automation", "how-to-automate-marketing-with-ai"],
+  "title": "How to Automate Marketing with AI: A Practical Workflow Guide",
+  "description": "A step-by-step guide to automating marketing tasks with AI tools — lead scoring, email nurture, content repurposing, and reporting — without losing the human touch.",
+  "excerpt": "Marketing teams spend a surprising share of their week on repetitive work: tagging new leads, drafting follow-up emails, resizing one announcement into five…",
+  "publishedAt": "2026-09-27",
+  "author": "MyAppAI Team",
+  "tags": [
+    "how",
+    "automate",
+    "marketing",
+    "with"
+  ],
   "sections": [
     {
-      "heading": "Section 1: how to automate marketing with AI",
-      "body": "how to automate marketing with AI becomes more useful when commands, content generation, and deployment automation all live in the same repository."
+      "heading": "Introduction",
+      "body": "Marketing teams spend a surprising share of their week on repetitive work: tagging new leads, drafting follow-up emails, resizing one announcement into five social posts, pulling the same weekly report. AI automation doesn't replace the strategy behind that work, but it can absorb the repetitive middle layer so a small team ships like a bigger one.\n\nThis guide walks through the five marketing workflows worth automating first, the tools that handle each one, and the mistakes that make automation backfire."
     },
     {
-      "heading": "Section 2: how to automate marketing with AI",
-      "body": "how to automate marketing with AI becomes more useful when commands, content generation, and deployment automation all live in the same repository."
+      "heading": "Start With the Bottleneck, Not the Tool",
+      "body": "The most common failure mode is buying a tool and then hunting for a use case. Flip it: list the tasks your team repeats every week, time them for two weeks, and automate the ones that are high-frequency and low-judgment. Data entry, first-draft writing, scheduling, and status reporting qualify. Pricing strategy, brand voice decisions, and handling an upset customer do not — at least not yet.\n\nA good rule of thumb: if the task has a clear \"done\" definition and you can describe the steps to a new hire in under five minutes, it's automatable."
     },
     {
-      "heading": "Section 3: how to automate marketing with AI",
-      "body": "how to automate marketing with AI becomes more useful when commands, content generation, and deployment automation all live in the same repository."
+      "heading": "Workflow 1: Lead Capture and Scoring",
+      "body": "When a prospect fills out a form, speed matters — responding within five minutes dramatically improves conversion versus responding in an hour. An automated flow can:\n\nEnrich the lead with firmographic data (company size, industry) from the form input. Score it against your ideal customer profile using rules you define. Route hot leads to a salesperson immediately (Slack alert, CRM task) and drop warm leads into a nurture sequence.\n\nTools like HubSpot, ActiveCampaign, and Apollo handle this natively. The AI layer adds natural-language lead qualification: a chatbot can ask two or three questions and summarize the answers for the rep, so the first human call starts informed instead of cold."
     },
     {
-      "heading": "Section 4: how to automate marketing with AI",
-      "body": "how to automate marketing with AI becomes more useful when commands, content generation, and deployment automation all live in the same repository."
+      "heading": "Workflow 2: Email Nurture Sequences",
+      "body": "Drip campaigns are the oldest form of marketing automation, and AI has made them substantially better. Instead of one static five-email sequence, you can now:\n\nGenerate subject-line and body variants, then let the platform send the winner to the majority after a test sample. Trigger emails from behavior — a pricing-page visit, a stalled trial, a downloaded whitepaper — rather than from a calendar. Personalize beyond `{{first_name}}`: reference the prospect's industry, company size, or the specific feature they clicked.\n\nThe human job shifts from writing every email to writing the brief, reviewing the drafts, and setting the guardrails. Review the AI's output for the first month; most teams find they can spot-check after that."
+    },
+    {
+      "heading": "Workflow 3: Content Repurposing",
+      "body": "One solid piece of long-form content — a webinar, a guide, a customer interview — should become a dozen assets. AI tools now handle the mechanical part of that transformation:\n\nTranscribe the webinar and pull out quotable moments. Turn the transcript into a blog draft, then into five social posts sized for each platform. Generate the email announcing the piece, plus two follow-ups.\n\nKeep a human editor in the loop. AI repurposing is excellent at reformatting and mediocre at knowing which quote actually lands. The editor's job is selection, not rewriting from scratch — which is where the time savings come from."
+    },
+    {
+      "heading": "Workflow 4: Social Scheduling and Listening",
+      "body": "Scheduling tools with AI assistance (Buffer, Hootsuite, Sprout Social) can suggest posting times based on when your audience is actually online, draft alt text for images, and flag comments that need a human reply versus ones a saved response covers. Social listening — tracking brand mentions and competitor keywords — surfaces conversations worth joining without anyone manually searching all day.\n\nOne caution: fully automated replies on social media read as automated. Use AI to draft and triage; let a person hit send on anything public-facing."
+    },
+    {
+      "heading": "Workflow 5: Reporting",
+      "body": "The weekly marketing report is a strong automation candidate because the inputs are structured and the audience wants consistency. Connect your ad platforms, analytics, and CRM to a dashboard (Looker Studio, Datadog, or the native reporting in your marketing platform), and add an AI summary layer that writes the three-bullet \"what changed and why\" in plain language.\n\nThis doesn't eliminate analysis — it eliminates the hour of screenshotting charts. The analyst spends their time on the \"why,\" which is the part leadership actually reads."
+    },
+    {
+      "heading": "Choosing Tools Without Regret",
+      "body": "A few principles that hold up across vendors:\n\nPrefer platforms over point tools when you're small. One system that does email, CRM, and automation (even imperfectly) beats five best-in-class tools nobody has time to integrate. Check the data story. Every AI feature is trained on or processes your customer data. Read the vendor's data-use policy before connecting your CRM, especially under GDPR or CCPA. Pilot on one workflow for 30 days. Measure time saved and output quality against your manual baseline before rolling out further."
+    },
+    {
+      "heading": "Mistakes That Make Automation Backfire",
+      "body": "Automating a broken process. If your lead follow-up is slow because nobody owns it, automation just makes the neglect faster and more consistent. No unsubscribe hygiene. Automated sequences that ignore engagement signals train spam filters against your domain. Suppress chronic non-openers. Set-and-forget. Review automated flows quarterly. Pricing changes, new products, and stale testimonials all creep into templates. Over-personalization. Referencing data the prospect didn't knowingly give you (\"I saw you visited our pricing page 4 times Tuesday\") feels like surveillance, not service."
+    },
+    {
+      "heading": "A Sensible First 30 Days",
+      "body": "Week one: audit repetitive tasks and pick one workflow — usually email nurture or lead routing. Week two: configure the tool and write the human-review checklist. Week three: run it in parallel with the manual process and compare. Week four: keep the winner, document the setup, and pick the next workflow.\n\nMarketing automation with AI works best as a compounding investment: each workflow you automate frees the hours needed to automate the next one well. Start narrow, measure honestly, and keep humans where judgment lives."
     }
   ],
-  "updatedFor": "myappai",
-  "updatedAt": "2026-03-26T08:21:49.062Z"
+  "cta": {
+    "eyebrow": "MyAppAI",
+    "heading": "Put it to work",
+    "body": "Ideas are cheap — working systems aren't. Explore the tools and guides on MyAppAI and start building.",
+    "primaryLabel": "Explore the tools",
+    "primaryHref": "/tools"
+  }
 }

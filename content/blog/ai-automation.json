@@ -1,28 +1,53 @@
 {
+  "updatedFor": "myappai",
   "slug": "ai-automation",
-  "title": "How AI automation strengthens an AI-run website stack",
-  "description": "A practical look at using AI automation inside a local-model content and deployment workflow.",
-  "excerpt": "A practical look at using AI automation inside a local-model content and deployment workflow.",
-  "publishedAt": "2026-03-26",
-  "tags": ["ai", "automation", "ai-automation"],
+  "title": "AI Automation Explained: What It Is, What It Isn't, and Where to Start",
+  "description": "A plain-English explainer on AI automation — how it differs from traditional automation, realistic use cases, and a practical path to your first working automation.",
+  "excerpt": "\"AI automation\" gets used to describe everything from a mail-merge to a self-driving car. That vagueness causes real problems: people either expect magic or…",
+  "publishedAt": "2026-09-27",
+  "author": "MyAppAI Team",
+  "tags": [
+    "automation"
+  ],
   "sections": [
     {
-      "heading": "Section 1: AI automation",
-      "body": "AI automation becomes more useful when commands, content generation, and deployment automation all live in the same repository."
+      "heading": "Introduction",
+      "body": "\"AI automation\" gets used to describe everything from a mail-merge to a self-driving car. That vagueness causes real problems: people either expect magic or dismiss the whole category. Here's a grounded explanation of what the term means in practice, what it can and can't do today, and how to build your first useful automation without a engineering team."
     },
     {
-      "heading": "Section 2: AI automation",
-      "body": "AI automation becomes more useful when commands, content generation, and deployment automation all live in the same repository."
+      "heading": "Traditional Automation vs. AI Automation",
+      "body": "Traditional automation follows explicit rules: *when X happens, do Y.* A scheduled script backs up a database at 2 AM. A form submission creates a CRM record. These systems are reliable and predictable — and they break the moment reality deviates from the script. A customer writes \"ASAP!!\" instead of selecting \"Urgent\" from the dropdown, and the rule misses it.\n\nAI automation adds a judgment layer in the middle: *when X happens, figure out what it means, then do Y.* The system reads the customer's message, classifies it as urgent, extracts the order number, and routes it correctly — even though no rule anticipated that exact wording. The rules still exist; AI just handles the messy, human-shaped inputs that rules can't parse.\n\nNeither replaces the other. Rule-based automation is cheaper, faster, and more predictable for structured situations. AI earns its place where inputs are unstructured: natural language, images, documents, and decisions with shades of gray."
     },
     {
-      "heading": "Section 3: AI automation",
-      "body": "AI automation becomes more useful when commands, content generation, and deployment automation all live in the same repository."
+      "heading": "What AI Automation Actually Does Well",
+      "body": "The strongest use cases share a shape: high volume, clear success criteria, and a human available for the exceptions.\n\nTriage and routing. Reading incoming emails, tickets, or applications and sending each to the right place with a summary. Support desks and hiring pipelines live here. Data extraction. Pulling structured information from invoices, contracts, resumes, or forms — the kind of work that's trivial for a person and brutal at scale. First drafts. Customer replies, product descriptions, meeting summaries, report narratives. The AI drafts; a person approves or edits. Monitoring and alerting. Watching data streams — server logs, sales figures, social mentions — and flagging anomalies with context instead of raw numbers.\n\nNotice what's missing: final decisions with real consequences. Approving loans, diagnosing patients, firing employees — AI can prepare the analysis, but the decision stays human, both for ethical reasons and because the liability math doesn't work otherwise."
     },
     {
-      "heading": "Section 4: AI automation",
-      "body": "AI automation becomes more useful when commands, content generation, and deployment automation all live in the same repository."
+      "heading": "What It Doesn't Do",
+      "body": "Three misconceptions worth killing early:\n\nIt doesn't understand your business. An AI model has no context about your customers, your margins, or that one client who always pays late but always pays. Every automation needs that context supplied — through prompts, examples, and integrations — and supplying it is most of the work.\n\nIt isn't deterministic. The same input can produce slightly different outputs. That's fine for a draft email and unacceptable for a financial calculation. Design accordingly: let AI handle the fuzzy parts, keep arithmetic and record-keeping in traditional code.\n\nIt doesn't maintain itself. Models change, APIs deprecate, business processes evolve. An automation built in January may quietly degrade by September. Budget maintenance time or accept slow rot."
+    },
+    {
+      "heading": "The Tools, Honestly Assessed",
+      "body": "You don't need to train models or hire ML engineers. The practical stack has three layers:\n\nWorkflow platforms — Zapier, Make, and n8n connect apps and move data between them. n8n is open-source and self-hostable, which matters if you're cost-sensitive or handle sensitive data. These handle the \"when X, do Y\" plumbing.\n\nAI services — APIs from OpenAI, Anthropic, and Google provide the judgment layer: classify this, summarize that, extract fields from this document. You call them as steps inside your workflows.\n\nAI agents (the new layer) — tools that chain multiple steps toward a goal with less explicit scripting. Powerful, but harder to debug and easier to surprise you. Start with explicit workflows; graduate to agents once you've seen the failure modes up close."
+    },
+    {
+      "heading": "Your First Automation: A Worked Example",
+      "body": "Pick something small and annoying: let's say customer support emails pile up and take a day to sort. A reasonable first automation:\n\nTrigger: new email arrives in the support inbox. Classify: an AI step labels it billing, technical, or general, with a confidence score. Route: high-confidence technical issues get a draft reply prepared from your help docs; everything else goes to the right queue with an AI-written summary. Human checkpoint: nothing sends without approval for the first month.\n\nBuild it in an afternoon with Make or n8n plus one AI API call. Measure for two weeks: time-to-first-response, misclassification rate, and hours saved. If the numbers work, expand. If they don't, you've spent an afternoon learning exactly why — which is cheaper than a consultant telling you."
+    },
+    {
+      "heading": "The Failure Modes to Design Around",
+      "body": "Silent failures. An automation that stops running looks identical to one with nothing to do. Add heartbeat alerts — a daily \"I processed N items\" message — so silence itself becomes a signal. Confident errors. AI mistakes look plausible. Log the AI's reasoning or at least its inputs and outputs so you can audit what happened. Scope creep. \"While we're at it, let's also have it...\" is how a two-hour automation becomes a two-month project. Ship the narrow version first. No off switch. Every automation needs a kill switch and a documented manual fallback. You'll need both eventually."
+    },
+    {
+      "heading": "Where This Goes From Here",
+      "body": "The trajectory is clear: the judgment layer gets cheaper and more capable, which pushes the boundary of what's worth automating outward. Tasks that needed human nuance in 2023 are routine automation targets now. But the durable skill isn't learning any particular tool — it's the discipline of identifying automatable work, scoping it narrowly, measuring honestly, and keeping humans where judgment actually matters. That skill compounds regardless of which platform wins."
     }
   ],
-  "updatedFor": "myappai",
-  "updatedAt": "2026-03-26T08:14:22.882Z"
+  "cta": {
+    "eyebrow": "MyAppAI",
+    "heading": "Put it to work",
+    "body": "Ideas are cheap — working systems aren't. Explore the tools and guides on MyAppAI and start building.",
+    "primaryLabel": "Explore the tools",
+    "primaryHref": "/tools"
+  }
 }

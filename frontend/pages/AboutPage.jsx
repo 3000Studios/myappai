@@ -6,42 +6,26 @@ return (
   <article className="prose-page">
     <header className="prose-header">
       <h1>About MyAppAI</h1>
-      <p className="prose-lead">
-        MyAppAI is a browser-based operator platform built for developers, indie hackers, and small teams who want to research, plan, edit repositories, and deploy live sites from one authenticated workspace.
-      </p>
     </header>
 
     <section className="prose-section">
-      <h2>What We Build</h2>
+      <h2>What This Site Is</h2>
       <p>
-        We build tools that collapse the gap between idea and live product. MyAppAI gives you a single control plane where you can browse for source-backed answers, write and review code changes, manage repository content safely, and trigger live deployments to Cloudflare Pages or any static host.
-      </p>
-      <p>
-        Our platform is designed around one core belief: you should not need to juggle a dozen tabs, tools, and CLI windows to keep a site running. MyAppAI brings research, code, and deployment into one authenticated session.
+        MyAppAI is a public resource for anyone trying to make sense of the AI software landscape. We publish practical guides, honest tool comparisons, and tutorials for developers and teams who want to use AI applications effectively — not marketing copy, and not hype. The site covers two things: understanding AI tools (what they do, how they work, where they fall short) and building with them (tutorials and walkthroughs for developers integrating AI into real projects).
       </p>
     </section>
 
     <section className="prose-section">
-      <h2>Who It's For</h2>
-      <ul>
-        <li><b>Indie developers and solopreneurs</b> who ship fast and need everything in one place</li>
-        <li><b>Small dev teams</b> who want safe, reviewable repository operations without accidental breaks</li>
-        <li><b>AI builders</b> exploring how to integrate LLMs into real development workflows</li>
-        <li><b>Content creators and marketers</b> who need to update sites without touching code directly</li>
-      </ul>
-    </section>
-
-    <section className="prose-section">
-      <h2>Our Stack</h2>
+      <h2>How We Work</h2>
       <p>
-        MyAppAI is built on open, proven technology: React for the frontend, Cloudflare Pages for deployment, GitHub for version control, and OpenAI and Gemini for AI orchestration. Everything is designed to be auditable, reversible, and fast.
+        Our articles are written and reviewed by working developers. When we compare tools, we describe what each one actually does well and where it disappoints — including the limitations vendors leave off their pricing pages. When we publish a tutorial, the code is meant to run, not just to read. We don't publish filler. Where we've formed an opinion from experience, we say so plainly.
       </p>
     </section>
 
     <section className="prose-section">
-      <h2>Built by 3000Studios</h2>
+      <h2>What This Site Is Not</h2>
       <p>
-        MyAppAI is a product of <a href="https://github.com/3000Studios" rel="noopener noreferrer">3000Studios</a>, an independent software studio focused on AI-powered developer tools, automation platforms, and open-source projects. We believe the best software is built by small teams moving fast with the right tools.
+        MyAppAI is not a private network, a members-only club, or a gated community. Everything here is public and free to read. We're not selling access, courses, or certifications, and we don't cold-pitch readers.
       </p>
     </section>
 

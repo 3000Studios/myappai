@@ -6,7 +6,9 @@ import AdminLayout from '../components/admin/AdminLayout.jsx'
 import HomePage from '../pages/HomePage.jsx'
 import AboutPage from '../pages/AboutPage.jsx'
 import ContactPage from '../pages/ContactPage.jsx'
+import PrivacyPage from '../pages/PrivacyPage.jsx'
 import ToolsPage from '../pages/ToolsPage.jsx'
+import BlogIndexPage from '../pages/BlogIndexPage.jsx'
 import BlogPostPage from '../pages/BlogPostPage.jsx'
 import AdminLoginPage from '../pages/AdminLoginPage.jsx'
 import AdminOperatorPage from '../pages/admin/AdminOperatorPage.jsx'
@@ -42,7 +44,9 @@ return (
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/tools" element={<ToolsPage />} />
+        <Route path="/blog" element={<BlogIndexPage />} />
         <Route path="/blog/:slug" element={<BlogPostPage />} />
         <Route path="/openclaw" element={<OpenClaw />} />
         <Route path="/revenue" element={<RevenueStreams />} />
