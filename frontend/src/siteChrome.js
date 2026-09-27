@@ -6,6 +6,7 @@ export const publicNavItems = [
 { label: 'Blog', to: '/blog' },
 { label: 'About', to: '/about' },
 { label: 'Contact', to: '/contact' },
+{ label: 'Privacy', to: '/privacy' },
 { label: 'Admin', to: '/admin/login' },
 ]
 
