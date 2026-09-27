@@ -11,31 +11,55 @@ setForm({ ...form, [e.target.name]: e.target.value })
 
 function handleSubmit(e) {
 e.preventDefault()
-const mailto = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(form.subject || 'Contact from ' + form.name)}&body=${encodeURIComponent('Name: ' + form.name + '\nEmail: ' + form.email + '\n\n' + form.message)}`
+const subject = form.subject || 'Contact from ' + form.name
+const body = 'Name: ' + form.name + ' | Email: ' + form.email + ' | Message: ' + form.message
+const mailto = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
 window.location.href = mailto
 setSubmitted(true)
 }
-
-return (
-<article className="prose-page">
-  <header className="prose-header">
-    <h1>Contact Us</h1>
-    <p className="prose-lead">
-      Have a question, bug report, or partnership inquiry? We read every message and respond within 1-2 business days.
-    </p>
-  </header>
-
-  <section className="prose-section">
-    <h2>Get in Touch</h2>
-    <p>
-      Email us directly at <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a> or use the form below.
-    </p>
-
     {submitted ? (
       <div className="contact-success">
         <p>Thanks! Your email client should have opened. If not, email us directly at <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.</p>
       </div>
     ) : (
+  <section className="prose-section">
+    <h2>Corrections to articles</h2>
+    <p>
+      Technical accuracy is the foundation of this site. If you spot an error in an article, report it via the contact form with the article title and a description of the problem. Corrections are reviewed promptly.
+    </p>
+  </section>
+
+  <section className="prose-section">
+    <h2>Topic requests</h2>
+    <p>
+      Reader requests influence the publishing schedule. If there is a topic you would like us to cover, tell us via the contact form.
+    </p>
+  </section>
+
+  <section className="prose-section">
+    <h2>Feedback on the site</h2>
+    <p>
+      Found a broken link, confusing navigation, or something else that is not working? We want to hear about it.
+    </p>
+  </section>
+
+  <section className="prose-section">
+    <h2>What to Expect</h2>
+    <p>
+      We read every message. Straightforward corrections usually get acknowledged within a few days; longer questions may take a week or more.
+    </p>
+  </section>
+
+  <section className="prose-section">
+    <h2>Before You Write</h2>
+    <p>
+      When reporting an issue with an article, include the article title and URL. For technical problems, describe what you expected to happen versus what actually happened.
+    </p>
+  </section>
+</article>
+)
+}
+
       <form className="contact-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name</label>
@@ -58,14 +82,14 @@ return (
     )}
   </section>
 
+return (
+<article className="prose-page">
+  <header className="prose-header">
+    <h1>Contact Us</h1>
+  </header>
+
   <section className="prose-section">
-    <h2>Other Ways to Reach Us</h2>
-    <ul>
-      <li><b>Email:</b> <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a></li>
-      <li><b>GitHub:</b> <a href="https://github.com/3000Studios" rel="noopener noreferrer">github.com/3000Studios</a></li>
-      <li><b>Response time:</b> 1-2 business days</li>
-    </ul>
-  </section>
-</article>
-)
-}
+    <h2>Get in Touch</h2>
+    <p>
+      We welcome questions, corrections, and suggestions from readers.
+    </p>
