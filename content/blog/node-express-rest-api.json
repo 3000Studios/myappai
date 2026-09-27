@@ -1,1 +1,68 @@
-{"updatedFor":"myappai","slug":"node-express-rest-api","title":"Build a Production-Ready REST API with Node.js and Express","description":"A complete guide to building a REST API with Node.js and Express — routing, middleware, error handling, validation, authentication, and deployment.","publishedAt":"2026-01-15T00:00:00.000Z","author":"MyAppAI Team","tags":["Node.js","Express","API","backend","tutorial"],"body":"Express is still the most popular Node.js framework in 2025 — and for good reason. It's minimal, flexible, and has a massive ecosystem. Here's how to build a production-ready REST API from scratch.\n\n## Project Setup\n\n```bash\nmkdir my-api && cd my-api\nnpm init -y\nnpm install express cors helmet morgan dotenv express-validator\nnpm install -D nodemon\n```\n\nUpdate `package.json`:\n\n```json\n{\n  \"type\": \"module\",\n  \"scripts\": {\n    \"dev\": \"nodemon src/index.js\",\n    \"start\": \"node src/index.js\"\n  }\n}\n```\n\n## Project Structure\n\n```\nsrc/\n  routes/\n    users.js\n    posts.js\n  middleware/\n    auth.js\n    errorHandler.js\n    validate.js\n  controllers/\n    usersController.js\n  index.js\n```\n\n## Main Entry Point\n\n```javascript\nimport express from 'express'\nimport cors from 'cors'\nimport helmet from 'helmet'\nimport morgan from 'morgan'\nimport 'dotenv/config'\nimport usersRouter from './routes/users.js'\nimport { errorHandler } from './middleware/errorHandler.js'\n\nconst app = express()\n\napp.use(helmet())\napp.use(cors({ origin: process.env.ALLOWED_ORIGIN || '*' }))\napp.use(morgan('dev'))\napp.use(express.json({ limit: '10mb' }))\n\napp.use('/api/users', usersRouter)\n\napp.get('/health', (req, res) => res.json({ status: 'ok' }))\napp.use((req, res) => res.status(404).json({ error: 'Not found' }))\napp.use(errorHandler)\n\nconst PORT = process.env.PORT || 3000\napp.listen(PORT, () => console.log(`API running on port ${PORT}`))\n```\n\n## Error Handler Middleware\n\n```javascript\nexport function errorHandler(err, req, res, next) {\n  console.error(err.stack)\n  const status = err.status || 500\n  const message = err.message || 'Internal server error'\n  res.status(status).json({\n    error: message,\n    ...(process.env.NODE_ENV === 'development' && { stack: err.stack })\n  })\n}\n\nexport function createError(status, message) {\n  const err = new Error(message)\n  err.status = status\n  return err\n}\n```\n\n## Input Validation\n\n```javascript\nimport { validationResult } from 'express-validator'\n\nexport function validate(req, res, next) {\n  const errors = validationResult(req)\n  if (!errors.isEmpty()) {\n    return res.status(400).json({ errors: errors.array() })\n  }\n  next()\n}\n```\n\n## Routes with Validation\n\n```javascript\nimport { Router } from 'express'\nimport { body, param } from 'express-validator'\nimport { validate } from '../middleware/validate.js'\nimport * as usersController from '../controllers/usersController.js'\n\nconst router = Router()\n\nrouter.get('/', usersController.getAll)\n\nrouter.get('/:id',\n  param('id').isUUID().withMessage('Invalid user ID'),\n  validate,\n  usersController.getById\n)\n\nrouter.post('/',\n  body('email').isEmail().normalizeEmail(),\n  body('name').trim().isLength({ min: 2, max: 100 }),\n  body('password').isLength({ min: 8 }),\n  validate,\n  usersController.create\n)\n\nexport default router\n```\n\n## JWT Authentication\n\n```javascript\nimport jwt from 'jsonwebtoken'\nimport { createError } from './errorHandler.js'\n\nexport function requireAuth(req, res, next) {\n  const token = req.headers.authorization?.split(' ')[1]\n  if (!token) return next(createError(401, 'No token provided'))\n\n  try {\n    req.user = jwt.verify(token, process.env.JWT_SECRET)\n    next()\n  } catch {\n    next(createError(401, 'Invalid token'))\n  }\n}\n```\n\n## Async Error Handling\n\n```javascript\nexport function asyncHandler(fn) {\n  return (req, res, next) => {\n    Promise.resolve(fn(req, res, next)).catch(next)\n  }\n}\n\nrouter.get('/:id', asyncHandler(async (req, res) => {\n  const user = await db.users.findById(req.params.id)\n  if (!user) throw createError(404, 'User not found')\n  res.json(user)\n}))\n```\n\n## Production Checklist\n\n- Set `NODE_ENV=production` in your environment\n- Use `helmet` for security headers\n- Rate limit your API with `express-rate-limit`\n- Log errors to a service like Sentry\n- Use a process manager like PM2 for zero-downtime restarts\n- Put a reverse proxy (Nginx or Cloudflare) in front of your Node process\n\nThis structure scales from a weekend project to a production API serving millions of requests."}
+{
+  "updatedFor": "myappai",
+  "slug": "node-express-rest-api",
+  "title": "Build a Production-Ready REST API with Node.js and Express",
+  "description": "Beyond the hello-world tutorial: project structure, validation, error handling, authentication, and testing patterns for an Express API you'd actually deploy.",
+  "excerpt": "Most Express tutorials stop at `app.get('/hello')` and leave you to discover everything else in production at 2 AM. This guide covers the parts that make an…",
+  "publishedAt": "2026-09-27",
+  "author": "MyAppAI Team",
+  "tags": [
+    "node",
+    "express",
+    "rest",
+    "api"
+  ],
+  "sections": [
+    {
+      "heading": "Introduction",
+      "body": "Most Express tutorials stop at `app.get('/hello')` and leave you to discover everything else in production at 2 AM. This guide covers the parts that make an API production-ready: structure that survives growth, input validation, consistent errors, authentication, and tests — the unglamorous work that determines whether your API is reliable."
+    },
+    {
+      "heading": "Project Setup",
+      "body": "```bash mkdir my-api && cd my-api npm init -y npm install express dotenv npm install -D nodemon ```\n\nEntry point with the basics — JSON parsing, environment config, and a health check (your future monitoring will thank you):\n\n```js import express from 'express'; import 'dotenv/config';\n\nconst app = express(); app.use(express.json());\n\napp.get('/health', (req, res) => res.json({ status: 'ok' }));\n\nconst PORT = process.env.PORT || 3000; app.listen(PORT, () => console.log(`Listening on ${PORT}`)); ```\n\nUse ES modules (`\"type\": \"module\"` in package.json) — it's the modern default and what most libraries now assume."
+    },
+    {
+      "heading": "Structure: Routes, Controllers, Services",
+      "body": "Don't put business logic in route handlers. A three-layer split keeps things testable:\n\n``` src/ routes/ # URL wiring only: router.get('/', controller.list) controllers/ # request/response handling: parse input, call service, format output services/ # business logic: database calls, rules, computations middleware/ # auth, validation, error handling ```\n\nRoutes map URLs to controllers. Controllers translate HTTP into service calls and service results into HTTP. Services contain the actual logic and know nothing about HTTP. When you need to change how something works, you know exactly which layer to open."
+    },
+    {
+      "heading": "Input Validation: Never Trust the Client",
+      "body": "Every request body, query parameter, and URL parameter is hostile until proven otherwise. Validate with a schema library — Zod is the current standard:\n\n```js import { z } from 'zod';\n\nconst createUserSchema = z.object({ name: z.string().min(1).max(100), email: z.string().email(), age: z.number().int().min(13).optional(), });\n\napp.post('/users', (req, res, next) => { const result = createUserSchema.safeParse(req.body); if (!result.success) { return res.status(400).json({ error: 'Invalid input', details: result.error.flatten(), }); } // result.data is now typed and safe }); ```\n\nValidate at the boundary (middleware or the top of the controller) so service code can assume clean input. This one practice eliminates an entire class of bugs and most injection-style vulnerabilities."
+    },
+    {
+      "heading": "Consistent Error Handling",
+      "body": "Ad-hoc error responses (`res.status(500).send('oops')` in some places, JSON in others) make client code miserable. Centralize with an error-handling middleware — Express routes errors there when you call `next(err)`:\n\n```js // Custom error classes class NotFoundError extends Error { status = 404; } class ValidationError extends Error { status = 400; }\n\n// In a controller: if (!user) throw new NotFoundError('User not found');\n\n// Central handler (registered LAST, after all routes): app.use((err, req, res, next) => { const status = err.status || 500; if (status === 500) console.error(err); // log server errors with stack res.status(status).json({ error: status === 500 ? 'Internal server error' : err.message, }); }); ```\n\nNote: async route handlers need errors forwarded — either wrap handlers in a helper that catches promise rejections into `next()`, or use Express 5, which handles async errors natively. Unhandled promise rejections crashing the process is a classic production incident; eliminate the possibility structurally."
+    },
+    {
+      "heading": "Authentication with JWT",
+      "body": "For most APIs, JSON Web Tokens are the pragmatic choice: the server signs a token at login, the client sends it in the `Authorization: Bearer <token>` header, and middleware verifies it per request.\n\n```js import jwt from 'jsonwebtoken';\n\nfunction authenticate(req, res, next) { const header = req.headers.authorization; const token = header?.startsWith('Bearer ') ? header.slice(7) : null; if (!token) return res.status(401).json({ error: 'Missing token' }); try { req.user = jwt.verify(token, process.env.JWT_SECRET); next(); } catch { return res.status(401).json({ error: 'Invalid or expired token' }); } }\n\napp.get('/profile', authenticate, (req, res) => { res.json({ userId: req.user.sub }); }); ```\n\nKeep tokens short-lived (15 minutes to a few hours) and use refresh tokens for long sessions. Store the JWT secret in environment variables, rotate it if it's ever exposed, and never put sensitive data in the token payload — it's signed, not encrypted, and anyone can decode it."
+    },
+    {
+      "heading": "Pagination, Filtering, and Sensible Defaults",
+      "body": "Any endpoint returning a list needs pagination from day one. Offset-based (`?page=2&limit=20`) is simple and fine for most cases; cursor-based is better for large or frequently-changing datasets. Cap the page size server-side — a client requesting `limit=1000000` should get your maximum, not your database.\n\nReturn a consistent envelope so clients can rely on the shape:\n\n```json { \"data\": [ ... ], \"pagination\": { \"page\": 2, \"limit\": 20, \"total\": 341 } } ```"
+    },
+    {
+      "heading": "Rate Limiting and Security Headers",
+      "body": "`express-rate-limit` takes five minutes to add and stops the trivial abuse: brute-force login attempts, scrapers hammering list endpoints. Set stricter limits on auth routes than on public reads. Helmet sets sensible HTTP security headers with one line. Neither replaces real security review, but both close doors that are otherwise wide open.\n\nAlso: CORS. If your API serves a browser frontend on a different origin, configure `cors` with an explicit origin list — not `*` — when credentials or tokens are involved."
+    },
+    {
+      "heading": "Testing What Matters",
+      "body": "You don't need 100% coverage; you need tests on the paths that break in production:\n\nValidation tests — send malformed bodies and assert 400s with useful messages. Auth tests — missing token, bad token, expired token, and a valid token hitting a protected route. Happy-path integration tests — spin up the app against a test database and walk through create/read/update/delete.\n\nSupertest plus a test runner (Vitest or Node's built-in runner) covers this well. Run tests in CI on every push — an API without CI-tested deploys is a incident waiting for a schedule."
+    },
+    {
+      "heading": "Logging and Observability",
+      "body": "Log structured JSON (a request ID, method, path, status, duration) rather than free-text strings — your future self grepping logs at midnight will be grateful. In production, ship logs to a collector instead of stdout files. Add the `/health` endpoint from the start and a `/ready` endpoint if startup involves async initialization (database connections) that load balancers should wait for."
+    },
+    {
+      "heading": "Deployment Checklist",
+      "body": "Environment variables set on the host, not in the repo. `NODE_ENV=production` (Express changes behavior: less verbose errors, view caching). Process manager or container restart policy — Node processes crash; plan for it. Database connection pooling sized for your host's limits. Backups tested by restoring, not by assuming.\n\nAn Express API doesn't need to be complex to be production-ready. It needs validation at the boundary, consistent errors, authentication done carefully, tests on the critical paths, and logs you can actually read. Get those right and the framework mostly stays out of your way."
+    }
+  ],
+  "cta": {
+    "eyebrow": "MyAppAI",
+    "heading": "Put it to work",
+    "body": "Ideas are cheap — working systems aren't. Explore the tools and guides on MyAppAI and start building.",
+    "primaryLabel": "Explore the tools",
+    "primaryHref": "/tools"
+  }
+}

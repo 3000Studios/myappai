@@ -1,10 +1,60 @@
 {
-"updatedFor": "myappai",
-"slug": "openai-api-getting-started",
-"title": "Getting Started with the OpenAI API: A Developer's Guide",
-"description": "Everything you need to know to start building with GPT-4o, embeddings, and the Assistants API. Includes working code examples.",
-"publishedAt": "2025-11-15T00:00:00.000Z",
-"author": "MyAppAI Team",
-"tags": ["OpenAI", "API", "tutorial", "AI"],
-"body": "The OpenAI API is the fastest way to add AI capabilities to any application. Whether you want to build a chatbot, summarize documents, generate code, or analyze images, the API gives you access to GPT-4o and other state-of-the-art models with a few lines of code.\n\nHere's everything you need to get started.\n\n## 1. Get Your API Key\n\nSign up at platform.openai.com and navigate to API Keys. Create a new secret key and store it somewhere safe — you won't be able to see it again.\n\nSet it as an environment variable:\n\n```bash\nexport OPENAI_API_KEY=sk-...\n```\n\n## 2. Install the SDK\n\n```bash\nnpm install openai\n```\n\n## 3. Your First API Call\n\n```javascript\nimport OpenAI from 'openai'\n\nconst client = new OpenAI()\n\nconst response = await client.chat.completions.create({\n  model: 'gpt-4o',\n  messages: [\n    { role: 'user', content: 'Explain how React hooks work in 3 sentences.' }\n  ]\n})\n\nconsole.log(response.choices[0].message.content)\n```\n\n## 4. Streaming Responses\n\nFor a better user experience, stream the response as it generates:\n\n```javascript\nconst stream = await client.chat.completions.create({\n  model: 'gpt-4o',\n  messages: [{ role: 'user', content: 'Write a short poem about coding.' }],\n  stream: true\n})\n\nfor await (const chunk of stream) {\n  process.stdout.write(chunk.choices[0]?.delta?.content || '')\n}\n```\n\n## 5. System Prompts\n\nSystem prompts let you define the AI's persona and behavior:\n\n```javascript\nconst response = await client.chat.completions.create({\n  model: 'gpt-4o',\n  messages: [\n    {\n      role: 'system',\n      content: 'You are a senior software engineer. Give concise, practical answers. Always include code examples.'\n    },\n    {\n      role: 'user',\n      content: 'How do I debounce a function in JavaScript?'\n    }\n  ]\n})\n```\n\n## 6. Vision — Analyzing Images\n\nGPT-4o can analyze images directly:\n\n```javascript\nconst response = await client.chat.completions.create({\n  model: 'gpt-4o',\n  messages: [{\n    role: 'user',\n    content: [\n      { type: 'text', text: 'What is in this image?' },\n      { type: 'image_url', image_url: { url: 'https://example.com/image.jpg' } }\n    ]\n  }]\n})\n```\n\n## 7. Embeddings\n\nEmbeddings convert text into vectors for semantic search and similarity:\n\n```javascript\nconst embedding = await client.embeddings.create({\n  model: 'text-embedding-3-small',\n  input: 'The quick brown fox'\n})\n\nconsole.log(embedding.data[0].embedding) // Array of 1536 numbers\n```\n\n## Pricing Tips\n\n- GPT-4o mini is 15x cheaper than GPT-4o and handles most tasks well\n- Cache your responses when possible — repeated identical prompts cost the same\n- Use `max_tokens` to cap response length and control costs\n- Monitor usage at platform.openai.com/usage\n\n## What to Build Next\n\nNow that you have the basics, here are some ideas:\n\n- **Document Q&A:** Upload PDFs and let users ask questions\n- **Code review bot:** Analyze PRs and suggest improvements\n- **Content generator:** Automate blog posts, product descriptions, or social copy\n- **Customer support:** Build a chatbot trained on your documentation\n\nThe OpenAI API is the foundation of most AI products being built today. Once you understand the basics, the possibilities are nearly unlimited."
+  "updatedFor": "myappai",
+  "slug": "openai-api-getting-started",
+  "title": "Getting Started with the OpenAI API: A Developer's Guide",
+  "description": "From API key to first streaming chatbot: authentication, chat completions, structured output, function calling, error handling, and keeping costs under control.",
+  "excerpt": "The OpenAI API is the fastest way to add language-model capabilities to an application: no model hosting, no GPU management, just HTTPS calls. This guide takes…",
+  "publishedAt": "2026-09-27",
+  "author": "MyAppAI Team",
+  "tags": [
+    "openai",
+    "api",
+    "getting",
+    "started"
+  ],
+  "sections": [
+    {
+      "heading": "Introduction",
+      "body": "The OpenAI API is the fastest way to add language-model capabilities to an application: no model hosting, no GPU management, just HTTPS calls. This guide takes you from a fresh API key to a working integration with streaming, structured output, and sane cost controls — plus the error handling that separates a demo from production code."
+    },
+    {
+      "heading": "Setup and Authentication",
+      "body": "Create an account at platform.openai.com, add a payment method (the API is usage-based; there's no free tier for API calls beyond initial trial credits), and generate an API key from the API keys page. Set a spending limit immediately — in the dashboard under Billing → Limits. This is the single most important setup step; an accidental infinite loop calling the API is an expensive lesson.\n\nStore the key in an environment variable, never in source code:\n\n```bash export OPENAI_API_KEY=\"sk-...\" ```\n\nInstall the official SDK:\n\n```bash npm install openai ```\n\n```js import OpenAI from 'openai'; const client = new OpenAI(); // reads OPENAI_API_KEY automatically ```\n\nSecurity note: the API key must only live on your server. Any key shipped in client-side JavaScript can be extracted in seconds. If you need model access from a browser or mobile app, route it through your own backend endpoint."
+    },
+    {
+      "heading": "Your First Completion",
+      "body": "```js const response = await client.chat.completions.create({ model: 'gpt-4o', messages: [ { role: 'system', content: 'You are a concise, helpful assistant.' }, { role: 'user', content: 'Explain REST APIs in two sentences.' }, ], });\n\nconsole.log(response.choices[0].message.content); ```\n\nThree concepts here that matter for everything after:\n\nMessages form a conversation: `system` sets behavior, `user` provides input, `assistant` holds prior replies. To maintain context across turns, send the full message history each call — the API is stateless. The system prompt is where you define the assistant's role, tone, and constraints. Time spent writing a good one pays off more than model upgrades. Model selection is a cost/quality tradeoff. Flagship models handle nuance and complex reasoning; smaller models (like the mini variants) are dramatically cheaper and fine for classification, extraction, and simple generation. Default to the smaller model and upgrade only where quality demands it."
+    },
+    {
+      "heading": "Streaming Responses",
+      "body": "Waiting for a full response before showing anything feels broken in a chat UI. Stream tokens as they generate:\n\n```js const stream = await client.chat.completions.create({ model: 'gpt-4o', messages: [{ role: 'user', content: 'Write a haiku about APIs.' }], stream: true, });\n\nfor await (const chunk of stream) { process.stdout.write(chunk.choices[0]?.delta?.content || ''); } ```\n\nOn the frontend, append each chunk to the displayed text. Handle the stream ending cleanly — network interruptions mid-stream are normal, so your UI should distinguish \"still generating\" from \"failed\" and offer a retry."
+    },
+    {
+      "heading": "Structured Output",
+      "body": "When you need the model to return data your code can parse — not prose — ask for JSON explicitly. Modern models support constrained output:\n\n```js const response = await client.chat.completions.create({ model: 'gpt-4o', messages: [ { role: 'system', content: 'Extract the meeting details as JSON.' }, { role: 'user', content: 'Lunch with Priya tomorrow at noon at Cafe Luna' }, ], response_format: { type: 'json_schema', json_schema: { name: 'meeting', schema: { type: 'object', properties: { title: { type: 'string' }, attendee: { type: 'string' }, time: { type: 'string' }, location: { type: 'string' }, }, required: ['title', 'time'], }, }, }, });\n\nconst meeting = JSON.parse(response.choices[0].message.content); ```\n\nValidate the parsed result against your schema anyway. Constrained output is highly reliable but not a substitute for validation at the boundary."
+    },
+    {
+      "heading": "Function Calling: Letting the Model Use Your Tools",
+      "body": "Function calling lets the model request your code to do things — look up an order, check the weather, query a database — then continue with the results:\n\n```js const tools = [{ type: 'function', function: { name: 'get_order_status', description: 'Look up the status of a customer order', parameters: { type: 'object', properties: { order_id: { type: 'string' } }, required: ['order_id'], }, }, }];\n\nconst response = await client.chat.completions.create({ model: 'gpt-4o', messages: [{ role: 'user', content: 'Where is order A-123?' }], tools, });\n\nconst call = response.choices[0].message.tool_calls?.[0]; if (call) { const result = await getOrderStatus(JSON.parse(call.function.arguments)); // Send the result back as a tool message and get the final answer } ```\n\nThe model decides *when* to call your function and *with what arguments*; your code executes it. Keep functions narrow and side-effect-free where possible — a function that only reads data can't cause damage if the model calls it with surprising arguments. For functions that write data, add a confirmation step."
+    },
+    {
+      "heading": "Error Handling for Production",
+      "body": "The API fails in predictable ways; handle each:\n\n429 rate limits — back off exponentially and retry. Set `max_retries` on the client (it defaults to 2) and add jitter. 401 authentication — your key is wrong or revoked. Fail loudly; retrying won't help. Context length exceeded — your prompt plus history exceeds the model's window. Trim old messages (keep the system prompt and recent turns) or summarize history. Timeouts — set explicit timeouts on requests and treat a timeout as retryable.\n\nLog the request ID from error responses — support can't help you without it."
+    },
+    {
+      "heading": "Controlling Costs",
+      "body": "API spend scales with tokens, and tokens scale with sloppy prompts. Practical controls:\n\nSpending limits in the dashboard — set monthly caps per project. Right-size the model per task; classification rarely needs the flagship. Cache aggressively — identical prompts (system prompts, few-shot examples) shouldn't be re-sent when avoidable. Limit max_tokens on every call; unbounded completions are how bills surprise you. Monitor per-feature usage with separate API keys per environment or feature, so one runaway feature is visible immediately.\n\nA common pattern: prototype with the best model, then measure whether the cheaper model is good enough for each specific call site. Most production systems end up with a mix."
+    },
+    {
+      "heading": "What to Build First",
+      "body": "Good first projects: a support-draft assistant (drafts replies for human approval), a document summarizer over your own content, or a classification pipeline (route tickets, tag content). All three have clear success criteria and a human in the loop — the two properties that make early AI integrations safe to learn on."
+    }
+  ],
+  "cta": {
+    "eyebrow": "MyAppAI",
+    "heading": "Put it to work",
+    "body": "Ideas are cheap — working systems aren't. Explore the tools and guides on MyAppAI and start building.",
+    "primaryLabel": "Explore the tools",
+    "primaryHref": "/tools"
+  }
 }
