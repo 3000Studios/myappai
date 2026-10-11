@@ -1,8 +1,0 @@
-/admin
-  X-Robots-Tag: noindex, nofollow
-
-/admin/*
-  X-Robots-Tag: noindex, nofollow
-
-/checkout/*
-  X-Robots-Tag: noindex, nofollow

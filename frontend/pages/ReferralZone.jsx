@@ -26,98 +26,80 @@ const ReferralZone = () => {
     seconds: 0,
   })
 
-  // Parse referral data from URL or fetch from API
+  // Load the referral page created in the admin Referral Upload tool.
+  // Pages are stored in localStorage under "generatedReferralPages"
+  // (see frontend/pages/AdminReferralUpload.jsx). There is no demo or
+  // seed data: an unknown id renders the invalid-link state below.
   useEffect(() => {
     const loadReferralData = async () => {
       setIsLoading(true)
 
       try {
-        // In production, this would fetch from your API
-        // For now, we'll simulate with demo data
-        const mockReferralData = {
-          id: referralId || 'demo',
-          title: 'Elite AI Website Builder',
-          description:
-            'Transform your business with our cutting-edge AI-powered website building platform',
-          originalUrl: 'https://example.com/offer',
-          brandColors: {
+        const saved = localStorage.getItem('generatedReferralPages')
+        const pages = saved ? JSON.parse(saved) : []
+        const page = Array.isArray(pages)
+          ? pages.find((entry) => entry && entry.id === referralId)
+          : null
+
+        if (!page) {
+          setReferralData(null)
+          return
+        }
+
+        const data = {
+          id: page.id,
+          title: page.title || 'Special Offer',
+          description: page.description || '',
+          originalUrl: page.url || '',
+          brandColors: page.brandColors || {
             primary: '#00ff88',
             secondary: '#0088ff',
             accent: '#ff00ff',
           },
           discount: {
-            percentage: 25,
-            code: 'ELITE25',
-            validUntil: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days from now
+            percentage: page.discountPercentage || 0,
+            code: page.discountCode || '',
+            validUntil: page.validUntil || null,
           },
-          features: [
-            'AI-powered website generation',
-            'Voice command integration',
-            'Real-time analytics',
-            'Premium templates',
-            '24/7 support',
-            '30-day money-back guarantee',
-          ],
-          testimonials: [
-            {
-              name: 'Sarah Johnson',
-              role: 'CEO, TechStart Inc.',
-              content:
-                'This platform transformed our online presence. Sales increased by 300%!',
-              rating: 5,
-            },
-            {
-              name: 'Mike Chen',
-              role: 'Marketing Director',
-              content:
-                'The AI features are incredible. We launched our site in hours, not weeks.',
-              rating: 5,
-            },
-          ],
-          pricing: {
-            original: 299.99,
-            discounted: 224.99,
-            savings: 75.0,
-          },
-          stats: {
-            usersServed: '50,000+',
-            satisfactionRate: '98%',
-            uptime: '99.9%',
-            awards: '15+ Industry Awards',
-          },
+          features: Array.isArray(page.features) ? page.features : [],
+          testimonials: Array.isArray(page.testimonials)
+            ? page.testimonials
+            : [],
+          pricing: page.pricing || null,
+          stats: page.stats || null,
         }
 
-        setReferralData(mockReferralData)
-        setDiscountCode(mockReferralData.discount.code)
+        setReferralData(data)
+        setDiscountCode(data.discount.code)
 
-        // Set up countdown
-        const countdownInterval = setInterval(() => {
-          const now = new Date()
-          const validUntil = new Date(mockReferralData.discount.validUntil)
-          const difference = validUntil - now
+        if (data.discount.validUntil) {
+          const countdownInterval = setInterval(() => {
+            const now = new Date()
+            const validUntil = new Date(data.discount.validUntil)
+            const difference = validUntil - now
 
-          if (difference > 0) {
-            const days = Math.floor(difference / (1000 * 60 * 60 * 24))
-            const hours = Math.floor(
-              (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-            )
-            const minutes = Math.floor(
-              (difference % (1000 * 60 * 60)) / (1000 * 60)
-            )
-            const seconds = Math.floor((difference % (1000 * 60)) / 1000)
+            if (difference > 0) {
+              const days = Math.floor(difference / (1000 * 60 * 60 * 24))
+              const hours = Math.floor(
+                (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+              )
+              const minutes = Math.floor(
+                (difference % (1000 * 60 * 60)) / (1000 * 60)
+              )
+              const seconds = Math.floor((difference % (1000 * 60)) / 1000)
 
-            setCountdown({ days, hours, minutes, seconds })
-          } else {
-            setCountdown({ days: 0, hours: 0, minutes: 0, seconds: 0 })
-            clearInterval(countdownInterval)
-          }
-        }, 1000)
+              setCountdown({ days, hours, minutes, seconds })
+            } else {
+              setCountdown({ days: 0, hours: 0, minutes: 0, seconds: 0 })
+              clearInterval(countdownInterval)
+            }
+          }, 1000)
 
-        return () => clearInterval(countdownInterval)
+          return () => clearInterval(countdownInterval)
+        }
       } catch (error) {
         console.error('Error loading referral data:', error)
-        // Redirect to home if invalid referral
-        navigate('/')
+        setReferralData(null)
       } finally {
         setIsLoading(false)
       }
@@ -237,6 +219,7 @@ const ReferralZone = () => {
             </div>
           </div>
 
+          {referralData.discount.validUntil && (
           <div className="urgency-timer">
             <Clock size={16} />
             <span>Offer expires in:</span>
@@ -247,9 +230,12 @@ const ReferralZone = () => {
               <span>{countdown.seconds}s</span>
             </div>
           </div>
+          )}
         </motion.div>
       </section>
 
+      {referralData.features.length > 0 && (
+      <>
       {/* Features Section */}
       <section className="features-section">
         <motion.div
@@ -277,7 +263,11 @@ const ReferralZone = () => {
           ))}
         </div>
       </section>
+      </>
+      )}
 
+      {referralData.pricing && (
+      <>
       {/* Pricing Section */}
       <section className="pricing-section">
         <motion.div
@@ -324,7 +314,11 @@ const ReferralZone = () => {
           </div>
         </motion.div>
       </section>
+      </>
+      )}
 
+      {referralData.testimonials.length > 0 && (
+      <>
       {/* Testimonials Section */}
       <section className="testimonials-section">
         <motion.div
@@ -362,7 +356,11 @@ const ReferralZone = () => {
           ))}
         </div>
       </section>
+      </>
+      )}
 
+      {referralData.stats && (
+      <>
       {/* Stats Section */}
       <section className="stats-section">
         <div className="stats-grid">
@@ -382,6 +380,8 @@ const ReferralZone = () => {
           ))}
         </div>
       </section>
+      </>
+      )}
 
       {/* Final CTA Section */}
       <section className="final-cta-section">

@@ -1,7 +1,0 @@
-.next
-node_modules
-.git
-.shadow
-*.log
-.env*
-! .env.example

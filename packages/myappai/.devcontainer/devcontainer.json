@@ -1,6 +1,0 @@
-{
-  "name": "myappai",
-  "image": "ghcr.io/openai/codex-universal:latest",
-  "workspaceFolder": "/workspace/myappai",
-  "postCreateCommand": "bash setup.sh"
-}

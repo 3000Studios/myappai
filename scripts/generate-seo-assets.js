@@ -16,9 +16,37 @@ const ADSENSE_PUBLISHER_ID =
 
 async function collectRoutes() {
   void contentPagesDir
-  void contentBlogDir
   void contentProductsDir
-  return ['/']
+  // Public crawlable routes from frontend/src/App.jsx (admin + dynamic
+  // referral routes are intentionally excluded).
+  const staticRoutes = [
+    '/',
+    '/about',
+    '/contact',
+    '/privacy',
+    '/tools',
+    '/blog',
+    '/openclaw',
+    '/revenue',
+  ]
+
+  let blogRoutes = []
+  try {
+    const indexRaw = await fs.readFile(
+      path.join(contentBlogDir, 'index.json'),
+      'utf8'
+    )
+    const index = JSON.parse(indexRaw)
+    const posts = Array.isArray(index) ? index : index.posts || []
+    blogRoutes = posts
+      .map((post) => post && post.slug)
+      .filter(Boolean)
+      .map((slug) => `/blog/${slug}`)
+  } catch {
+    blogRoutes = []
+  }
+
+  return [...staticRoutes, ...blogRoutes]
 }
 
 async function generateSitemap() {

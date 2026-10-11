@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://voicetowebsite.com</loc>
+    <loc>https://myappai.net</loc>
+  </url>
+  <url>
+    <loc>https://myappai.net/about</loc>
+  </url>
+  <url>
+    <loc>https://myappai.net/contact</loc>
+  </url>
+  <url>
+    <loc>https://myappai.net/privacy</loc>
+  </url>
+  <url>
+    <loc>https://myappai.net/tools</loc>
+  </url>
+  <url>
+    <loc>https://myappai.net/blog</loc>
+  </url>
+  <url>
+    <loc>https://myappai.net/openclaw</loc>
+  </url>
+  <url>
+    <loc>https://myappai.net/revenue</loc>
+  </url>
+  <url>
+    <loc>https://myappai.net/blog/how-to-automate-marketing-with-ai</loc>
+  </url>
+  <url>
+    <loc>https://myappai.net/blog/ai-marketing-automation-for-startups</loc>
+  </url>
+  <url>
+    <loc>https://myappai.net/blog/ai-productivity-tools-comparison</loc>
+  </url>
+  <url>
+    <loc>https://myappai.net/blog/ai-automation</loc>
   </url>
 </urlset>

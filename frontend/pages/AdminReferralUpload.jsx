@@ -350,7 +350,7 @@ const AdminReferralUpload = () => {
               type="url"
               value={referralData.url}
               onChange={(e) => handleInputChange('url', e.target.value)}
-              placeholder="https://example.com/offer"
+              placeholder="Paste the destination offer URL"
               className="form-input"
               required
             />
