@@ -12,7 +12,8 @@ WWW_SITE_URL = "https://www.myappai.net"
 SITE_ORIGIN = "https://myappai.net"
 WWW_SITE_ORIGIN = "https://www.myappai.net"
 API_MODE = "repo-local"
-VITE_ENABLE_ADS = "false"
+VITE_ENABLE_ADS = "true"
+VITE_ADSENSE_CLIENT_ID = "ca-pub-5800977493749262"
 
 [[r2_buckets]]
 binding = "ASSETS_BUCKET"
