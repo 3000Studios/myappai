@@ -1,0 +1,152 @@
+/* ============================================================
+   ACSS-3000 — 3000 Studios production drop-in library (2026-10-25)
+   Dependency-free. Zero JS required. No external fonts/assets.
+   Performance law: animations use transform/opacity only;
+   prefers-reduced-motion guards everywhere.
+   Usage: <link rel="stylesheet" href="acss-3000.css"> then use
+   the .acss-* classes / utilities documented in README.md.
+   ============================================================ */
+@layer acss.tokens, acss.base, acss.layout, acss.components, acss.effects, acss.utilities;
+
+@property --acss-angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+@property --acss-glow { syntax: "<color>"; initial-value: transparent; inherits: false; }
+@property --acss-lift { syntax: "<length>"; initial-value: 0px; inherits: false; }
+
+@layer acss.tokens {
+  :root {
+    color-scheme: light dark;
+    --acss-brand: oklch(0.62 0.19 255);
+    --acss-brand-2: oklch(0.68 0.17 320);
+    --acss-gold: oklch(0.78 0.14 85);
+    --acss-ink: light-dark(oklch(0.22 0.02 260), oklch(0.93 0.01 260));
+    --acss-bg: light-dark(oklch(0.98 0.005 260), oklch(0.16 0.02 260));
+    --acss-surface: light-dark(oklch(1 0 0), oklch(0.21 0.02 260));
+    --acss-muted: color-mix(in oklch, var(--acss-ink) 62%, transparent);
+    --acss-line: color-mix(in oklch, var(--acss-ink) 14%, transparent);
+    --acss-radius: 1rem;
+    --acss-ease: cubic-bezier(.22,1,.36,1);
+    --acss-shadow-1: 0 1px 2px rgb(0 0 0/.08), 0 4px 14px rgb(0 0 0/.08);
+    --acss-shadow-2: 0 2px 4px rgb(0 0 0/.08), 0 12px 32px rgb(0 0 0/.14), 0 24px 64px rgb(0 0 0/.08);
+    --acss-texture: radial-gradient(120% 140% at 15% 0%, color-mix(in oklch, var(--acss-brand) 16%, transparent), transparent 55%),
+                    radial-gradient(100% 120% at 90% 10%, color-mix(in oklch, var(--acss-brand-2) 14%, transparent), transparent 50%);
+  }
+}
+
+@layer acss.base {
+  .acss-fluid-type { font-size: clamp(1rem, .92rem + .6cqi, 1.25rem); line-height: 1.55; text-wrap: pretty; }
+  .acss-display { font-size: clamp(2rem, 1.4rem + 4.5vw, 4.25rem); line-height: 1.02; letter-spacing: -.02em; text-wrap: balance; }
+  .acss-h2 { font-size: clamp(1.5rem, 1.15rem + 2.2vw, 2.5rem); line-height: 1.1; text-wrap: balance; }
+  .acss-gradient-text { background: linear-gradient(100deg, var(--acss-brand), var(--acss-brand-2), var(--acss-gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .acss-balance { text-wrap: balance; } .acss-pretty { text-wrap: pretty; }
+}
+
+@layer acss.layout {
+  /* Cards auto-grid — the house card system */
+  .acss-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr)); gap: clamp(.9rem, 2vw, 1.5rem); container-type: inline-size; }
+  .acss-cards--dense { grid-template-columns: repeat(auto-fit, minmax(min(13rem, 100%), 1fr)); }
+  .acss-cards--wide { grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr)); }
+  .acss-masonry { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(16rem,100%),1fr)); grid-auto-rows: .5rem; gap: 1rem; }
+  .acss-subgrid-card { display: grid; grid-template-rows: subgrid; grid-row: span 3; }
+  .acss-snap-row { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; padding-block-end: .5rem; }
+  .acss-snap-row > * { scroll-snap-align: start; flex: 0 0 min(20rem, 82vw); }
+}
+
+@layer acss.components {
+  .acss-card { container-type: inline-size; background: var(--acss-surface); color: var(--acss-ink); border: 1px solid var(--acss-line); border-radius: var(--acss-radius); box-shadow: var(--acss-shadow-1); padding: clamp(1rem, 3cqi, 1.5rem); transition: transform .35s var(--acss-ease), box-shadow .35s var(--acss-ease); }
+  @container (min-width: 26rem) { .acss-card--media { display: grid; grid-template-columns: 38% 1fr; gap: 1.1rem; align-items: center; } }
+  @container (max-width: 15rem) { .acss-card { font-size: .92rem; } .acss-card .acss-card__cta { inline-size: 100%; } }
+  /* Hover lift + layered shadow */
+  .acss-lift:hover, .acss-lift:focus-within { transform: translateY(-6px); box-shadow: var(--acss-shadow-2); }
+  /* 3D tilt (parent supplies perspective) */
+  .acss-tilt-wrap { perspective: 900px; }
+  .acss-tilt { transform-style: preserve-3d; transition: transform .4s var(--acss-ease); }
+  .acss-tilt:hover { transform: rotateX(4deg) rotateY(-6deg) translateZ(6px); }
+  .acss-tilt > .acss-tilt__pop { transform: translateZ(28px); }
+  /* Click / press states */
+  .acss-press { transition: transform .15s var(--acss-ease), box-shadow .15s var(--acss-ease); }
+  .acss-press:active { transform: translateY(1px) scale(.985); box-shadow: var(--acss-shadow-1); }
+  .acss-btn { display: inline-flex; align-items: center; gap: .5rem; min-block-size: 44px; padding: .7rem 1.25rem; border-radius: 999px; border: 1px solid transparent; background: var(--acss-brand); color: white; font-weight: 650; text-decoration: none; transition: transform .2s var(--acss-ease), box-shadow .25s var(--acss-ease), background .25s; }
+  .acss-btn:hover { background: color-mix(in oklch, var(--acss-brand) 86%, black); box-shadow: 0 10px 28px color-mix(in oklch, var(--acss-brand) 38%, transparent); transform: translateY(-2px); }
+  .acss-btn:active { transform: translateY(0) scale(.98); }
+  .acss-btn:focus-visible, .acss-card:focus-visible, a:focus-visible { outline: 3px solid color-mix(in oklch, var(--acss-brand) 65%, white); outline-offset: 3px; }
+  /* Glass */
+  .acss-glass { background: color-mix(in oklch, var(--acss-surface) 68%, transparent); -webkit-backdrop-filter: blur(14px) saturate(1.4); backdrop-filter: blur(14px) saturate(1.4); border: 1px solid color-mix(in oklch, white 35%, transparent); }
+  /* Aurora border (animatable via @property) */
+  .acss-aurora { position: relative; border: 1px solid transparent; background: linear-gradient(var(--acss-surface), var(--acss-surface)) padding-box, conic-gradient(from var(--acss-angle), var(--acss-brand), var(--acss-brand-2), var(--acss-gold), var(--acss-brand)) border-box; animation: acss-spin-angle 6s linear infinite; }
+  @keyframes acss-spin-angle { to { --acss-angle: 360deg; } }
+  /* Shine sweep */
+  .acss-shine { position: relative; overflow: hidden; isolation: isolate; }
+  .acss-shine::after { content: ""; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 40%, rgb(255 255 255/.35) 50%, transparent 60%); transform: translateX(-120%); transition: transform .8s var(--acss-ease); pointer-events: none; }
+  .acss-shine:hover::after, .acss-shine:focus-within::after { transform: translateX(120%); }
+  /* Magnetic glow CTA (glow follows via --acss-glow fallback pulse; pointer version needs 4 lines of JS, optional) */
+  .acss-glow-cta { box-shadow: 0 0 0 1px color-mix(in oklch, var(--acss-brand) 45%, transparent), 0 12px 34px color-mix(in oklch, var(--acss-brand) 35%, transparent); animation: acss-glow-pulse 2.8s ease-in-out infinite; }
+  @keyframes acss-glow-pulse { 50% { box-shadow: 0 0 0 1px color-mix(in oklch, var(--acss-brand-2) 55%, transparent), 0 16px 44px color-mix(in oklch, var(--acss-brand-2) 42%, transparent); } }
+  /* Shimmer skeleton */
+  .acss-skeleton { border-radius: .6rem; background: linear-gradient(100deg, color-mix(in oklch, var(--acss-ink) 8%, transparent) 40%, color-mix(in oklch, var(--acss-ink) 16%, transparent) 50%, color-mix(in oklch, var(--acss-ink) 8%, transparent) 60%); background-size: 200% 100%; animation: acss-shimmer 1.4s linear infinite; }
+  @keyframes acss-shimmer { to { background-position-x: -200%; } }
+  /* Sticky header that reacts to scroll-state */
+  .acss-sticky { position: sticky; inset-block-start: 0; container-type: scroll-state; z-index: 20; }
+  @container scroll-state(stuck: top) { .acss-sticky__bar { box-shadow: var(--acss-shadow-2); background: color-mix(in oklch, var(--acss-surface) 88%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); } }
+  /* Popover / dialog entry-exit */
+  .acss-pop { opacity: 0; transform: translateY(8px) scale(.98); transition: opacity .25s var(--acss-ease), transform .25s var(--acss-ease), display .25s allow-discrete, overlay .25s allow-discrete; }
+  .acss-pop:popover-open { opacity: 1; transform: none; }
+  @starting-style { .acss-pop:popover-open { opacity: 0; transform: translateY(8px) scale(.98); } }
+  /* Anchor-positioned tooltip */
+  .acss-anchor-btn { anchor-name: --acss-tip; }
+  .acss-tooltip { position: absolute; position-anchor: --acss-tip; inset-block-start: anchor(bottom); margin-block-start: .5rem; justify-self: anchor-center; }
+  /* :has() driven states */
+  .acss-form:has(:invalid) .acss-form__submit { opacity: .55; }
+  .acss-card:has(> a:hover) { border-color: color-mix(in oklch, var(--acss-brand) 55%, transparent); }
+  /* Self-sizing field */
+  .acss-field { field-sizing: content; min-inline-size: 12ch; max-inline-size: 100%; }
+  /* Details accordion with animated size */
+  .acss-accordion::details-content { block-size: 0; overflow: clip; transition: block-size .35s var(--acss-ease), content-visibility .35s allow-discrete; }
+  .acss-accordion[open]::details-content { block-size: auto; }
+}
+
+@layer acss.effects {
+  /* Scroll reveal — no JS, compositor-driven */
+  .acss-reveal { animation: acss-reveal-in linear both; animation-timeline: view(); animation-range: entry 0% entry 65%; }
+  @keyframes acss-reveal-in { from { opacity: 0; transform: translateY(26px) scale(.985); } to { opacity: 1; transform: none; } }
+  .acss-reveal--left { animation-name: acss-reveal-left; } @keyframes acss-reveal-left { from { opacity: 0; transform: translateX(-32px); } to { opacity: 1; transform: none; } }
+  .acss-reveal--zoom { animation-name: acss-reveal-zoom; } @keyframes acss-reveal-zoom { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: scale(1); } }
+  /* Page scroll progress bar */
+  .acss-progress { position: fixed; inset: 0 auto auto 0; block-size: 3px; inline-size: 100%; transform-origin: 0 50%; background: linear-gradient(90deg, var(--acss-brand), var(--acss-brand-2)); animation: acss-progress-x linear both; animation-timeline: scroll(root block); z-index: 50; }
+  @keyframes acss-progress-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  /* Parallax layer (transform only) */
+  .acss-parallax { animation: acss-para linear both; animation-timeline: view(); }
+  @keyframes acss-para { from { transform: translateY(24px); } to { transform: translateY(-24px); } }
+  /* Text marquee / scroll animations */
+  .acss-marquee { overflow: clip; display: flex; gap: 2.5rem; mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent); }
+  .acss-marquee__track { display: flex; gap: 2.5rem; flex-shrink: 0; animation: acss-marquee-x 26s linear infinite; }
+  .acss-marquee:hover .acss-marquee__track { animation-play-state: paused; }
+  @keyframes acss-marquee-x { to { transform: translateX(calc(-100% - 2.5rem)); } }
+  .acss-text-scroll { animation: acss-text-in linear both; animation-timeline: view(); animation-range: entry 0% cover 45%; }
+  @keyframes acss-text-in { from { opacity: .12; transform: translateY(.6em); letter-spacing: .04em; } to { opacity: 1; transform: none; letter-spacing: 0; } }
+  /* Stagger children with sibling-index() (progressive enhancement) */
+  .acss-stagger > * { transition-delay: calc((sibling-index() - 1) * 70ms); }
+  /* View transitions (same + cross-document) */
+  ::view-transition-old(root) { animation: acss-vt-out .28s var(--acss-ease) both; }
+  ::view-transition-new(root) { animation: acss-vt-in .34s var(--acss-ease) both; }
+  @keyframes acss-vt-out { to { opacity: 0; transform: translateY(-8px); } }
+  @keyframes acss-vt-in { from { opacity: 0; transform: translateY(10px); } }
+  .acss-vt-hero { view-transition-name: acss-hero; }
+  /* Mask + clip reveals */
+  .acss-mask-fade { mask-image: linear-gradient(180deg, black 78%, transparent); }
+  .acss-clip-hero { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 3.5rem), 0 100%); }
+  /* Texture surface */
+  .acss-texture { background-color: var(--acss-surface); background-image: var(--acss-texture); }
+}
+
+@layer acss.utilities {
+  .acss-stack { display: grid; gap: 1rem; } .acss-row { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
+  .acss-center { display: grid; place-items: center; } .acss-visually-hidden { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .acss-cq { container-type: inline-size; } .acss-cq-units { padding: 4cqi; font-size: 3.2cqi; }
+}
+
+/* Reduced motion: kill motion, keep state changes instant */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  .acss-reveal, .acss-text-scroll, .acss-parallax { animation: none; opacity: 1; transform: none; }
+  .acss-marquee__track { animation: none; }
+}
