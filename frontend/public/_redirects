@@ -1,1 +1,31 @@
-/* /index.html 200
+# MyAppAI — Cloudflare Pages redirects.
+# Deliberate rules only. There is deliberately NO /* catch-all: Pages'
+# validator ignores splat -> /index.html rules as infinite loops (the old
+# file parsed as 0 valid + 1 invalid), and with dist/404.html present
+# (scripts/generate-404.mjs, run as postbuild) unmatched paths are served
+# 404.html with a genuine 404 status.
+#
+# This app is a pure SPA — no route is prerendered — so every genuine
+# route below gets an explicit rewrite to the app shell at its own URL.
+# The rewrite target is / (the directory index): a /index.html target is
+# discarded by the validator, per the findmerates fix. Route list mirrors
+# frontend/src/App.jsx; anything not listed here is a dead path and 404s.
+/about / 200
+/about/ / 200
+/contact / 200
+/contact/ / 200
+/privacy / 200
+/privacy/ / 200
+/tools / 200
+/tools/ / 200
+/openclaw / 200
+/openclaw/ / 200
+/revenue / 200
+/revenue/ / 200
+/blog / 200
+/blog/ / 200
+/blog/* / 200
+/referral/* / 200
+/admin / 200
+/admin/login / 200
+/admin/* / 200
