@@ -19,6 +19,10 @@ async function collectRoutes() {
   void contentProductsDir
   // Public crawlable routes from frontend/src/App.jsx (admin + dynamic
   // referral routes are intentionally excluded).
+  // Content routes only. /openclaw and /revenue are interactive app
+  // dashboards (operator console / revenue tracker), not publisher
+  // content, so they are deliberately not listed for crawlers
+  // (fleet AdSense sweep 2026-11-07).
   const staticRoutes = [
     '/',
     '/about',
@@ -26,8 +30,6 @@ async function collectRoutes() {
     '/privacy',
     '/tools',
     '/blog',
-    '/openclaw',
-    '/revenue',
   ]
 
   let blogRoutes = []
