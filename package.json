@@ -12,7 +12,7 @@
     "dev:server": "node --watch server/index.js",
     "prebuild": "node scripts/generate-seo-assets.js",
     "build": "vite build",
-    "postbuild": "node scripts/generate-404.mjs",
+    "postbuild": "node scripts/generate-404.mjs && node scripts/generate-static-pages.mjs",
     "lint": "eslint . --cache --cache-location .cache/eslint",
     "lint:fix": "eslint . --fix --cache --cache-location .cache/eslint",
     "format": "prettier --write .",

@@ -5,17 +5,13 @@
 # (scripts/generate-404.mjs, run as postbuild) unmatched paths are served
 # 404.html with a genuine 404 status.
 #
-# This app is a pure SPA — no route is prerendered — so every genuine
-# route below gets an explicit rewrite to the app shell at its own URL.
+# /privacy, /about, /contact are served as real static documents
+# (scripts/generate-static-pages.mjs emits dist/<route>/index.html from
+# the page components at postbuild) — no rewrite for them. Every other
+# genuine route below gets an explicit rewrite to the app shell.
 # The rewrite target is / (the directory index): a /index.html target is
 # discarded by the validator, per the findmerates fix. Route list mirrors
 # frontend/src/App.jsx; anything not listed here is a dead path and 404s.
-/about / 200
-/about/ / 200
-/contact / 200
-/contact/ / 200
-/privacy / 200
-/privacy/ / 200
 /tools / 200
 /tools/ / 200
 /openclaw / 200
