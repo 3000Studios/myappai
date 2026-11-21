@@ -13,6 +13,10 @@
 # The rewrite target is / (the directory index): a /index.html target is
 # discarded by the validator, per the findmerates fix. Route list mirrors
 # frontend/src/App.jsx; anything not listed here is a dead path and 404s.
+# /privacy-policy has no route (canonical page is /privacy) — redirect it
+# instead of 404ing (AdSense W8 sweep 2026-11-21).
+/privacy-policy /privacy 301
+/privacy-policy/ /privacy 301
 /openclaw / 200
 /openclaw/ / 200
 /revenue / 200
