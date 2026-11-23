@@ -77,6 +77,7 @@ return (
       </div>
 
       <div className="nav-actions">
+        <a href="https://play.google.com/store/apps/details?id=com.studios3000.thunderdome" className="nav-play-btn" target="_blank" rel="noopener noreferrer">Aeropocalypse Online</a>
         <Link to="/admin/login" className="nav-admin-btn">Admin</Link>
         <motion.button
           className="mobile-menu-toggle"
@@ -138,6 +139,23 @@ return (
                 </Link>
               </motion.div>
             ))}
+            <motion.div
+              className="mobile-nav-item"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <a
+                href="https://play.google.com/store/apps/details?id=com.studios3000.thunderdome"
+                className="mobile-nav-link mobile-play-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <span className="mobile-nav-icon">🎮</span>
+                <span className="mobile-nav-label">Aeropocalypse Online</span>
+              </a>
+            </motion.div>
             <motion.div
               className="mobile-nav-item"
               initial={{ opacity: 0, x: 50 }}

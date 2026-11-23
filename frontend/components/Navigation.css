@@ -126,6 +126,31 @@ border-color: rgba(99, 102, 241, 0.6);
 color: #fff;
 }
 
+.nav-play-btn {
+padding: 0.4rem 1rem;
+border-radius: 8px;
+background: rgba(255, 122, 26, 0.15);
+border: 1px solid rgba(255, 122, 26, 0.45);
+color: #ffb877;
+font-size: 0.85rem;
+font-weight: 600;
+text-decoration: none;
+white-space: nowrap;
+transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-play-btn:hover {
+background: rgba(255, 122, 26, 0.3);
+border-color: rgba(255, 122, 26, 0.7);
+color: #fff;
+}
+
+.mobile-play-link {
+color: #ffb877;
+background: rgba(255, 122, 26, 0.1);
+border: 1px solid rgba(255, 122, 26, 0.25);
+}
+
 /* Mobile toggle */
 .mobile-menu-toggle {
 display: none;
@@ -200,6 +225,10 @@ text-align: center;
 }
 
 .nav-admin-btn {
+  display: none;
+}
+
+.nav-play-btn {
   display: none;
 }
 
